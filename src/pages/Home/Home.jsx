@@ -12,7 +12,7 @@ export default function Home() {
     return (
         <div className="home-container">
             {/* Title */}
-            <h1 className="home-title">
+            <h1 className="title">
                 Track Now
             </h1>
             <p className="home-subtitle">
@@ -21,11 +21,9 @@ export default function Home() {
 
             {/* Buttons */}
             <div className="home-buttons">
-                <button onClick={() => navigate('/register')}
-                    className="btn btn-register"
-                >
+                <Link to="/register" className="btn btn-register">
                     {t("home.register")}
-                </button>
+                </Link>
                 <Link to="/login" className="btn btn-login">
                     {t("home.login")}
                 </Link>

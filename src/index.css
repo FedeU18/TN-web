@@ -2,6 +2,13 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
+.title {
+  font-size: 3.25rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -40,7 +47,8 @@ h1 {
 }
 
 .btn-register:hover {
-  background-color: #2563eb;
+  background-color: #1b5be3;
+  color:white;
 }
 
 .btn-login {
@@ -48,6 +56,31 @@ h1 {
 }
 
 .btn-login:hover {
-  background-color: #059669;
+  background-color: #039667;
+  color:white;
 }
 
+.centered-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-field {
+  width: 300px;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+
+.input-field:hover {
+  width: 300px;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  border: 1px solid #868686;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}

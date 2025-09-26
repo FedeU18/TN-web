@@ -56,53 +56,60 @@ export default function Register() {
 
   return (
     <div>
-      <h2>Registro</h2>
-      <form onSubmit={handleSubmit}>
+      <h1 className="title">Registro</h1>
+      <form className="centered-container" style={{ marginBottom: "3rem" }} onSubmit={handleSubmit}>
         <input 
             name="nombre" 
-            placeholder="Nombre" 
+            placeholder="Nombre"
+            className="input-field" 
             value={form.nombre} 
             onChange={handleChange} 
             required />
         <input 
             name="apellido" 
-            placeholder="Apellido" 
+            placeholder="Apellido"
+            className="input-field" 
             value={form.apellido} 
             onChange={handleChange} 
             required />
         <input 
             name="email" 
-            type="email" 
+            type="email"
+            className="input-field" 
             placeholder="Email" 
             value={form.email} 
             onChange={handleChange} 
             required />
         <input 
             name="password" 
-            type="password" 
+            type="password"
+            className="input-field" 
             placeholder="Contraseña" 
             value={form.password} 
             onChange={handleChange} 
             required />
         <input 
-            name="confirmPassword" 
+            name="confirmPassword"
+            className="input-field" 
             type="password" 
             placeholder="Confirmar Contraseña" 
             value={form.confirmPassword} 
             onChange={handleChange} 
             required />
         <input 
-            name="telefono" 
+            name="telefono"
+            className="input-field" 
             type="number"
             placeholder="Teléfono" 
             value={form.telefono} 
             onChange={handleChange} />
         <input 
             name="foto_perfil" 
-            placeholder="URL Foto de Perfil" 
+            placeholder="URL Foto de Perfil"
+            className="input-field" 
             value={form.foto_perfil} 
             onChange={handleChange} />
-        <button type="submit">Registrar</button>
+        <button type="submit" className="btn btn-register" style={{width:"300px", marginTop: "1rem"}}>Registrarse</button>
       </form>
       {error && <p style={{ color: "red" }}>{error}</p>}
     </div>

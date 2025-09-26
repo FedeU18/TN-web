@@ -32,12 +32,13 @@ export default function Login() {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h1>Iniciar Sesion</h1>
+        <form className="centered-container" style={{ marginBottom: "3rem" }} onSubmit={handleSubmit}>
+            <h1 className="title">Iniciar Sesión</h1>
             <input
                 type="email"
                 name="email"
                 placeholder="Email"
+                className="input-field" 
                 value={form.email}
                 onChange={handleChange}
                 required
@@ -47,6 +48,7 @@ export default function Login() {
                 type="password"
                 name="password"
                 placeholder="Password"
+                className="input-field" 
                 value={form.password}
                 onChange={handleChange}
                 required
@@ -54,7 +56,7 @@ export default function Login() {
             <br />
 
             {error && <p style={{color: "red"}}>{error}</p>}
-            <button type="submit">Login</button>
+            <button type="submit" className="btn btn-login" style={{width:"300px"}}>Iniciar sesión</button>
         </form>
     );
     

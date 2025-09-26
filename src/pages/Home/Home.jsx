@@ -1,5 +1,6 @@
 import React from "react";
 import "./Home.css";
+import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
@@ -25,11 +26,9 @@ export default function Home() {
                 >
                     {t("home.register")}
                 </button>
-                <button onClick={() => navigate('/login')}
-                    className="btn btn-login"
-                >
+                <Link to="/login" className="btn btn-login">
                     {t("home.login")}
-                </button>
+                </Link>
             </div>
         </div>
     );

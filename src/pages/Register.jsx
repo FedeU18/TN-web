@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { registerRequest } from "../api/auth";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -10,8 +11,8 @@ export default function Register() {
     password: "",
     confirmPassword: "",
     telefono: "",
-    foto_perfil: "",
-    //id_rol: "",
+    rol: "",
+    //foto_perfil: "",
     //id_estado: ""
   });
 
@@ -28,29 +29,16 @@ export default function Register() {
     e.preventDefault();
     setError("");
 
-    // Validación simple
     if (form.password !== form.confirmPassword) {
       setError("Las contraseñas no coinciden");
       return;
     }
 
     try {
-      const response = await fetch("http://localhost:3000/api/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(form)
-      });
-
-      if (!response.ok) {
-        const data = await response.json();
-        setError(data.message || "Error al registrarse");
-      } else {
-        navigate("/login"); // redirigir al login
-      }
+      await registerRequest(form);
+      navigate("/login");
     } catch (err) {
-      setError("Error de conexión con el servidor");
+      setError(err.response?.data?.error || "Error al registrarse");
     }
   };
 
@@ -103,12 +91,17 @@ export default function Register() {
             placeholder="Teléfono" 
             value={form.telefono} 
             onChange={handleChange} />
-        <input 
-            name="foto_perfil" 
-            placeholder="URL Foto de Perfil"
-            className="input-field" 
-            value={form.foto_perfil} 
-            onChange={handleChange} />
+        <select
+          name="rol"
+          className="input-field"
+          value={form.rol || ""}
+          onChange={handleChange}
+          required
+        >
+          <option value="">Selecciona un rol</option>
+          <option value="cliente">Cliente</option>
+          <option value="repartidor">Repartidor</option>
+        </select>
         <button type="submit" className="btn btn-register" style={{width:"300px", marginTop: "1rem"}}>Registrarse</button>
       </form>
       {error && <p style={{ color: "red" }}>{error}</p>}

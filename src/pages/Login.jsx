@@ -1,14 +1,12 @@
+import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { loginRequest } from '../api/auth';
 import { useState } from "react"; 
 
 export default function Login() {
-
-    // const { t } = useTranslation();
-    // const navigate = useNavigate();
-
     const [form, setForm] = useState ({email: "", password: ""});
-    const [error, setError] = useState("");// "" o conviene null?
+    const [error, setError] = useState("");
     const [logeado, setLogeado] = useState(false);
 
     const handleChange = (e) => {
@@ -17,15 +15,26 @@ export default function Login() {
             [e.target.name]: e.target.value
         });
     }
-    const handleSubmit = (e) => {
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (form.email === "" || form.password === "") {
-            setError("Todos los campos son obligatorios");
-            return;
-        }
         setError("");
-        setLogeado(true);
-    }
+
+        try {
+            const response = await loginRequest(form.email, form.password);
+
+            //axios devuelve data
+            const data = response.data;
+
+            //guardo el token
+            localStorage.setItem("token", data.token);
+
+            setLogeado(true);
+        } catch (err) {
+            //axios mete el error
+            setError(err.response?.data?.error || "Error en el login");
+        }
+    };
 
     if (logeado) {
         return <h1>Bienvenido, {form.email}</h1>//cambiar a q llame el user buscando x el mail
@@ -57,6 +66,24 @@ export default function Login() {
 
             {error && <p style={{color: "red"}}>{error}</p>}
             <button type="submit" className="btn btn-login" style={{width:"300px"}}>Iniciar sesión</button>
+            <div style={{ marginTop: "16px" }}>
+                <Link 
+                    to="../" 
+                    style={{
+                        display: "inline-block",
+                        width: "300px",
+                        background: "black",
+                        fontSize: "12px",
+                        color: "white",
+                        textAlign: "center",
+                        padding: "10px 0",
+                        textDecoration: "none",
+                        borderRadius: "10px"
+                    }}
+                >
+                    Volver al menú principal
+                </Link>
+            </div>
         </form>
     );
     

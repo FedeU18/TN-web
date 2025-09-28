@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { registerRequest } from "../api/auth";
+import { validateRegistrationStep1, validateRegistrationStep2 } from "../utils/validations";
 
 export default function Register() {
   const navigate = useNavigate();
+  const [step, setStep] = useState(1);
   const [form, setForm] = useState({
     nombre: "",
     apellido: "",
@@ -11,26 +13,36 @@ export default function Register() {
     password: "",
     confirmPassword: "",
     telefono: "",
-    rol: "",
-    //foto_perfil: "",
-    //id_estado: ""
+    rol: ""
   });
-
   const [error, setError] = useState("");
 
   const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value
-    });
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const nextStep = () => {
+    setError("");
+    const validation = validateRegistrationStep1(form);
+    if (!validation.isValid) {
+      setError(validation.message);
+      return;
+    }
+    setStep(2);
+  };
+
+  const prevStep = () => {
+    setError("");
+    setStep(1);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
-    if (form.password !== form.confirmPassword) {
-      setError("Las contraseñas no coinciden");
+    const validation = validateRegistrationStep2(form);
+    if (!validation.isValid) {
+      setError(validation.message);
       return;
     }
 
@@ -46,65 +58,159 @@ export default function Register() {
     <div>
       <h1 className="title">Registro</h1>
       <form className="centered-container" style={{ marginBottom: "3rem" }} onSubmit={handleSubmit}>
-        <input 
-            name="nombre" 
-            placeholder="Nombre"
-            className="input-field" 
-            value={form.nombre} 
-            onChange={handleChange} 
-            required />
-        <input 
-            name="apellido" 
-            placeholder="Apellido"
-            className="input-field" 
-            value={form.apellido} 
-            onChange={handleChange} 
-            required />
-        <input 
-            name="email" 
-            type="email"
-            className="input-field" 
-            placeholder="Email" 
-            value={form.email} 
-            onChange={handleChange} 
-            required />
-        <input 
-            name="password" 
-            type="password"
-            className="input-field" 
-            placeholder="Contraseña" 
-            value={form.password} 
-            onChange={handleChange} 
-            required />
-        <input 
-            name="confirmPassword"
-            className="input-field" 
-            type="password" 
-            placeholder="Confirmar Contraseña" 
-            value={form.confirmPassword} 
-            onChange={handleChange} 
-            required />
-        <input 
-            name="telefono"
-            className="input-field" 
-            type="number"
-            placeholder="Teléfono" 
-            value={form.telefono} 
-            onChange={handleChange} />
-        <select
-          name="rol"
-          className="input-field"
-          value={form.rol || ""}
-          onChange={handleChange}
-          required
-        >
-          <option value="">Selecciona un rol</option>
-          <option value="cliente">Cliente</option>
-          <option value="repartidor">Repartidor</option>
-        </select>
-        <button type="submit" className="btn btn-register" style={{width:"300px", marginTop: "1rem"}}>Registrarse</button>
+        {step === 1 && (
+          <>
+            <input 
+              name="nombre" 
+              placeholder="Nombre"
+              className="input-field" 
+              value={form.nombre} 
+              onChange={handleChange} 
+            />
+            <input 
+              name="apellido" 
+              placeholder="Apellido"
+              className="input-field" 
+              value={form.apellido} 
+              onChange={handleChange} 
+            />
+            <input 
+              name="telefono"
+              className="input-field" 
+              type="text"
+              placeholder="Teléfono" 
+              value={form.telefono} 
+              onChange={handleChange} 
+            />
+            <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginTop: "1rem" }}>
+              <button 
+                type="button" 
+                style={{
+                  background: "#2E7D32",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "10px",
+                  padding: "12px 0",
+                  width: "300px",
+                  fontSize: "16px",
+                  cursor: "pointer"
+                }}
+                onClick={nextStep}
+              >
+                Siguiente
+              </button>
+
+              <Link 
+                to="/" 
+                style={{
+                  background: "black",
+                  color: "white",
+                  textAlign: "center",
+                  padding: "12px 0",
+                  textDecoration: "none",
+                  borderRadius: "10px",
+                  width: "300px",
+                  fontSize: "16px"
+                }}
+              >
+                Volver al menú principal
+              </Link>
+            </div>
+          </>
+        )}
+
+        {step === 2 && (
+          <>
+            <input 
+              name="email" 
+              type="email"
+              className="input-field" 
+              placeholder="Email" 
+              value={form.email} 
+              onChange={handleChange} 
+            />
+            <input 
+              name="password" 
+              type="password"
+              className="input-field" 
+              placeholder="Contraseña" 
+              value={form.password} 
+              onChange={handleChange} 
+            />
+            <input 
+              name="confirmPassword"
+              className="input-field" 
+              type="password" 
+              placeholder="Confirmar Contraseña" 
+              value={form.confirmPassword} 
+              onChange={handleChange} 
+            />
+            {/* <select
+              name="rol"
+              className="input-field"
+              value={form.rol || ""}
+              onChange={handleChange}
+            >
+              <option value="">Selecciona un rol</option>
+              <option value="cliente">Cliente</option>
+              <option value="repartidor">Repartidor</option>
+            </select> */}
+
+            <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginTop: "1rem" }}>
+              <button 
+                type="submit" 
+                style={{
+                  flex: 1,
+                  width: "300px",
+                  fontSize: "16px",
+                  padding: "12px 0",
+                  background: "#2E7D32",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "10px",
+                  cursor: "pointer"
+                }}
+              >
+                Registrarse
+              </button>
+              <button 
+                type="button" 
+                style={{
+                  flex: 1,
+                  fontSize: "16px",
+                  padding: "12px 0",
+                  background: "gray",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "10px",
+                  width: "300px",
+                  cursor: "pointer"
+                }}
+                onClick={prevStep}
+              >
+                Volver
+              </button>
+              <Link 
+                to="/" 
+                style={{
+                  background: "black",
+                  color: "white",
+                  textAlign: "center",
+                  padding: "12px 0",
+                  textDecoration: "none",
+                  borderRadius: "10px",
+                  width: "300px",
+                  fontSize: "16px"
+                }}
+              >
+                Volver al menú principal
+              </Link>
+            </div>
+          </>
+        )}
       </form>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+
+      {error && <p style={{ color: "red", marginTop: "1rem" }}>{error}</p>}
     </div>
   );
 }

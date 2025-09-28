@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+
+import { validateLogin } from '../utils/validations';
 import { loginRequest } from '../api/auth';
 import { useState } from "react"; 
 
@@ -19,6 +19,12 @@ export default function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError("");
+
+        const validation = validateLogin(form);
+        if (!validation.isValid) {
+            setError(validation.message);
+            return;
+        }
 
         try {
             const response = await loginRequest(form.email, form.password);

@@ -73,3 +73,11 @@
   background: #333;
   color: white;
 }
+
+.btnLogout {
+  width: 100px;
+  background: red;
+  color: white;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}

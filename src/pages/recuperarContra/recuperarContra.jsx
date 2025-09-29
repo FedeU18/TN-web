@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { forgotPasswordRequest } from "../../api/auth"; 
 import styles from "./RecuperarContra.module.css";
 
 export default function RecuperarContra() {
@@ -7,10 +8,6 @@ export default function RecuperarContra() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const handleChange = (e) => {
-    setEmail(e.target.value);
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,28 +22,20 @@ export default function RecuperarContra() {
     }
 
     try {
-      // Simula llamada a la API
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      setSuccess(
-        "Se ha enviado un enlace de recuperación a su correo electrónico."
-      );
+      const response = await forgotPasswordRequest(email);
+      setSuccess(response.data.message);
       setEmail("");
     } catch (err) {
-      setError(
-        "Error al enviar el enlace de recuperación. Inténtelo de nuevo."
-      );
+      setError(err.response?.data?.message || "Error al enviar el enlace.");
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
     <div>
       <h1 className={styles.title}>Recuperar Contraseña</h1>
-      <form
-        className={styles.centeredContainer}
-        onSubmit={handleSubmit}
-      >
+      <form className={styles.centeredContainer} onSubmit={handleSubmit}>
         {error && <p className={styles.errorMessage}>{error}</p>}
         {success && <p className={styles.successMessage}>{success}</p>}
 
@@ -57,16 +46,12 @@ export default function RecuperarContra() {
             id="email"
             name="email"
             value={email}
-            onChange={handleChange}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
 
-        <button
-          type="submit"
-          className={styles.button}
-          disabled={loading}
-        >
+        <button type="submit" className={styles.button} disabled={loading}>
           {loading ? "Enviando..." : "Enviar Enlace de Recuperación"}
         </button>
       </form>

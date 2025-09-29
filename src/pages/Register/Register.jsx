@@ -134,6 +134,17 @@ export default function Register() {
               onChange={handleChange}
             />
 
+            <select
+              name="rol"
+              className="input-field"
+              value={form.rol || ""}
+              onChange={handleChange}
+            >
+              <option value="">Selecciona un rol</option>
+              <option value="cliente">Cliente</option>
+              <option value="repartidor">Repartidor</option>
+            </select>
+
             <div className={styles.buttonGroup}>
               <button
                 type="submit"

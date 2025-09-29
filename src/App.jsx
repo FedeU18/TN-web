@@ -6,6 +6,9 @@ import Footer from "./components/Footer/footer";
 import RecuperarContra from "./pages/recuperarContra/recuperarContra";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
+import ClienteDashboard from "./pages/ClienteDashboard/ClienteDashboard";
+import RepartidorDashboard from "./pages/RepartidorDashboard/RepartidorDashboard";
+import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
 
 function App() {
   return (
@@ -17,6 +20,9 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/recuperarContra" element={<RecuperarContra />} />
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          <Route path="/cliente-dashboard" element={<ClienteDashboard />} />
+          <Route path="/repartidor-dashboard" element={<RepartidorDashboard />} />
         </Routes>
         <Footer />
       </div>

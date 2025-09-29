@@ -1,18 +1,17 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; // <--- usamos useNavigate
 import { forgotPasswordRequest } from "../../api/auth"; 
 import styles from "./RecuperarContra.module.css";
 
 export default function RecuperarContra() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate(); // <--- hook para redirigir
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    setSuccess("");
     setLoading(true);
 
     if (!email) {
@@ -23,7 +22,12 @@ export default function RecuperarContra() {
 
     try {
       const response = await forgotPasswordRequest(email);
-      setSuccess(response.data.message);
+
+      // Redirigimos al formulario de verificar token y pasamos el mensaje como estado
+      navigate("/verify-token", {
+        state: { successMessage: response.data.message, email },
+      });
+
       setEmail("");
     } catch (err) {
       setError(err.response?.data?.message || "Error al enviar el enlace.");
@@ -37,7 +41,6 @@ export default function RecuperarContra() {
       <h1 className={styles.title}>Recuperar Contraseña</h1>
       <form className={styles.centeredContainer} onSubmit={handleSubmit}>
         {error && <p className={styles.errorMessage}>{error}</p>}
-        {success && <p className={styles.successMessage}>{success}</p>}
 
         <div className={styles.formGroup}>
           <label htmlFor="email">Correo Electrónico:</label>
@@ -55,12 +58,6 @@ export default function RecuperarContra() {
           {loading ? "Enviando..." : "Enviar Enlace de Recuperación"}
         </button>
       </form>
-
-      <p>
-        <Link to="/login" className={styles.linkBack}>
-          Volver al inicio de sesión
-        </Link>
-      </p>
     </div>
   );
 }

@@ -15,9 +15,13 @@ export const forgotPasswordRequest = async (email) => {
   return axios.post("/forgot-password", { email });
 }
 
-export const resetPasswordRequest = async (token, newPassword) => {
+export const verifyResetTokenRequest = async (token) => {
+  return axios.post("/verify-reset-token", { token });
+};
+
+export const resetPasswordRequest = async ({ token, newPassword }) => {
   return axios.post("/reset-password", { token, newPassword });
-}
+};
 
 export const profileRequest = async (token) => {
   return axios.get("/profile")

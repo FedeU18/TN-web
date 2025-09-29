@@ -1,0 +1,61 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* separación entre input y botón */
+  align-items: center;
+}
+
+.inputField {
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 14px;
+  text-align: center;
+}
+
+.successMessage {
+  color: green;
+  font-size: 14px;
+  text-align: center;
+}
+
+.btn {
+  padding: 10px 0;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btnVerify {
+  width: 300px;
+  background: #007bff;
+  color: white;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.btnVerify:hover {
+  background: #0056b3;
+}

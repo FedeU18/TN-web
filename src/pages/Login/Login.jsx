@@ -12,6 +12,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   const setToken = useAuthStore((state) => state.setToken);
+  const setUser = useAuthStore((state) => state.setUser);
 
   const handleChange = (e) => {
     setForm({
@@ -36,6 +37,7 @@ export default function Login() {
 
       //guarda el token en el store global
       setToken(data.token);
+      setUser(data.user);
 
       //marca como logeado
       setLogeado(true);

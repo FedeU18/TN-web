@@ -1,0 +1,22 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #1f2937;
+  color: white;
+  text-align: center;
+  z-index: 1000;
+}
+
+.header-logo {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 24px;
+  transition: color 0.3s ease;
+}
+
+.header-logo:hover {
+  color: #60a5fa;
+}

@@ -5,7 +5,9 @@ export const useAuthStore = create(
   persist(
     (set) => ({
       token: "",
+      user: null,
       setToken: (token) => set(() => ({ token })),
+      setUser: (user) => set(() => ({ user })),
       logout: () => set(() => ({ token: "" })) //limpiar token
     }),
     { name: "auth" } //clave en localStorage

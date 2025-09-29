@@ -1,0 +1,81 @@
+.centeredContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.inputField {
+  width: 300px;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.errorMessage {
+  color: red;
+  margin-top: 1rem;
+  font-size: 14px;
+}
+
+.btn {
+  width: 300px;
+  font-size: 16px;
+  padding: 12px 0;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btnPrimary {
+  background: #2e7d32;
+  color: white;
+}
+
+.btnPrimary:hover {
+  background: #256428;
+}
+
+.btnSecondary {
+  background: gray;
+  color: white;
+}
+
+.btnSecondary:hover {
+  background: #555;
+}
+
+.linkBack {
+  background: black;
+  color: white;
+  text-align: center;
+  padding: 12px 0;
+  text-decoration: none;
+  border-radius: 10px;
+  width: 300px;
+  font-size: 16px;
+  transition: background 0.3s ease;
+}
+
+.linkBack:hover {
+  background: #333;
+  color: white; /* 👈 evita que se ponga azul */
+}
+
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 1rem;
+}

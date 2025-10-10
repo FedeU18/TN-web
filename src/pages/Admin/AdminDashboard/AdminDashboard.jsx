@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuthStore } from "../../store/auth";
+import { useAuthStore } from "../../../store/auth";
 import styles from "./AdminDashboard.module.css";
 
 export default function AdminDashboard() {

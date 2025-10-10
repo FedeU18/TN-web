@@ -8,9 +8,10 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import ClienteDashboard from "./pages/ClienteDashboard/ClienteDashboard";
 import RepartidorDashboard from "./pages/RepartidorDashboard/RepartidorDashboard";
-import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
+import AdminDashboard from "./pages/Admin/AdminDashboard/AdminDashboard";
 import VerificarToken from "./components/VerificarToken/VerificarToken";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
+import AdminPanel from "./pages/Admin/AdminPanel/AdminPanel";
 import { ProtectedRoute } from "./components/ProtectedRoutes";
 
 function App() {
@@ -32,6 +33,14 @@ function App() {
             element={
               <ProtectedRoute roles={["admin"]}>
                 <AdminDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin-panel"
+            element={
+              <ProtectedRoute roles={["admin"]}>
+                <AdminPanel />
               </ProtectedRoute>
             }
           />

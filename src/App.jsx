@@ -6,13 +6,14 @@ import Footer from "./components/Footer/Footer";
 import RecuperarContra from "./pages/recuperarContra/recuperarContra";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
-import ClienteDashboard from "./pages/ClienteDashboard/ClienteDashboard";
+import ClienteDashboard from "./pages/Client/ClienteDashboard/ClienteDashboard";
 import RepartidorDashboard from "./pages/RepartidorDashboard/RepartidorDashboard";
 import AdminDashboard from "./pages/Admin/AdminDashboard/AdminDashboard";
 import VerificarToken from "./components/VerificarToken/VerificarToken";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import AdminPanel from "./pages/Admin/AdminPanel/AdminPanel";
 import ReportsPanel from "./pages/Admin/ReportsPanel/ReportsPanel";
+import Profile from "./pages/Profile/Profile";
 import { ProtectedRoute } from "./components/ProtectedRoutes";
 
 function App() {
@@ -66,6 +67,14 @@ function App() {
             element={
               <ProtectedRoute roles={["repartidor"]}>
                 <RepartidorDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute roles={["admin", "cliente", "repartidor"]}>
+                <Profile />
               </ProtectedRoute>
             }
           />

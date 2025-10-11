@@ -1,5 +1,5 @@
-import { useNavigate } from "react-router-dom";
-import { useAuthStore } from "../../store/auth";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuthStore } from "../../../store/auth";
 import styles from "./ClienteDashboard.module.css";
 
 export default function ClienteDashboard() {
@@ -22,7 +22,7 @@ export default function ClienteDashboard() {
       <div className={styles.buttonContainer}>
         <button className={styles.primaryButton}>Hacer Pedido</button>
         <button className={styles.secondaryButton}>Mis Pedidos</button>
-        <button className={styles.secondaryButton}>Mi Perfil</button>
+        <Link to="/profile" className={styles.secondaryButton}>Mi Perfil</Link>
       </div>
 
       <button className={styles.logoutButton} onClick={handleLogout}>

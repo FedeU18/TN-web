@@ -37,11 +37,11 @@ export async function getOrdersDisponibles() {
 export async function getAllOrders() {
   try {
     const res = await api.get("/pedidos");
-    // el controller devuelve array de pedidos o 404 si no hay ninguno
+    //el controller devuelve array de pedidos o 404 si no hay ninguno
     return Array.isArray(res.data) ? res.data.map(mapPedido) : [];
   } catch (err) {
     const status = err.response?.status;
-    // si backend devuelve 404 "No hay pedidos registrados", tratamos como [] en frontend
+    //si backend devuelve 404 "No hay pedidos registrados", tratamos como [] en frontend
     if (status === 404) return [];
     throw new Error(`Error al obtener pedidos${status ? ` (status ${status})` : ""}`);
   }
@@ -57,6 +57,17 @@ export async function getOrder(id_pedido) {
   }
 }
 
+export async function getClientePedidos(clienteId) {
+  try {
+    const res = await api.get(`/clientes/${clienteId}/pedidos`);
+    return res.data; //array pedidos
+  } catch (err) {
+    const status = err.response?.status;
+    throw new Error(`Error al obtener pedidos${status ? ` (status ${status})` : ""}`);
+  }
+}
+
+//mas vale q funques wachin
 export async function reassignOrder(id_pedido, id_repartidor) {
   const driverId = Number(id_repartidor);
   if (isNaN(driverId)) throw new Error("ID de repartidor inválido");

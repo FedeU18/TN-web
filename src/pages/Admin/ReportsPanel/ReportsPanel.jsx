@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { getPerformance } from "../../../services/reportApi";
 import KpiCard from "../../../components/KpiCard/KpiCard";
 import {
@@ -85,6 +86,11 @@ export default function ReportsPanel() {
       </div>
 
       {series.length === 0 && !loading && <div style={{ marginTop: 12 }}>No hay datos para el rango seleccionado.</div>}
+      <div>
+        <Link to="/admin-dashboard" style={{ display: "inline-block", marginTop: 20 }}>
+          Volver al Dashboard
+        </Link>
+      </div>
     </div>
   );
 }

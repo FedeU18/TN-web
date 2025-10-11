@@ -11,7 +11,7 @@ export async function getPerformance({ startDate, endDate, repartidorId } = {}) 
     if (startDate) params.startDate = startDate;
     if (endDate) params.endDate = endDate;
     if (repartidorId) params.repartidorId = repartidorId;
-    const res = await api.get("/reportes/desempeno", { params });
+    const res = await api.get("/admin/reportes/desempeno", { params });
     return res.data;
   } catch (err) {
     const status = err.response?.status;

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import OrderCard from '../../../components/OrderCard/OrderCard';
 import * as api from '../../../services/ordersApi';
 
@@ -58,6 +59,11 @@ export default function AdminPanel() {
           {filtered.length === 0 && <div>No hay pedidos</div>}
         </div>
       )}
+      <div>
+        <Link to="/admin-dashboard" style={{ display: 'inline-block', marginTop: 20 }}>
+          Volver al Dashboard
+        </Link>
+      </div>
     </div>
   );
 }

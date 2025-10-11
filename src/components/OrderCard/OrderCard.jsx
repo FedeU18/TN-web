@@ -1,25 +1,23 @@
-export default function OrderCard({ order, onChange }) {
+export default function OrderCard({ order, onReassign }) {
   const { id, cliente, direccion, status, assignedTo } = order;
 
   const handleReassign = async () => {
-    const newDriver = prompt('ID del repartidor (vacío para quitar asignación):', assignedTo ?? '');
-    if (newDriver === null) return;
-    try {
-      await onChange.reassign(id, newDriver || null);
-      onChange.refresh();
-    } catch (e) {
-      alert('Error al reasignar');
-    }
-  };
+    const newDriver = prompt(
+      'ID del repartidor (vacío para quitar asignación):',
+      assignedTo ?? ''
+    );
+    if (newDriver === null) return; // usuario canceló
 
-  const handleStatus = async () => {
-    const next = prompt('Nuevo estado (pendiente, asignado, en curso, entregado):', status);
-    if (!next) return;
+    const driverId = Number(newDriver);
+    if (isNaN(driverId) || driverId <= 0) {
+      alert('Debe ingresar un ID válido de repartidor.');
+      return;
+    }
+
     try {
-      await onChange.updateStatus(id, next);
-      onChange.refresh();
-    } catch {
-      alert('Error al actualizar estado');
+      await onReassign(id, driverId);
+    } catch (e) {
+      alert(e.message || 'Error al reasignar');
     }
   };
 
@@ -30,8 +28,7 @@ export default function OrderCard({ order, onChange }) {
       <div>Estado: <em>{status}</em></div>
       <div>Asignado: <em>{assignedTo ?? '— sin asignar —'}</em></div>
       <div style={{ marginTop: 8 }}>
-        <button onClick={handleReassign} style={{ marginRight: 8 }}>Reasignar</button>
-        <button onClick={handleStatus}>Cambiar estado</button>
+        <button onClick={handleReassign}>Reasignar repartidor</button>
       </div>
     </div>
   );

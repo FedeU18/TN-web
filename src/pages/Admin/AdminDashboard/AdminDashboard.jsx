@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useAuthStore } from "../../../store/auth";
 import styles from "./AdminDashboard.module.css";
 
@@ -22,7 +22,8 @@ const handleLogout = () => {
 
       <div className={styles.buttonContainer}>
         <button className={styles.primaryButton}>Gestionar Usuarios</button>
-        <button className={styles.secondaryButton}>Reportes</button>
+        <Link to ="/reports-panel" className={styles.secondaryButton}>Reportes</Link>
+        <Link to ="/admin-panel" className={styles.secondaryButton}>Panel</Link>
         <button className={styles.secondaryButton}>Mi Perfil</button>
       </div>
 

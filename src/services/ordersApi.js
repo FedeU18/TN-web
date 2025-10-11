@@ -1,89 +1,82 @@
-import authApi from "../libs/axios";
+import api from "../libs/axios";
 
-const normalizeEstado = (s) => {
-  if (!s) return "Pendiente";
-  const key = String(s).toLowerCase().trim();
-  const map = {
-    "pendiente": "Pendiente",
-    "asignado": "Asignado",
-    "en curso": "En curso",
-    "entregado": "Entregado",
-  };
-  return map[key] ?? (s.charAt(0).toUpperCase() + s.slice(1));
+const STATE_MAP = {
+  1: "pendiente",
+  2: "asignado",
+  3: "en camino",
+  4: "entregado",
 };
 
 const mapPedido = (p) => ({
-  id: p.id_pedido,
+  id: p.id_pedido ?? null,
   assignedTo: p.id_repartidor ?? null,
   direccion: p.direccion_destino ?? p.direccion_origen ?? "",
-  // cliente puede venir como objeto; intentamos mostrar algo legible
   cliente:
     p.cliente?.nombre ??
-    p.cliente?.nombre_completo ??
-    (p.id_cliente ? `Cliente #${p.id_cliente}` : "Cliente desconocido"),
-  // normalizamos el estado a una cadena amigable (minusculas/formatos en UI)
-  status: (p.estado?.nombre_estado ?? "Pendiente").toLowerCase(),
-  // mantenemos el raw por si se necesita más info en UI
+    (p.cliente?.nombre_completo ? p.cliente.nombre_completo : (p.id_cliente ? `Cliente #${p.id_cliente}` : "Cliente desconocido")),
+  status: (p.estado?.nombre_estado ?? STATE_MAP[p.id_estado] ?? "Pendiente").toLowerCase(),
   _raw: p,
 });
 
 /**
- * GET /pedidos/disponibles
+ * Pedidos disponibles (sin cambiar) -> /pedidos/disponibles
  */
-export async function getOrders() {
+export async function getOrdersDisponibles() {
   try {
-    const res = await authApi.get("/pedidos/disponibles");
-    const raw = res.data;
-    const mapped = Array.isArray(raw) ? raw.map(mapPedido) : [];
-    return mapped;
+    const res = await api.get("/pedidos/disponibles");
+    return Array.isArray(res.data) ? res.data.map(mapPedido) : [];
   } catch (err) {
     const status = err.response?.status;
+    throw new Error(`Error al obtener pedidos disponibles${status ? ` (status ${status})` : ""}`);
+  }
+}
+
+/**
+ * TODOS los pedidos (para admin) -> /pedidos
+ */
+export async function getAllOrders() {
+  try {
+    const res = await api.get("/pedidos");
+    // el controller devuelve array de pedidos o 404 si no hay ninguno
+    return Array.isArray(res.data) ? res.data.map(mapPedido) : [];
+  } catch (err) {
+    const status = err.response?.status;
+    // si backend devuelve 404 "No hay pedidos registrados", tratamos como [] en frontend
+    if (status === 404) return [];
     throw new Error(`Error al obtener pedidos${status ? ` (status ${status})` : ""}`);
   }
 }
 
-/**
- * GET /pedidos/monitor/:id
- * Devuelve el pedido mapeado (usa controller monitorPedido que responde { message, pedido })
- */
 export async function getOrder(id_pedido) {
   try {
-    const res = await authApi.get(`/pedidos/monitor/${id_pedido}`);
-    const pedidoRaw = res.data?.pedido ?? null;
-    return pedidoRaw ? mapPedido(pedidoRaw) : null;
+    const res = await api.get(`/pedidos/monitor/${id_pedido}`);
+    const raw = res.data?.pedido ?? res.data ?? null;
+    return raw ? mapPedido(raw) : null;
   } catch (err) {
-    const status = err.response?.status;
-    throw new Error(`Error al obtener pedido${status ? ` (status ${status})` : ""}`);
+    throw err;
   }
 }
 
-/**
- * PUT /pedidos/asignar/:id
- * Body: { id_repartidor }
- */
 export async function reassignOrder(id_pedido, id_repartidor) {
+  const driverId = Number(id_repartidor);
+  if (isNaN(driverId)) throw new Error("ID de repartidor inválido");
+
   try {
-    const res = await authApi.put(`/pedidos/asignar/${id_pedido}`, { id_repartidor });
-    // el backend devuelve { message, pedido } — retornamos el pedido mapeado
-    const pedidoRaw = res.data?.pedido ?? null;
-    return pedidoRaw ? mapPedido(pedidoRaw) : res.data;
+    const res = await api.put(`/pedidos/asignar/${id_pedido}`, { id_repartidor: driverId });
+    const raw = res.data?.pedido ?? res.data ?? null;
+    return raw ? mapPedido(raw) : res.data;
   } catch (err) {
     const status = err.response?.status;
     throw new Error(`Error reasignando pedido${status ? ` (status ${status})` : ""}`);
   }
 }
 
-/**
- * PUT /pedidos/estado/:id
- * Body: { nuevoEstado } (el backend espera nombre de estado, ej. "Asignado", "Entregado")
- * Recibe 'status' desde UI (ej. 'asignado'|'en curso'|'entregado'|'pendiente')
- */
 export async function updateOrderStatus(id_pedido, status) {
   try {
-    const nuevoEstado = normalizeEstado(status);
-    const res = await authApi.put(`/pedidos/estado/${id_pedido}`, { nuevoEstado });
-    const pedidoRaw = res.data?.pedido ?? null;
-    return pedidoRaw ? mapPedido(pedidoRaw) : res.data;
+    const nuevoEstado = (status || "Pendiente").replace(/^./, s => s.toUpperCase());
+    const res = await api.put(`/pedidos/estado/${id_pedido}`, { nuevoEstado });
+    const raw = res.data?.pedido ?? res.data ?? null;
+    return raw ? mapPedido(raw) : res.data;
   } catch (err) {
     const statusCode = err.response?.status;
     throw new Error(`Error actualizando estado${statusCode ? ` (status ${statusCode})` : ""}`);

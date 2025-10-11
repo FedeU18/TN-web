@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import OrderCard from '../../../components/OrderCard/OrderCard';
 import * as api from '../../../services/ordersApi';
 
 export default function AdminPanel() {
   const [orders, setOrders] = useState([]);
-  const [filter, setFilter] = useState('todos'); // todos | asignados | no-asignados
+  const [filter, setFilter] = useState('todos'); //todos | asignados | no-asignados
   const [loading, setLoading] = useState(false);
+
   const refresh = async () => {
     setLoading(true);
     try {
-      const data = await api.getOrders();
+      //usar endpoint de admin que devuelve todos los pedidos
+      const data = await api.getAllOrders();
       setOrders(data);
     } catch (e) {
       console.error(e);
@@ -19,7 +21,9 @@ export default function AdminPanel() {
     }
   };
 
-  useEffect(() => { refresh(); }, []);
+  useEffect(() => {
+    refresh();
+  }, []);
 
   const filtered = orders.filter(o => {
     if (filter === 'asignados') return !!o.assignedTo;
@@ -37,16 +41,17 @@ export default function AdminPanel() {
         <button onClick={refresh} style={{ marginLeft: 16 }}>Actualizar</button>
       </div>
 
-      {loading ? <div>Cargando...</div> : (
+      {loading ? (
+        <div>Cargando...</div>
+      ) : (
         <div style={{ display: 'grid', gap: 12 }}>
           {filtered.map(o => (
             <OrderCard
               key={o.id}
               order={o}
-              onChange={{
-                reassign: api.reassignOrder,
-                updateStatus: api.updateOrderStatus,
-                refresh,
+              onReassign={async (id, driver) => {
+                await api.reassignOrder(id, driver);
+                refresh();
               }}
             />
           ))}

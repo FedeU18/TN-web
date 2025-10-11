@@ -10,10 +10,9 @@ api.interceptors.request.use((config) => {
   config.headers = config.headers || {};
   const token = typeof useAuthStore.getState === "function"
     ? useAuthStore.getState().token
-    : null;
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
+    : localStorage.getItem('token'); // fallback
+  console.log("Axios token (interceptor) =>", !!token);
+  if (token) config.headers.Authorization = `Bearer ${token}`;
   if (!config.headers["Content-Type"] && !(config.data instanceof FormData)) {
     config.headers["Content-Type"] = "application/json";
   }

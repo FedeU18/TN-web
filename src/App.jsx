@@ -12,6 +12,7 @@ import AdminDashboard from "./pages/Admin/AdminDashboard/AdminDashboard";
 import VerificarToken from "./components/VerificarToken/VerificarToken";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import AdminPanel from "./pages/Admin/AdminPanel/AdminPanel";
+import ReportsPanel from "./pages/Admin/ReportsPanel/ReportsPanel";
 import { ProtectedRoute } from "./components/ProtectedRoutes";
 
 function App() {
@@ -41,6 +42,14 @@ function App() {
             element={
               <ProtectedRoute roles={["admin"]}>
                 <AdminPanel />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/reports-panel"
+            element={
+              <ProtectedRoute roles={["admin"]}>
+                <ReportsPanel />
               </ProtectedRoute>
             }
           />

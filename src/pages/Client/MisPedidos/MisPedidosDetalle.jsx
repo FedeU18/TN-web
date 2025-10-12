@@ -28,8 +28,7 @@ export default function MisPedidosDetalle() {
   return (
     <>
     <div className={styles.detalleContainer}>
-      <h1>Pedido #{pedido.id_pedido}</h1>
-      <p><strong>Estado:</strong> {pedido.estado?.nombre_estado}</p>
+      <h1>Pedido </h1>
       {pedido.repartidor && (
         <p>
           <strong>Repartidor:</strong> {pedido.repartidor.nombre}{" "}
@@ -37,7 +36,6 @@ export default function MisPedidosDetalle() {
         </p>
       )}
 
-      <h2>Monitoreo en tiempo real</h2>
       <MonitorPedido pedidoId={id} />
     </div>
     <div>

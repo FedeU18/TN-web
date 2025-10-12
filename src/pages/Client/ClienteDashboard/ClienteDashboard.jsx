@@ -10,10 +10,12 @@ export default function ClienteDashboard() {
   const [pedidos, setPedidos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [page, setPage] = useState(1);
+  const PEDIDOS_PER_PAGE = 3;
 
   const handleLogout = () => {
-    logout();        // limpia el token
-    navigate("/");   // redirige al home
+    logout();
+    navigate("/");
   };
 
   useEffect(() => {
@@ -31,6 +33,11 @@ export default function ClienteDashboard() {
     fetchPedidos();
   }, []);
 
+  // Paginación
+  const totalPages = Math.ceil(pedidos.length / PEDIDOS_PER_PAGE);
+  const startIndex = (page - 1) * PEDIDOS_PER_PAGE;
+  const paginatedPedidos = pedidos.slice(startIndex, startIndex + PEDIDOS_PER_PAGE);
+
   return (
     <div className={styles.container}>
       <div className={styles.welcomeContainer}>
@@ -39,38 +46,49 @@ export default function ClienteDashboard() {
         <p className={styles.subtitle}>Desde aquí podrás realizar y gestionar tus pedidos.</p>
       </div>
 
-      <div className={styles.buttonContainer}> 
-        <button className={styles.primaryButton}>
-          Hacer Pedido
-        </button>
-
-        <Link to="/profile" className={styles.secondaryButton}>
-          Mi Perfil
-        </Link>
+      <div className={styles.buttonContainer}>
+        <button className={styles.primaryButton}>Hacer Pedido</button>
+        <Link to="/profile" className={styles.secondaryButton}>Mi Perfil</Link>
       </div>
 
       <div className={styles.pedidosContainer}>
         <h2>Mis Pedidos</h2>
-
         {loading && <p>Cargando pedidos...</p>}
         {error && <p className={styles.error}>{error}</p>}
-        {!loading && pedidos.length === 0 && <p>No tienes pedidos aún.</p>}
+        {!loading && paginatedPedidos.length === 0 && <p>No tienes pedidos aún.</p>}
 
         <ul className={styles.pedidosList}>
-          {pedidos.map((pedido) => (
+          {paginatedPedidos.map((pedido) => (
             <li key={pedido.id_pedido} className={styles.pedidoItem}>
               <span>
-                Pedido #{pedido.id_pedido} — {pedido.estado?.nombre_estado || "Sin estado"}
+                Pedido — {pedido.estado?.nombre_estado || "Sin estado"}
               </span>
               <Link
                 to={`/mis-pedidos/${pedido.id_pedido}`}
                 className={styles.secondaryButton}
               >
-                Ver Detalle / Monitorear
+                Ver Detalle
               </Link>
             </li>
           ))}
         </ul>
+
+        {/* Paginación */}
+        {totalPages > 1 && (
+          <div className={styles.pagination}>
+            <button onClick={() => setPage(1)} disabled={page === 1}>«</button>
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((num) => (
+              <button
+                key={num}
+                className={page === num ? styles.activePage : ""}
+                onClick={() => setPage(num)}
+              >
+                {num}
+              </button>
+            ))}
+            <button onClick={() => setPage(totalPages)} disabled={page === totalPages}>»</button>
+          </div>
+        )}
       </div>
 
       <button className={styles.logoutButton} onClick={handleLogout}>

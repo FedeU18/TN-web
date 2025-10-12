@@ -139,6 +139,7 @@ export default function Register() {
               className="input-field"
               value={form.rol || ""}
               onChange={handleChange}
+              required
             >
               <option value="">Selecciona un rol</option>
               <option value="cliente">Cliente</option>

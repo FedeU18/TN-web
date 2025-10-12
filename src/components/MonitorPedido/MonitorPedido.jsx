@@ -50,15 +50,17 @@ export default function MonitorPedido({ pedidoId }) {
       ? "gray"
       : estado === "Asignado"
       ? "orange"
-      : estado === "En curso"
+      : estado === "En camino"
       ? "blue"
       : estado === "Entregado"
       ? "green"
-      : "red";
+      : estado === "Cancelado"
+      ? "red":
+        "black";
 
   return (
     <div style={{ textAlign: "center", marginTop: 20 }}>
-      <h2>Estado del pedido #{pedidoId}</h2>
+      <h2>Estado del pedido</h2>
       <div
         style={{
           backgroundColor: color,

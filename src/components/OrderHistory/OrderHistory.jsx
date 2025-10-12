@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "../../libs/axios";
+import styles from "./OrderHistory.module.css";
 
 export default function OrderHistory() {
   const [orders, setOrders] = useState([]);
@@ -18,16 +19,18 @@ export default function OrderHistory() {
     }
   };
 
-  useEffect(() => { fetchOrders(); }, []);
+  useEffect(() => {
+    fetchOrders();
+  }, []);//se ejecuta solo una vez al montar el componente
 
   if (loading) return <div>Cargando pedidos...</div>;
 
   if (orders.length === 0) return <div>No hay pedidos registrados</div>;
 
   return (
-    <div>
+    <div className={styles.ordersContainer}>
       <h2>Historial de pedidos</h2>
-      <table style={{ width: "100%", borderCollapse: "collapse" }}>
+      <table>
         <thead>
           <tr>
             <th>ID</th>

@@ -27,9 +27,9 @@ export default function OrderCard({ order, onReassign }) {
       <div>{direccion}</div>
       <div>Estado: <em>{status}</em></div>
       <div>Asignado: <em>{assignedTo ?? '— sin asignar —'}</em></div>
-      <div style={{ marginTop: 8 }}>
+      {/* <div style={{ marginTop: 8 }}>
         <button onClick={handleReassign}>Reasignar repartidor</button>
-      </div>
+      </div> */}
     </div>
   );
 }

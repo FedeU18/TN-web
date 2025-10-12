@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "../../libs/axios";
+import styles from "./UserProfile.module.css";
 
 export default function UserProfile() {
   const [user, setUser] = useState(null);
@@ -19,30 +20,21 @@ export default function UserProfile() {
     }
   };
 
-  useEffect(() => {
-    fetchUser();
-  }, []);
+  useEffect(() => { fetchUser(); }, []);
 
   if (loadingUser) return <div>Cargando perfil...</div>;
-
   if (!user) return <div>No se pudo cargar el usuario</div>;
 
   return (
-    <div style={{ padding: 16 }}>
+    <div className={styles.userProfile}>
       {/*perfil del user*/}
+      <img src={user.foto_perfil || "/default-avatar.png"} alt="Avatar" />
       <div>
-        <img
-          src={user.foto_perfil || "/default-avatar.png"}
-          alt="Avatar"
-          style={{ width: 80, height: 80, borderRadius: "50%" }}
-        />
-        <div>
-          <h2>{user.nombre} {user.apellido}</h2>
-          <p>Email: {user.email}</p>
-          <p>Teléfono: {user.telefono || "-"}</p>
-          <p>Rol: {user.rol}</p>
-          <p>Registrado: {new Date(user.fecha_registro).toLocaleDateString()}</p>
-        </div>
+        <h2>{user.nombre} {user.apellido}</h2>
+        <p>Email: {user.email}</p>
+        <p>Teléfono: {user.telefono || "-"}</p>
+        <p>Rol: {user.rol}</p>
+        <p>Registrado: {new Date(user.fecha_registro).toLocaleDateString()}</p>
       </div>
     </div>
   );

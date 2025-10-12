@@ -8,9 +8,9 @@ import api from "../libs/axios";
 export async function getPerformance({ startDate, endDate, repartidorId } = {}) {
   try {
     const params = {};
-    if (startDate) params.startDate = startDate;
-    if (endDate) params.endDate = endDate;
-    if (repartidorId) params.repartidorId = repartidorId;
+    if (startDate) params.fechaInicio = startDate;
+    if (endDate) params.fechaFin = endDate;
+    if (repartidorId) params.id_repartidor = repartidorId;
     const res = await api.get("/admin/reportes/desempeno", { params });
     return res.data;
   } catch (err) {

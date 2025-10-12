@@ -2,8 +2,17 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getPerformance } from "../../../services/reportApi";
 import KpiCard from "../../../components/KpiCard/KpiCard";
+import styles from "./ReportsPanel.module.css";
 import {
-  ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, Line, Legend
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  CartesianGrid,
+  Line,
+  Legend
 } from "recharts";
 
 export default function ReportsPanel() {
@@ -18,59 +27,71 @@ export default function ReportsPanel() {
   const fetch = async () => {
     setLoading(true);
     try {
-      const data = await getPerformance({ startDate, endDate, repartidorId: repartidorId || undefined });
-      //esperado: data.kpis, data.series, data.repartidores (opcional)
-      setKpis(data.kpis ?? { entregados: 0, cancelados: 0, tiempoPromedio: 0 });
+      const data = await getPerformance({
+        startDate,
+        endDate,
+        repartidorId: repartidorId || undefined
+      });
+
+      //kpis
+      setKpis(data.resumen ?? { entregados: 0, cancelados: 0, tiempoPromedio: 0 });
+      //series para gráficos
       setSeries(Array.isArray(data.series) ? data.series : []);
-      if (Array.isArray(data.repartidores)) setRepartidores(data.repartidores);
-      //si el endpoint no devuelve repartidores, mantener lista vacía o cargar desde otro endpoint
+      //repartidores
+      if (Array.isArray(data.detalle_repartidores)) {
+        const repartidoresFormateados = data.detalle_repartidores.map(r => ({
+          id: r.id_repartidor,
+          nombre: r.nombre
+        }));
+        setRepartidores(repartidoresFormateados);
+      }
     } catch (e) {
       console.error(e);
-      alert("No se pudieron cargar los reportes");
     } finally {
       setLoading(false);
     }
   };
 
-  useEffect(() => { fetch(); }, []); //carga inicial
+  useEffect(() => {
+    fetch();
+  }, []);
 
   const handleApply = () => fetch();
 
   return (
-    <div style={{ padding: 16 }}>
-      <h1>Reporte de desempeño</h1>
+    <div className={styles.container}>
+      <h1 className={styles.title}>Reporte de Desempeño</h1>
 
-      <div style={{ display: "flex", gap: 12, marginBottom: 16, alignItems: "center" }}>
-        <div>
-          <label>Desde</label><br />
+      <div className={styles.filters}>
+        <div className={styles.filterGroup}>
+          <label>Desde</label>
           <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} />
         </div>
-        <div>
-          <label>Hasta</label><br />
+        <div className={styles.filterGroup}>
+          <label>Hasta</label>
           <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} />
         </div>
-        <div>
-          <label>Repartidor</label><br />
+        <div className={styles.filterGroup}>
+          <label>Repartidor</label>
           <select value={repartidorId} onChange={e => setRepartidorId(e.target.value)}>
             <option value="">Todos</option>
-            {repartidores.map(r => (
-              <option key={r.id || r.id_usuario} value={r.id ?? r.id_usuario}>{r.nombre ?? r.nombre_completo ?? `#${r.id ?? r.id_usuario}`}</option>
+           {repartidores.map(r => (
+              <option key={r.id} value={r.id}>{r.nombre}</option>
             ))}
           </select>
         </div>
-
-        <div style={{ marginLeft: 8 }}>
-          <button onClick={handleApply} disabled={loading}>Aplicar</button>
-        </div>
+        <button className={styles.applyButton} onClick={handleApply} disabled={loading}>
+          {loading ? "Cargando..." : "Aplicar"}
+        </button>
       </div>
 
-      <div style={{ display: "flex", gap: 12, marginBottom: 20 }}>
+      <div className={styles.kpiContainer}>
         <KpiCard title="Pedidos entregados" value={kpis.entregados ?? 0} />
         <KpiCard title="Pedidos cancelados" value={kpis.cancelados ?? 0} />
-        <KpiCard title="Tiempo promedio (min)" value={kpis.tiempoPromedio ?? 0} />
+        <KpiCard title="Tiempo promedio (min)" value={kpis.promedio_entrega_minutos ?? 0} />
       </div>
 
-      <div style={{ width: "100%", height: 360, background: "#fff", padding: 12, borderRadius: 8 }}>
+      <div className={styles.chartContainer}>
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={series} margin={{ top: 8, right: 24, left: 0, bottom: 8 }}>
             <CartesianGrid strokeDasharray="3 3" />
@@ -85,11 +106,12 @@ export default function ReportsPanel() {
         </ResponsiveContainer>
       </div>
 
-      {series.length === 0 && !loading && <div style={{ marginTop: 12 }}>No hay datos para el rango seleccionado.</div>}
-      <div>
-        <Link to="/admin-dashboard" style={{ display: "inline-block", marginTop: 20 }}>
-          Volver al Dashboard
-        </Link>
+      {series.length === 0 && !loading && (
+        <div className={styles.noData}>No hay datos para el rango seleccionado.</div>
+      )}
+
+      <div className={styles.backLink}>
+        <Link to="/admin-dashboard">← Volver al Dashboard</Link>
       </div>
     </div>
   );

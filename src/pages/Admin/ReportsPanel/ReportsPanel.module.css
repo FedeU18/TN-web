@@ -1,0 +1,112 @@
+.container {
+  padding: 20px 24px;
+  min-height: 95vh;
+  background-color: #f3f4f6;
+  color: #111827;
+}
+
+.title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #1f2937;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-end;
+  justify-content: center;
+  margin-bottom: 24px;
+  background-color: #ffffff;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.filterGroup label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 4px;
+}
+
+.filterGroup input,
+.filterGroup select {
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 14px;
+  outline: none;
+}
+
+.filterGroup input:focus,
+.filterGroup select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.applyButton {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.applyButton:hover {
+  background-color: #1d4ed8;
+}
+
+.applyButton:disabled {
+  background-color: #93c5fd;
+  cursor: not-allowed;
+}
+
+.kpiContainer {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+.chartContainer {
+  width: 100%;
+  height: 380px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  padding: 12px;
+}
+
+.noData {
+  margin-top: 16px;
+  text-align: center;
+  color: #6b7280;
+}
+
+.backLink {
+  text-align: center;
+  margin-top: 32px;
+}
+
+.backLink a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.backLink a:hover {
+  color: #1d4ed8;
+}

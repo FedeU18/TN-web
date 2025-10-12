@@ -1,0 +1,48 @@
+.profileContainer {
+  padding: 24px;
+  min-height: auto;
+  background-color: #f3f4f6;
+  color: #111827;
+}
+
+.backLink {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.backLink a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.backLink a:hover {
+  color: #1d4ed8;
+}
+
+hr {
+  margin: 24px 0;
+  border: 0.5px solid #d1d5db;
+}
+
+.historyBtn {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 16px 0;
+  background-color: #3b82f6;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.historyBtn:hover {
+  background-color: #2563eb
+}
+
+.historyBtn:active {
+  background-color: #1d4ed8;
+}

@@ -1,0 +1,28 @@
+.userProfile {
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.userProfile img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.userProfile div h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.userProfile div p {
+  margin: 2px 0;
+  font-size: 14px;
+  color: #6b7280;
+}

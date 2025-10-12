@@ -14,6 +14,8 @@ import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import AdminPanel from "./pages/Admin/AdminPanel/AdminPanel";
 import ReportsPanel from "./pages/Admin/ReportsPanel/ReportsPanel";
 import Profile from "./pages/Profile/Profile";
+import MisPedidosList from "./pages/Client/MisPedidos/MisPedidosList";
+import MisPedidosDetalle from "./pages/Client/MisPedidos/MisPedidosDetalle";
 import { ProtectedRoute } from "./components/ProtectedRoutes";
 
 function App() {
@@ -59,6 +61,22 @@ function App() {
             element={
               <ProtectedRoute roles={["cliente"]}>
                 <ClienteDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/mis-pedidos"
+            element={
+              <ProtectedRoute roles={["cliente"]}>
+                <MisPedidosList />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/mis-pedidos/:id"
+            element={
+              <ProtectedRoute roles={["cliente"]}>
+                <MisPedidosDetalle />
               </ProtectedRoute>
             }
           />

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import io from "socket.io-client";
-import { getDetallePedidoCliente } from "../services/pedidosCliente";
+import { getDetallePedidoCliente } from "../../services/pedidosCliente";
 
 const socket = io("http://localhost:3000");
 

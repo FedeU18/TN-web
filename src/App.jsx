@@ -16,6 +16,8 @@ import ReportsPanel from "./pages/Admin/ReportsPanel/ReportsPanel";
 import Profile from "./pages/Profile/Profile";
 import MisPedidosList from "./pages/Client/MisPedidos/MisPedidosList";
 import MisPedidosDetalle from "./pages/Client/MisPedidos/MisPedidosDetalle";
+import PedidosAdminList from "./pages/Admin/PedidosAdmin/PedidosAdminList";
+import PedidoAdminDetalle from "./pages/Admin/PedidosAdmin/PedidoAdminDetalle";
 import { ProtectedRoute } from "./components/ProtectedRoutes";
 
 function App() {
@@ -53,6 +55,22 @@ function App() {
             element={
               <ProtectedRoute roles={["admin"]}>
                 <ReportsPanel />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin-panel/pedidos"
+            element={
+              <ProtectedRoute roles={["admin"]}>
+                <PedidosAdminList />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin-panel/pedido/:id"
+            element={
+              <ProtectedRoute roles={["admin"]}>
+                <PedidoAdminDetalle />
               </ProtectedRoute>
             }
           />

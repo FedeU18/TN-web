@@ -24,6 +24,7 @@ const handleLogout = () => {
         <button className={styles.primaryButton}>Gestionar Usuarios</button>
         <Link to ="/reports-panel" className={styles.secondaryButton}>Reportes</Link>
         <Link to ="/admin-panel" className={styles.secondaryButton}>Panel</Link>
+        <Link to ="/admin-panel/pedidos" className={styles.secondaryButton}>Pedidos</Link>
         <button className={styles.secondaryButton}>Mi Perfil</button>
       </div>
 

@@ -2,35 +2,36 @@ import { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import { io } from "socket.io-client";
 import 'mapbox-gl/dist/mapbox-gl.css';
+import api from "../../libs/axios";
 
 const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN;
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-export default function MapaRepartidor({ pedidoId }) {
+export default function MapaRepartidor({ pedidoId, origen, destino }) {
   const mapContainer = useRef(null);
   const map = useRef(null);
   const marker = useRef(null);
   const historialRef = useRef([]);
-  const [ubicacion, setUbicacion] = useState({ lat: -38.9516, lng: -68.0591 });//nqn x defecto
+  const [ubicacion, setUbicacion] = useState({ lat: -38.9516, lng: -68.0591 });
 
-  //obtener ubicación inicial desde el backend
-  useEffect(() => {
+    useEffect(() => {
     const fetchUbicacionInicial = async () => {
-      try {
-        const res = await fetch(`${BACKEND_URL}/ubicacion/${pedidoId}`);
-        const data = await res.json();
+        try {
+        const { data } = await api.get(`/repartidores/ubicacion/${pedidoId}`);
         if (data.latitud && data.longitud) {
-          setUbicacion({ lat: data.latitud, lng: data.longitud });
+            setUbicacion({ lat: data.latitud, lng: data.longitud });
         }
-      } catch (err) {
-        console.error("Error al obtener ubicación inicial:", err);
-      }
+        } catch (err) {
+        console.error(
+            "Error al obtener ubicación inicial:",
+            err.response?.data?.message || err.message
+        );
+        }
     };
 
     fetchUbicacionInicial();
-  }, [pedidoId]);
+    }, [pedidoId]);
 
-  //inicializar mapa
   useEffect(() => {
     mapboxgl.accessToken = MAPBOX_TOKEN;
 
@@ -48,7 +49,6 @@ export default function MapaRepartidor({ pedidoId }) {
     return () => map.current.remove();
   }, [ubicacion]);
 
-  //escuchar ubicación en tiempo real
   useEffect(() => {
     const socket = io(BACKEND_URL);
     socket.emit("joinPedido", pedidoId);
@@ -86,6 +86,22 @@ export default function MapaRepartidor({ pedidoId }) {
 
     return () => socket.disconnect();
   }, [pedidoId]);
+
+  useEffect(() => {
+    if (map.current && origen) {
+      new mapboxgl.Marker({ color: "green" })
+        .setLngLat([origen.lng, origen.lat])
+        .setPopup(new mapboxgl.Popup().setText("Origen"))
+        .addTo(map.current);
+    }
+
+    if (map.current && destino) {
+      new mapboxgl.Marker({ color: "blue" })
+        .setLngLat([destino.lng, destino.lat])
+        .setPopup(new mapboxgl.Popup().setText("Destino"))
+        .addTo(map.current);
+    }
+  }, [origen, destino]);
 
   return <div ref={mapContainer} style={{ width: "100%", height: "100%" }} />;
 }

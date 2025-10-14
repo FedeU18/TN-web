@@ -24,6 +24,8 @@ export default function ReportsPanel() {
   const [kpis, setKpis] = useState({ entregados: 0, cancelados: 0, tiempoPromedio: 0 });
   const [series, setSeries] = useState([]);
 
+  const hoy = new Date().toISOString().split("T")[0];
+
   const fetch = async () => {
     setLoading(true);
     try {
@@ -35,9 +37,25 @@ export default function ReportsPanel() {
 
       //kpis
       setKpis(data.resumen ?? { entregados: 0, cancelados: 0, tiempoPromedio: 0 });
+
       //series para gráficos
-      setSeries(Array.isArray(data.series) ? data.series : []);
-      //repartidores
+     const seriesOrdenadas = Array.isArray(data.series)
+        ? data.series
+            .filter(s => {
+              const fecha = new Date(s.fecha);
+              const desde = startDate ? new Date(startDate) : null;
+              const hasta = endDate ? new Date(endDate) : null;
+              const dentroDelRango =
+                (!desde || fecha >= desde) && (!hasta || fecha <= hasta);
+              const tienePedidos = s.entregados > 0 || s.cancelados > 0;
+              return dentroDelRango && tienePedidos;
+            })
+            .sort((a, b) => new Date(a.fecha) - new Date(b.fecha))
+        : [];
+
+      setSeries(seriesOrdenadas);
+
+      //rpartidores
       if (Array.isArray(data.detalle_repartidores)) {
         const repartidoresFormateados = data.detalle_repartidores.map(r => ({
           id: r.id_repartidor,
@@ -56,7 +74,13 @@ export default function ReportsPanel() {
     fetch();
   }, []);
 
-  const handleApply = () => fetch();
+  const handleApply = () => {
+    if (startDate && endDate && new Date(startDate) > new Date(endDate)) {
+      alert("La fecha de inicio no puede ser posterior a la fecha de fin.");
+      return;
+    }
+    fetch();
+  };
 
   return (
     <div className={styles.container}>
@@ -65,17 +89,27 @@ export default function ReportsPanel() {
       <div className={styles.filters}>
         <div className={styles.filterGroup}>
           <label>Desde</label>
-          <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} />
+          <input
+            type="date"
+            value={startDate}
+            onChange={e => setStartDate(e.target.value)}
+            max={hoy}
+          />
         </div>
         <div className={styles.filterGroup}>
           <label>Hasta</label>
-          <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} />
+          <input
+            type="date"
+            value={endDate}
+            onChange={e => setEndDate(e.target.value)}
+            max={hoy}
+          />
         </div>
         <div className={styles.filterGroup}>
           <label>Repartidor</label>
           <select value={repartidorId} onChange={e => setRepartidorId(e.target.value)}>
             <option value="">Todos</option>
-           {repartidores.map(r => (
+            {repartidores.map(r => (
               <option key={r.id} value={r.id}>{r.nombre}</option>
             ))}
           </select>

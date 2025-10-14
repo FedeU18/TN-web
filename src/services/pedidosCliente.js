@@ -16,6 +16,6 @@ export const getPedidosCliente = async () => {
 };
 
 export const getDetallePedidoCliente = async (id_pedido) => {
-  const response = await axios.get(`/clientes/pedidos/${id_pedido}`);
+  const response = await axios.get(`/pedidos/${id_pedido}`);
   return response.data;
 };

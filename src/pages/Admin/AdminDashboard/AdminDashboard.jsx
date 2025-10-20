@@ -22,9 +22,11 @@ const handleLogout = () => {
 
       <div className={styles.buttonContainer}>
         <button className={styles.primaryButton}>Gestionar Usuarios</button>
-        <Link to ="/reports-panel" className={styles.secondaryButton}>Reportes</Link>
-        <Link to ="/admin-panel" className={styles.secondaryButton}>Panel</Link>
-        <Link to ="/admin-panel/pedidos" className={styles.secondaryButton}>Pedidos</Link>
+        <Link to="/reports-panel" className={styles.secondaryButton}>Reportes</Link>
+        <Link to="/admin-panel" className={styles.secondaryButton}>Panel</Link>
+        <Link to="/admin-panel/pedidos" className={styles.secondaryButton}>Pedidos</Link>
+  <Link to="/buscar-pedidos-email" className={styles.secondaryButton}>Buscar pedidos por email (REST)</Link>
+  <Link to="/buscar-pedidos-email-soap" className={styles.secondaryButton}>Buscar pedidos por email (SOAP)</Link>
         <button className={styles.secondaryButton}>Mi Perfil</button>
       </div>
 

@@ -19,6 +19,8 @@ import MisPedidosDetalle from "./pages/Client/MisPedidos/MisPedidosDetalle";
 import PedidosAdminList from "./pages/Admin/PedidosAdmin/PedidosAdminList";
 import PedidoAdminDetalle from "./pages/Admin/PedidosAdmin/PedidoAdminDetalle";
 import { ProtectedRoute } from "./components/ProtectedRoutes";
+import BuscarPedidosPorEmailSOAP from "./pages/AdminDashboard/BuscarPedidosPorEmailSOAP";
+import BuscarPedidosPorEmail from "./pages/AdminDashboard/BuscarPedidosPorEmail";
 
 function App() {
   return (
@@ -32,7 +34,7 @@ function App() {
           <Route path="/recuperarContra" element={<RecuperarContra />} />
           <Route path="/verify-token" element={<VerificarToken />} />
           <Route path="/reset-password" element={<ResetPassword />} />
-          
+
           {/*Dashboards protegidos*/}
           <Route
             path="/admin-dashboard"
@@ -71,6 +73,22 @@ function App() {
             element={
               <ProtectedRoute roles={["admin"]}>
                 <PedidoAdminDetalle />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/buscar-pedidos-email"
+            element={
+              <ProtectedRoute roles={["admin"]}>
+                <BuscarPedidosPorEmail />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/buscar-pedidos-email-soap"
+            element={
+              <ProtectedRoute roles={["admin"]}>
+                <BuscarPedidosPorEmailSOAP />
               </ProtectedRoute>
             }
           />

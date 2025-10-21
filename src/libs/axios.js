@@ -11,7 +11,7 @@ api.interceptors.request.use((config) => {
   const token = typeof useAuthStore.getState === "function"
     ? useAuthStore.getState().token
     : localStorage.getItem('token'); // fallback
-  console.log("Axios token (interceptor) =>", !!token);
+  // Añadir Authorization si existe token
   if (token) config.headers.Authorization = `Bearer ${token}`;
   if (!config.headers["Content-Type"] && !(config.data instanceof FormData)) {
     config.headers["Content-Type"] = "application/json";

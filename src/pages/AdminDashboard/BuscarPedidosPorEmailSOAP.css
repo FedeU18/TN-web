@@ -1,0 +1,48 @@
+/* Styles for BuscarPedidosPorEmailSOAP component */
+.soap-search-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+.soap-search-card {
+  width: 900px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  padding: 28px 36px;
+  text-align: center;
+}
+.soap-search-card h2 {
+  margin: 0 0 12px 0;
+  font-size: 22px;
+}
+.soap-search-form {
+  margin: 12px 0 18px 0;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+.soap-search-form input[type="email"] {
+  padding: 8px 10px;
+  width: 360px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+.soap-search-form button {
+  padding: 8px 14px;
+  background: #0b5ed7;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.soap-search-form button:disabled {
+  background: #8fb3ff;
+  cursor: not-allowed;
+}
+.soap-time { margin: 10px 0 20px 0; color: #333; }
+.soap-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+.soap-table th, .soap-table td { padding: 8px 10px; text-align: left; border-bottom: 1px solid #eee; }
+.soap-table th { font-weight: 700; font-size: 13px; color: #222; }
+.soap-empty { color: #666; margin-top: 12px; }

@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import io from "socket.io-client";
 import { getDetallePedidoCliente } from "../../services/pedidosCliente";
 
-const socket = io("http://localhost:3000");
-
 export default function MonitorPedido({ pedidoId }) {
   const [estado, setEstado] = useState("");
   const [loading, setLoading] = useState(true);
@@ -26,6 +24,9 @@ export default function MonitorPedido({ pedidoId }) {
 
   //unirse a la sala del pedido y escuchar actualizaciones
   useEffect(() => {
+    
+    const socket = io("http://localhost:3000");
+
     socket.emit("joinPedido", pedidoId);
 
     socket.on("estadoActualizado", (data) => {

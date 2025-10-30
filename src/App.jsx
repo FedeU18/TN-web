@@ -21,6 +21,7 @@ import PedidoAdminDetalle from "./pages/Admin/PedidosAdmin/PedidoAdminDetalle";
 import { ProtectedRoute } from "./components/ProtectedRoutes";
 import BuscarPedidosPorEmailSOAP from "./pages/AdminDashboard/BuscarPedidosPorEmailSOAP";
 import BuscarPedidosPorEmail from "./pages/AdminDashboard/BuscarPedidosPorEmail";
+import CalificarRepartidor from "./pages/CalificarRepartidor/CalificarRepartidor";
 
 function App() {
   return (
@@ -129,6 +130,14 @@ function App() {
             element={
               <ProtectedRoute roles={["admin", "cliente", "repartidor"]}>
                 <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/calificar-repartidor"
+            element={
+              <ProtectedRoute roles={["cliente"]}>
+                <CalificarRepartidor />
               </ProtectedRoute>
             }
           />

@@ -22,8 +22,29 @@ import { ProtectedRoute } from "./components/ProtectedRoutes";
 import BuscarPedidosPorEmailSOAP from "./pages/AdminDashboard/BuscarPedidosPorEmailSOAP";
 import BuscarPedidosPorEmail from "./pages/AdminDashboard/BuscarPedidosPorEmail";
 import CalificarRepartidor from "./pages/CalificarRepartidor/CalificarRepartidor";
+import io from "socket.io-client";
+import { useEffect } from "react";
+import { useNotifications } from "./contexts/NotificationContext";
 
 function App() {
+  const { showNotification } = useNotifications();
+
+  useEffect(() => {
+    //conexión con tu backend
+    const socket = io("http://localhost:3000");
+
+    //escucha cuando el backend emite el evento "estadoActualizado"
+    socket.on("estadoActualizado", (data) => {
+      showNotification({
+        title: "Pedido actualizado",
+        message: data.mensaje || `Tu pedido #${data.pedidoId} cambió a estado "${data.nuevoEstado}"`,
+        type: "info",
+      });
+    });
+
+    //limpieza cuando se desmonta el componente
+    return () => socket.disconnect();
+  }, [showNotification]);
   return (
     <BrowserRouter>
       <div>

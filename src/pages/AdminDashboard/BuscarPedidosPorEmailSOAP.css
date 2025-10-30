@@ -46,3 +46,38 @@
 .soap-table th, .soap-table td { padding: 8px 10px; text-align: left; border-bottom: 1px solid #eee; }
 .soap-table th { font-weight: 700; font-size: 13px; color: #222; }
 .soap-empty { color: #666; margin-top: 12px; }
+
+/* Back button container placed below the search bar */
+.soap-back-button-container {
+  display: flex;
+  justify-content: center; /* center the button under the input */
+  margin-top: 8px;
+}
+
+.soap-back-button {
+  padding: 8px 14px;
+  background: #6c757d; /* secondary color */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.soap-back-button:hover:not(:disabled) {
+  background: #5a646a;
+}
+
+.soap-back-button:disabled {
+  background: #c6c8ca;
+  cursor: not-allowed;
+}
+
+/* Small screens: center the button and make it full width under the form */
+@media (max-width: 640px) {
+  .soap-search-card { width: 100%; padding: 18px; }
+  .soap-search-form { flex-direction: column; align-items: stretch; }
+  .soap-search-form input[type="email"] { width: 100%; }
+  .soap-back-button-container { justify-content: center; }
+  .soap-back-button { width: 120px; }
+}

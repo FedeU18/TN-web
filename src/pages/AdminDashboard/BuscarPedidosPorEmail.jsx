@@ -48,7 +48,9 @@ function BuscarPedidosPorEmail() {
   return (
     <div className="soap-search-wrapper">
       <div className="soap-search-card">
-        <h2>Buscar pedidos por email</h2>
+        <div className="soap-search-header">
+          <h2>Buscar pedidos por email</h2>
+        </div>
         <form className="soap-search-form" onSubmit={handleBuscar}>
           <input
             type="email"
@@ -59,6 +61,16 @@ function BuscarPedidosPorEmail() {
           />
           <button type="submit" disabled={loading}>Buscar</button>
         </form>
+        <div className="soap-back-button-container">
+          <button
+            type="button"
+            className="soap-back-button"
+            onClick={() => window.history.back()}
+            disabled={loading}
+          >
+            Volver
+          </button>
+        </div>
         {loading && <p className="soap-empty">Cargando...</p>}
         {error && <p style={{color:'red'}}>{error}</p>}
         {pedidos.length > 0 && (

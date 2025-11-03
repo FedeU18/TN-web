@@ -12,6 +12,7 @@ export default function MisPedidosSinCalificar() {
     const fetchPedidos = async () => {
       try {
         const data = await getPedidosSinCalificar();
+        console.log(data);
         setPedidos(data);
       } catch (err) {
         console.error(err);
@@ -23,31 +24,59 @@ export default function MisPedidosSinCalificar() {
     fetchPedidos();
   }, []);
 
-  if (loading) return <p>Cargando pedidos...</p>;
+  if (loading) return <p className={styles.loading}>Cargando pedidos...</p>;
   if (error) return <p className={styles.error}>{error}</p>;
 
   return (
     <div className={styles.container}>
       <h2>Pedidos sin calificar</h2>
+
       {pedidos.length === 0 ? (
-        <p>No tienes pedidos pendientes de calificar.</p>
+        <p className={styles.noPedidos}>
+          No tienes pedidos pendientes de calificar.
+        </p>
       ) : (
-        <ul className={styles.pedidosList}>
-          {pedidos.map((pedido) => (
-            <li key={pedido.id_pedido} className={styles.pedidoItem}>
-              <span>
-                Pedido #{pedido.id_pedido} —{" "}
-                {pedido.estado?.nombre_estado || "Sin estado"}
-              </span>
-              <Link
-                to={`/calificar-repartidor/${pedido.id_pedido}`}
-                className={styles.secondaryButton}
-              >
-                Calificar
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <div className={styles.tableWrapper}>
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th>ID Pedido</th>
+                <th>Estado</th>
+                <th>Repartidor</th>
+                <th>Fecha de entrega</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              {pedidos.map((pedido) => (
+                <tr key={pedido.id_pedido}>
+                  <td>#{pedido.id_pedido}</td>
+                  <td>{pedido.estado?.nombre_estado || "Sin estado"}</td>
+                  <td>
+                    {pedido.repartidor
+                      ? `${pedido.repartidor.nombre} ${pedido.repartidor.apellido}`
+                      : "No asignado"}
+                  </td>
+                  <td>
+                    {pedido.fecha_entrega
+                      ? new Date(pedido.fecha_entrega).toLocaleDateString(
+                          "es-AR"
+                        )
+                      : "—"}
+                  </td>
+                  <td>
+                    <Link
+                      to={`/calificar-repartidor/${pedido.id_pedido}`}
+                      className={styles.calificarBtn}
+                    >
+                      Calificar
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );

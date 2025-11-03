@@ -19,3 +19,8 @@ export const getDetallePedidoCliente = async (id_pedido) => {
   const response = await axios.get(`/pedidos/${id_pedido}`);
   return response.data;
 };
+
+export const getPedidosSinCalificar = async () => {
+  const response = await axios.get(`/clientes/pedidos/sin-calificar`);
+  return response.data;
+};

@@ -36,26 +36,42 @@ export default function ClienteDashboard() {
   // Paginación
   const totalPages = Math.ceil(pedidos.length / PEDIDOS_PER_PAGE);
   const startIndex = (page - 1) * PEDIDOS_PER_PAGE;
-  const paginatedPedidos = pedidos.slice(startIndex, startIndex + PEDIDOS_PER_PAGE);
+  const paginatedPedidos = pedidos.slice(
+    startIndex,
+    startIndex + PEDIDOS_PER_PAGE
+  );
 
   return (
     <div className={styles.container}>
       <div className={styles.welcomeContainer}>
-        <h1 className={styles.title}>¡Bienvenido {user?.nombre || "Usuario"}!</h1>
+        <h1 className={styles.title}>
+          ¡Bienvenido {user?.nombre || "Usuario"}!
+        </h1>
         <p className={styles.greeting}>Dashboard del rol Cliente.</p>
-        <p className={styles.subtitle}>Desde aquí podrás realizar y gestionar tus pedidos.</p>
+        <p className={styles.subtitle}>
+          Desde aquí podrás realizar y gestionar tus pedidos.
+        </p>
       </div>
 
       <div className={styles.buttonContainer}>
-        <button className={styles.primaryButton}>Hacer Pedido</button>
-        <Link to="/profile" className={styles.secondaryButton}>Mi Perfil</Link>
+        <Link to="/profile" className={styles.secondaryButton}>
+          Mi Perfil
+        </Link>
+        <Link
+          to="/mis-pedidos/sin-calificar"
+          className={styles.secondaryButton}
+        >
+          Pedidos sin calificar
+        </Link>
       </div>
 
       <div className={styles.pedidosContainer}>
         <h2>Mis Pedidos</h2>
         {loading && <p>Cargando pedidos...</p>}
         {error && <p className={styles.error}>{error}</p>}
-        {!loading && paginatedPedidos.length === 0 && <p>No tienes pedidos aún.</p>}
+        {!loading && paginatedPedidos.length === 0 && (
+          <p>No tienes pedidos aún.</p>
+        )}
 
         <ul className={styles.pedidosList}>
           {paginatedPedidos.map((pedido) => (
@@ -76,7 +92,9 @@ export default function ClienteDashboard() {
         {/* Paginación */}
         {totalPages > 1 && (
           <div className={styles.pagination}>
-            <button onClick={() => setPage(1)} disabled={page === 1}>«</button>
+            <button onClick={() => setPage(1)} disabled={page === 1}>
+              «
+            </button>
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((num) => (
               <button
                 key={num}
@@ -86,7 +104,12 @@ export default function ClienteDashboard() {
                 {num}
               </button>
             ))}
-            <button onClick={() => setPage(totalPages)} disabled={page === totalPages}>»</button>
+            <button
+              onClick={() => setPage(totalPages)}
+              disabled={page === totalPages}
+            >
+              »
+            </button>
           </div>
         )}
       </div>

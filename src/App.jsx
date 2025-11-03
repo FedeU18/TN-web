@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import './App.css'
+import "./App.css";
 import Home from "./pages/Home/Home";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
@@ -25,6 +25,7 @@ import CalificarRepartidor from "./pages/CalificarRepartidor/CalificarRepartidor
 import io from "socket.io-client";
 import { useEffect } from "react";
 import { useNotifications } from "./contexts/NotificationContext";
+import MisPedidosSinCalificar from "./pages/Client/MisPedidos/MisPedidosSinCalificar";
 
 function App() {
   const { showNotification } = useNotifications();
@@ -37,7 +38,9 @@ function App() {
     socket.on("estadoActualizado", (data) => {
       showNotification({
         title: "Pedido actualizado",
-        message: data.mensaje || `Tu pedido #${data.pedidoId} cambió a estado "${data.nuevoEstado}"`,
+        message:
+          data.mensaje ||
+          `Tu pedido #${data.pedidoId} cambió a estado "${data.nuevoEstado}"`,
         type: "info",
       });
     });
@@ -155,7 +158,15 @@ function App() {
             }
           />
           <Route
-            path="/calificar-repartidor"
+            path="/mis-pedidos/sin-calificar"
+            element={
+              <ProtectedRoute roles={["cliente"]}>
+                <MisPedidosSinCalificar />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/calificar-repartidor/:id"
             element={
               <ProtectedRoute roles={["cliente"]}>
                 <CalificarRepartidor />
@@ -169,4 +180,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

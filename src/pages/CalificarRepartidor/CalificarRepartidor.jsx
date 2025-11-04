@@ -31,7 +31,7 @@ export default function CalificarRepartidor() {
 
       // Espera un momento para mostrar el mensaje y luego redirige
       setTimeout(() => {
-        navigate("/dashboard"); // ← redirige al dashboard
+        navigate("/cliente-dashboard"); // ← redirige al dashboard
       }, 1500);
     } catch (error) {
       console.error(error);

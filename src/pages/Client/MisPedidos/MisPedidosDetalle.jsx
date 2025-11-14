@@ -109,6 +109,7 @@ export default function MisPedidosDetalle() {
         <div style={{ width: "100%", height: "350px", marginBottom: "20px" }}>
           <MapaRepartidor
             pedidoId={id}
+            estadoPedido={pedido.estado?.nombre_estado}
             origen={{
               lat: pedido.origen_latitud,
               lng: pedido.origen_longitud,

@@ -3,7 +3,6 @@ import "./App.css";
 import Home from "./pages/Home/Home";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import RecuperarContra from "./pages/recuperarContra/recuperarContra";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import ClienteDashboard from "./pages/Client/ClienteDashboard/ClienteDashboard";
@@ -26,6 +25,7 @@ import io from "socket.io-client";
 import { useEffect } from "react";
 import { useNotifications } from "./contexts/NotificationContext";
 import MisPedidosSinCalificar from "./pages/Client/MisPedidos/MisPedidosSinCalificar";
+import RecuperarContra from "./pages/recuperarContra/recuperarContra";
 
 function App() {
   const { showNotification } = useNotifications();

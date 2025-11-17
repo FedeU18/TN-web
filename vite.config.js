@@ -1,22 +1,22 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-  // Proxificar las peticiones a la API y al WSDL SOAP hacia el backend durante el desarrollo
-      '/api': {
-        target: 'http://localhost:3000',
+      // Proxificar las peticiones a la API y al WSDL SOAP hacia el backend durante el desarrollo
+      "/api": {
+        target: import.meta.env.VITE_BACKEND_URL,
         changeOrigin: true,
         secure: false,
       },
-      '/wsdl': {
-        target: 'http://localhost:3000',
+      "/wsdl": {
+        target: import.meta.env.VITE_BACKEND_URL,
         changeOrigin: true,
         secure: false,
-      }
-    }
-  }
-})
+      },
+    },
+  },
+});

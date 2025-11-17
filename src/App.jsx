@@ -32,7 +32,7 @@ function App() {
 
   useEffect(() => {
     //conexión con tu backend
-    const socket = io("http://localhost:3000");
+    const socket = io(import.meta.env.VITE_BACKEND_URL);
 
     //escucha cuando el backend emite el evento "estadoActualizado"
     socket.on("estadoActualizado", (data) => {

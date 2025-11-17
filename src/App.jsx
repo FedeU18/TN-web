@@ -25,7 +25,7 @@ import io from "socket.io-client";
 import { useEffect } from "react";
 import { useNotifications } from "./contexts/NotificationContext";
 import MisPedidosSinCalificar from "./pages/Client/MisPedidos/MisPedidosSinCalificar";
-import RecuperarContra from "./pages/recuperarContra/recuperarContra";
+import RecuperarContra from "./pages/RecuperarPass/RecuperarPass";
 
 function App() {
   const { showNotification } = useNotifications();

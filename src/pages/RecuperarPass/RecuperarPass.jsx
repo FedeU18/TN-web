@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"; // <--- usamos useNavigate
 import { forgotPasswordRequest } from "../../api/auth";
-import styles from "./RecuperarContra.module.css";
+import styles from "./RecuperarPass.module.css";
 
 export default function RecuperarContra() {
   const [email, setEmail] = useState("");

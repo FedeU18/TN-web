@@ -15,6 +15,7 @@ import {
   Line,
   Legend,
 } from "recharts";
+import * as XLSX from "xlsx";
 
 export default function ReportsPanel() {
   const [startDate, setStartDate] = useState("");
@@ -32,7 +33,11 @@ export default function ReportsPanel() {
 
   const hoy = new Date().toISOString().split("T")[0];
 
-  const fetch = async ({ startDate: sd, endDate: ed, repartidorId: rid } = {}) => {
+  const fetch = async ({
+    startDate: sd,
+    endDate: ed,
+    repartidorId: rid,
+  } = {}) => {
     setLoading(true);
     // usar parámetros si vienen, si no usar state
     const sDate = sd !== undefined ? sd : startDate;
@@ -103,7 +108,31 @@ export default function ReportsPanel() {
     setEndDate("");
     setRepartidorId("");
     fetch({ startDate: "", endDate: "", repartidorId: "" });
-  }
+  };
+
+  const exportToExcel = () => {
+    // --- Primera hoja: KPIs ---
+    const kpiData = [
+      ["Métrica", "Valor"],
+      ["Pedidos entregados", kpis.entregados],
+      ["Pedidos cancelados", kpis.cancelados],
+      ["Tiempo promedio (min)", kpis.promedio_entrega_minutos],
+      ["Promedio calificación general", kpis.promedio_calificacion_general],
+    ];
+
+    const kpiSheet = XLSX.utils.aoa_to_sheet(kpiData);
+
+    // --- Segunda hoja: Series ---
+    const seriesSheet = XLSX.utils.json_to_sheet(series);
+
+    // Crear workbook
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, kpiSheet, "Resumen");
+    XLSX.utils.book_append_sheet(workbook, seriesSheet, "Detalle");
+
+    // Exportar archivo
+    XLSX.writeFile(workbook, `reporte_desempeño_${Date.now()}.xlsx`);
+  };
 
   return (
     <div className={styles.container}>
@@ -157,6 +186,13 @@ export default function ReportsPanel() {
           disabled={loading}
         >
           Limpiar
+        </button>
+        <button
+          className={styles.applyButton}
+          onClick={exportToExcel}
+          disabled={loading || series.length === 0}
+        >
+          Exportar a Excel
         </button>
       </div>
 

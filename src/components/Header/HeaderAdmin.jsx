@@ -1,6 +1,6 @@
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import "./Header.css";
-import { useAuthStore } from "../../hooks/useAuthStore";
+import { useAuthStore } from "../../store/auth";
 
 export default function HeaderAdmin() {
   const { logout } = useAuthStore();

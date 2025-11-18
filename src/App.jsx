@@ -26,6 +26,7 @@ import { useEffect } from "react";
 import { useNotifications } from "./contexts/NotificationContext";
 import MisPedidosSinCalificar from "./pages/Client/MisPedidos/MisPedidosSinCalificar";
 import RecuperarContra from "./pages/RecuperarPass/RecuperarPass";
+import VendedorDashboard from "./pages/VendedorDashboard/VendedorDashboard";
 
 function App() {
   const { showNotification } = useNotifications();
@@ -170,6 +171,14 @@ function App() {
             element={
               <ProtectedRoute roles={["cliente"]}>
                 <CalificarRepartidor />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/vendedor-dashboard"
+            element={
+              <ProtectedRoute roles={["vendedor"]}>
+                <VendedorDashboard />
               </ProtectedRoute>
             }
           />

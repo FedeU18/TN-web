@@ -53,6 +53,9 @@ export default function Login() {
         case "repartidor":
           navigate("/repartidor-dashboard");
           break;
+        case "vendedor":
+          navigate("/vendedor-dashboard");
+          break;
         default:
           setError("Rol no reconocido");
       }

@@ -10,8 +10,13 @@
   height: 60px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   padding: 0 12px;
+}
+
+.header > h1 {
+  margin: 0;
+  font-size: 20px;
 }
 
 .header-logo {
@@ -24,4 +29,41 @@
 
 .header-logo:hover {
   color: #60a5fa;
+}
+
+.header-nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+.header-nav .active-link {
+  color: #60a5fa; /* azul clarito */
+  font-weight: bold;
+  border-bottom: 2px solid #60a5fa;
+  padding-bottom: 3px;
+}
+.header-nav a:hover {
+  color: #93c5fd;
+}
+.header-nav {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: fit-content;
+}
+.header-nav button {
+  margin: 0 10px;
+  padding: 0;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 0 10px;
+  transition: color 0.3s ease;
+}
+.header-nav button:hover {
+  color: #b95d33;
 }

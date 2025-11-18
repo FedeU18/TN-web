@@ -32,10 +32,7 @@ function App() {
   const { showNotification } = useNotifications();
 
   useEffect(() => {
-    //conexión con tu backend
     const socket = io(import.meta.env.VITE_BACKEND_URL);
-
-    //escucha cuando el backend emite el evento "estadoActualizado"
     socket.on("estadoActualizado", (data) => {
       showNotification({
         title: "Pedido actualizado",
@@ -45,14 +42,13 @@ function App() {
         type: "info",
       });
     });
-
-    //limpieza cuando se desmonta el componente
     return () => socket.disconnect();
   }, [showNotification]);
+
   return (
     <BrowserRouter>
       <div>
-        <Header />
+        <Header /> {/* <---- ahora es el dinámico */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />

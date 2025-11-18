@@ -54,7 +54,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/recuperarContra" element={<RecuperarContra />} />
-          <Route path="/verify-token" element={<VerificarToken />} />
+          <Route path="/verify-code" element={<VerificarToken />} />
           <Route path="/reset-password" element={<ResetPassword />} />
 
           {/*Dashboards protegidos*/}

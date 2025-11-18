@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { resetPasswordRequest } from "../../api/auth";
-import { useAuthStore } from "../../store/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import styles from "./ResetPassword.module.css";
 
 export default function ResetPassword() {
   const navigate = useNavigate();
-  const token = useAuthStore((state) => state.token);
-  const logout = useAuthStore((state) => state.logout);
+  const location = useLocation();
+
+  // 👇 Recuperamos email y code desde el state
+  const email = location.state?.email || "";
+  const code = location.state?.code || "";
 
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -34,10 +36,15 @@ export default function ResetPassword() {
     }
 
     try {
-      const res = await resetPasswordRequest({ token, newPassword });
+      // 👇 ahora enviamos email + code + newPassword
+      const res = await resetPasswordRequest(email, code, newPassword);
       setSuccess(res.data.message);
-      logout();
-      setTimeout(() => navigate("/login"), 2000);
+
+      setTimeout(
+        () =>
+          navigate("/login", { state: { successMessage: res.data.message } }),
+        2000
+      );
     } catch (err) {
       setError(err.response?.data?.message || "Error al cambiar contraseña");
     } finally {

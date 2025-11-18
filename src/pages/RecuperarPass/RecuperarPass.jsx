@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // <--- usamos useNavigate
+import { useNavigate } from "react-router-dom";
 import { forgotPasswordRequest } from "../../api/auth";
 import styles from "./RecuperarPass.module.css";
 
@@ -7,7 +7,7 @@ export default function RecuperarContra() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate(); // <--- hook para redirigir
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,14 +23,14 @@ export default function RecuperarContra() {
     try {
       const response = await forgotPasswordRequest(email);
 
-      // Redirigimos al formulario de verificar token y pasamos el mensaje como estado
-      navigate("/verify-token", {
+      // Redirigimos a verificar código
+      navigate("/verify-code", {
         state: { successMessage: response.data.message, email },
       });
 
       setEmail("");
     } catch (err) {
-      setError(err.response?.data?.message || "Error al enviar el enlace.");
+      setError(err.response?.data?.message || "Error al enviar el código.");
     } finally {
       setLoading(false);
     }
@@ -39,6 +39,7 @@ export default function RecuperarContra() {
   return (
     <div>
       <h1 className={styles.title}>Recuperar Contraseña</h1>
+
       <form className={styles.centeredContainer} onSubmit={handleSubmit}>
         {error && <p className={styles.errorMessage}>{error}</p>}
 
@@ -55,7 +56,7 @@ export default function RecuperarContra() {
         </div>
 
         <button type="submit" className={styles.button} disabled={loading}>
-          {loading ? "Enviando..." : "Enviar Enlace de Recuperación"}
+          {loading ? "Enviando..." : "Enviar Código"}
         </button>
       </form>
     </div>

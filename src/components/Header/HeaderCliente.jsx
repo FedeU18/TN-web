@@ -12,7 +12,7 @@ export default function HeaderCliente() {
   return (
     <header className="header">
       <h1>
-        <Link to="/" className="header-logo">
+        <Link to="/cliente-dashboard" className="header-logo">
           TrackNow
         </Link>
       </h1>

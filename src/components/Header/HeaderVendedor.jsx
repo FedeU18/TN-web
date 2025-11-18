@@ -5,7 +5,7 @@ export default function HeaderVendedor() {
   return (
     <header className="header">
       <h1>
-        <Link to="/" className="header-logo">
+        <Link to="/vendedor-dashboard" className="header-logo">
           TrackNow
         </Link>
       </h1>

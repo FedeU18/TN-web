@@ -1,7 +1,14 @@
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import "./Header.css";
+import { useAuthStore } from "../../hooks/useAuthStore";
 
 export default function HeaderAdmin() {
+  const { logout } = useAuthStore();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    logout(); //limpia el token
+    navigate("/"); //redirige al home
+  };
   return (
     <header className="header">
       <h1>
@@ -38,6 +45,7 @@ export default function HeaderAdmin() {
         >
           Perfil
         </NavLink>
+        <button onClick={handleLogout}>Cerrar Sesión</button>
       </nav>
     </header>
   );

@@ -1,7 +1,14 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import "./Header.css";
+import { useAuthStore } from "../../store/auth";
 
 export default function HeaderVendedor() {
+  const { logout } = useAuthStore();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    logout(); //limpia el token
+    navigate("/"); //redirige al home
+  };
   return (
     <header className="header">
       <h1>
@@ -23,6 +30,7 @@ export default function HeaderVendedor() {
         >
           Perfil
         </NavLink>
+        <button onClick={handleLogout}>Cerrar Sesión</button>
       </nav>
     </header>
   );

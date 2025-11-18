@@ -1,10 +1,11 @@
 import { Link, NavLink } from "react-router-dom";
 import "./Header.css";
 import { useAuthStore } from "../../store/auth";
+import { useNavigate } from "react-router-dom";
 
 export default function HeaderCliente() {
   const { logout } = useAuthStore();
-
+  const navigate = useNavigate();
   const handleLogout = () => {
     logout(); //limpia el token
     navigate("/"); //redirige al home

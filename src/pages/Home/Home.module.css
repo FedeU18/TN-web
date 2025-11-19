@@ -1,0 +1,208 @@
+/* ------- COLORES PRINCIPALES ------- */
+:root {
+  --primary: #ff6f3c; /* naranja delivery */
+  --primary-dark: #e65e30;
+  --secondary: #1e1e1e;
+  --bg: #f8f8f8;
+  --card-bg: #ffffff;
+  --text: #333;
+}
+
+/* Contenedor general */
+.container {
+  font-family: "Inter", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+}
+
+/* HERO */
+.heroSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 10%;
+  background: white;
+}
+
+.heroContent {
+  max-width: 500px;
+}
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 800;
+}
+
+.subtitle {
+  margin-top: 10px;
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+
+.buttons {
+  margin-top: 30px;
+  display: flex;
+  gap: 15px;
+}
+
+.btnPrimary {
+  background: var(--primary);
+  padding: 12px 28px;
+  color: white;
+  border-radius: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.btnPrimary:hover {
+  background: var(--primary-dark);
+}
+
+.btnSecondary {
+  padding: 12px 28px;
+  border-radius: 12px;
+  text-decoration: none;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.btnSecondary:hover {
+  background: var(--primary);
+  color: white;
+}
+
+.heroImage img {
+  width: 420px;
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+/* SECCIONES GENERALES */
+.sectionTitle {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 40px;
+  font-weight: 700;
+}
+
+/* COMO FUNCIONA */
+.stepsSection {
+  padding: 80px 10%;
+}
+
+.stepsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+.stepCard {
+  background: var(--card-bg);
+  padding: 25px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: 0.2s;
+}
+
+.stepCard:hover {
+  transform: translateY(-5px);
+}
+
+/* FUNCIONALIDADES POR ROL */
+.featuresSection {
+  padding: 80px 10%;
+  background: white;
+}
+
+.cardsContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+.card {
+  background: var(--card-bg);
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.card ul {
+  margin-top: 15px;
+}
+
+.card li {
+  margin-bottom: 8px;
+}
+
+/* BENEFICIOS */
+.benefitsSection {
+  padding: 80px 10%;
+}
+
+.benefitsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+.benefitCard {
+  background: var(--card-bg);
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* CTA FINAL */
+.ctaSection {
+  padding: 80px 10%;
+  text-align: center;
+}
+
+.btnPrimaryLarge {
+  background: var(--primary);
+  padding: 16px 40px;
+  color: white;
+  border-radius: 14px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.btnPrimaryLarge:hover {
+  background: var(--primary-dark);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .heroSection {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .heroImage img {
+    margin-top: 30px;
+  }
+
+  .stepsGrid,
+  .cardsContainer,
+  .benefitsGrid {
+    grid-template-columns: 1fr !important;
+  }
+}

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./Header.css";
 
 export default function HeaderPublic() {
@@ -11,8 +11,24 @@ export default function HeaderPublic() {
       </h1>
 
       <nav className="header-nav">
-        <Link to="/login">Ingresar</Link>
-        <Link to="/register">Registrarse</Link>
+        {/* <NavLink
+          to="/profile"
+          className={({ isActive }) => (isActive ? "active-link" : "")}
+        >
+          Perfil
+        </NavLink> */}
+        <NavLink
+          to="/login"
+          className={({ isActive }) => (isActive ? "active-link" : "")}
+        >
+          Ingresar
+        </NavLink>
+        <NavLink
+          to="/register"
+          className={({ isActive }) => (isActive ? "active-link" : "")}
+        >
+          Registrarse
+        </NavLink>
       </nav>
     </header>
   );

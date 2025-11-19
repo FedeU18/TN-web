@@ -1,8 +1,12 @@
 .profileContainer {
   padding: 24px;
-  min-height: auto;
+  margin: 48px auto;
   background-color: #f3f4f6;
   color: #111827;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .backLink {
@@ -40,9 +44,28 @@ hr {
 }
 
 .historyBtn:hover {
-  background-color: #2563eb
+  background-color: #2563eb;
 }
 
 .historyBtn:active {
   background-color: #1d4ed8;
+}
+.userHeader {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  margin-bottom: 25px;
+}
+
+.userHeader h2 {
+  margin-bottom: 10px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.userHeader p {
+  margin: 5px 0;
+  font-size: 16px;
+  color: #333;
 }

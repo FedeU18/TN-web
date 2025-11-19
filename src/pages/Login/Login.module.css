@@ -81,3 +81,42 @@
   font-weight: bold;
   transition: background 0.3s ease;
 }
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999; /* <-- SUPER IMPORTANTE */
+}
+
+.modalContent {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  z-index: 100000; /* encima del overlay */
+}
+
+@media (max-width: 480px) {
+  .inputField,
+  .btnLogin,
+  .linkBack {
+    width: 100%;
+    max-width: 350px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modalContent {
+    width: 95%;
+    padding: 1.5rem;
+  }
+}

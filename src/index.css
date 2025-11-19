@@ -1,5 +1,13 @@
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* Breakpoints (mobile-first) */
+  --bp-sm: 480px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1280px;
+  /* Layout heights (tune if header/footer sizes change) */
+  --header-height: 60px;
+  --footer-height: 56px;
 }
 
 .title {
@@ -7,6 +15,28 @@
   font-weight: 700;
   color: #1f2937;
   margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.8rem;
+  }
+}
+
+.input-field {
+  width: 300px;
+}
+
+@media (max-width: 480px) {
+  .input-field {
+    width: 90%;
+  }
 }
 
 a {
@@ -20,10 +50,10 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1 {

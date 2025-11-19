@@ -5,7 +5,19 @@
   justify-content: flex-start;
   min-height: 60vh;
   background-color: #f9fafb;
-  padding: 40px 80px;
+  padding: 20px;          /* móvil/tablet */
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 40px;        /* tablet grande */
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 40px 60px;   /* desktop */
+  }
 }
 
 .welcomeContainer {

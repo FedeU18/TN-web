@@ -6,7 +6,7 @@ import Footer from "./components/Footer/Footer";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import ClienteDashboard from "./pages/Client/ClienteDashboard/ClienteDashboard";
-import RepartidorDashboard from "./pages/RepartidorDashboard/RepartidorDashboard";
+//import RepartidorDashboard from "./pages/RepartidorDashboard/RepartidorDashboard";
 import AdminDashboard from "./pages/Admin/AdminDashboard/AdminDashboard";
 import VerificarToken from "./components/VerificarToken/VerificarToken";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
@@ -47,7 +47,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div>
+      <div className="app-container">
         <Header /> {/* <---- ahora es el dinámico */}
         <Routes>
           <Route path="/" element={<Home />} />
@@ -138,18 +138,18 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route
+          {/* <Route
             path="/repartidor-dashboard"
             element={
               <ProtectedRoute roles={["repartidor"]}>
                 <RepartidorDashboard />
               </ProtectedRoute>
             }
-          />
+          /> */}
           <Route
             path="/profile"
             element={
-              <ProtectedRoute roles={["admin", "cliente", "repartidor"]}>
+              <ProtectedRoute roles={["admin", "cliente", /*"repartidor"*/, "vendedor"]}>
                 <Profile />
               </ProtectedRoute>
             }

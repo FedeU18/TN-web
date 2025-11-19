@@ -1,12 +1,38 @@
 #root {
-  /* Permitir que la aplicación ocupe todo el ancho disponible
-     para dashboards que necesitan más espacio horizontal. */
   max-width: none;
   width: 100%;
   box-sizing: border-box;
   margin: 0;
-  padding: 2rem;
   text-align: center;
+}
+
+.app-container {
+  min-height: 100vh;
+  box-sizing: border-box;
+
+  /* evita que el header y footer tapen el contenido */
+  padding-top: calc(var(--header-height) + 1rem);
+  padding-bottom: calc(var(--footer-height) + 3rem);
+
+  /* el resto de tus paddings generales */
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: calc(var(--header-height) + 0.5rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .app-container {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: calc(var(--header-height) + 0.25rem);
+  }
 }
 
 .logo {

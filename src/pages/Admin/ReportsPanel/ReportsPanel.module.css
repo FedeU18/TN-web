@@ -1,28 +1,28 @@
+/* --- MOBILE --- */
 .container {
-  padding: 20px 24px;
-  min-height: 95vh;
-  /* permitir que la página use todo el ancho disponible; evitamos un max-width fijo
-     para que los gráficos puedan disponerse en más columnas si hay espacio */
-  max-width: 100%;
+  padding: 16px;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  min-height: calc(100vh - var(--header-height) - var(--footer-height));
   background-color: #f3f4f6;
   color: #111827;
+  overflow-x: hidden;
 }
 
 .title {
   text-align: center;
-  font-size: 28px;
+  font-size: 22px;
   font-weight: 700;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   color: #1f2937;
 }
 
+/* FILTROS */
 .filters {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 16px;
-  align-items: flex-end;
-  justify-content: center;
-  margin-bottom: 24px;
   background-color: #ffffff;
   padding: 16px;
   border-radius: 12px;
@@ -50,51 +50,63 @@
   outline: none;
 }
 
-.filterGroup input:focus,
-.filterGroup select:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
-}
-
-.applyButton {
+.applyButton,
+.clearButton {
+  width: 100%;
   background-color: #2563eb;
   color: white;
   border: none;
   border-radius: 6px;
-  padding: 8px 16px;
+  padding: 10px;
   cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.applyButton:hover {
-  background-color: #1d4ed8;
 }
 
 .applyButton:disabled {
   background-color: #93c5fd;
-  cursor: not-allowed;
+}
+
+.clearButton {
+  background-color: #9e9e9e;
 }
 
 .kpiContainer {
   display: flex;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-bottom: 32px;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
 }
 
-.chartContainer {
-  width: 100%;
-  height: 380px;
+/* --- GRÁFICOS MOBILE --- */
+.chartGrid {
+  display: grid;
+  grid-template-columns: 1fr;  /* SIEMPRE 1 COLUMNA EN CELULAR */
+  gap: 16px;
+  margin-top: 2rem;
+}
+
+.chartSection {
   background: #fff;
+  padding: 1rem 1.5rem;
   border-radius: 12px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-  padding: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  width: auto;
+  max-width: none;
+}
+
+.chartSection h2 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+/* El gráfico full ocupa toda la fila */
+.chartFull {
+  grid-column: 1 / -1;
 }
 
 .noData {
-  margin-top: 16px;
   text-align: center;
+  margin-top: 16px;
   color: #6b7280;
 }
 
@@ -105,56 +117,41 @@
 
 .backLink a {
   color: #2563eb;
-  text-decoration: none;
   font-weight: 500;
-  transition: color 0.2s ease;
 }
 
-.backLink a:hover {
-  color: #1d4ed8;
+/* --- TABLET --- */
+@media (min-width: 600px) {
+
+  .filters {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .applyButton,
+  .clearButton {
+    width: auto;
+    padding: 8px 14px;
+  }
+
+  .kpiContainer {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* FIX PRINCIPAL */
+  .chartGrid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
 }
 
-.chartGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
-  gap: 24px;
-  margin-top: 2rem;
-}
-
-.chartSection {
-  background: #fff;
-  padding: 1rem 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-.chartSection h2 {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-  color: #333;
-}
-
-/* Gráfico que ocupa toda la fila */
-.chartFull {
-  grid-column: 1 / -1;
-}
-
-.buttonGroup {
-  display: flex;
-  gap: 10px;
-  align-items: end;
-}
-
-.clearButton {
-  background-color: #9e9e9e;
-  color: white;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.clearButton:hover {
-  background-color: #757575;
+/* --- DESKTOP --- */
+@media (min-width: 1024px) {
+  .chartGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* AHORA SI 50/50 */
+    gap: 16px;
+  }
 }

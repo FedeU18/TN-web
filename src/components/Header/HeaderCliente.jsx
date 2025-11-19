@@ -18,10 +18,18 @@ export default function HeaderCliente() {
         </Link>
       </h1>
 
+      <div className="hamburger" onClick={(e) => {
+        const header = e.currentTarget.closest('.header');
+        header.classList.toggle('menu-open');
+      }}>
+        ☰
+      </div>
+
       <nav className="header-nav">
         <NavLink
           to="/cliente-dashboard"
           className={({ isActive }) => (isActive ? "active-link" : "")}
+          onClick={(e) => e.currentTarget.closest('.header')?.classList.remove('menu-open')}
         >
           Inicio
         </NavLink>
@@ -37,7 +45,7 @@ export default function HeaderCliente() {
         >
           Perfil
         </NavLink>
-        <button onClick={handleLogout}>Cerrar Sesión</button>
+        <button onClick={(e) => { e.currentTarget.closest('.header')?.classList.remove('menu-open'); handleLogout(); }}>Cerrar Sesión</button>
       </nav>
     </header>
   );

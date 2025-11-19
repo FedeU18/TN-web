@@ -16,3 +16,15 @@
   display: flex;
   gap: 1rem;
 }
+
+@media (max-width: 600px) {
+  .home-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .home-buttons a {
+    width: 100%;
+    text-align: center;
+  }
+}

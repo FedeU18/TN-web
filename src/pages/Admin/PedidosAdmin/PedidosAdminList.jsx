@@ -34,7 +34,8 @@ export default function PedidosAdminList() {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Pedidos del sistema</h1>
-      <table className={styles.table}>
+      <div className={styles.tableWrapper}>
+        <table className={styles.table}>
         <thead>
           <tr>
             <th>ID</th>
@@ -63,7 +64,8 @@ export default function PedidosAdminList() {
             </tr>
           ))}
         </tbody>
-      </table>
+        </table>
+      </div>
 
       {/*paginacion*/}
       {pedidos.length > PEDIDOS_POR_PAGINA && (

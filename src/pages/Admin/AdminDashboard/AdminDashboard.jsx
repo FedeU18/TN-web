@@ -27,7 +27,7 @@ const handleLogout = () => {
         <Link to="/admin-panel/pedidos" className={styles.secondaryButton}>Pedidos</Link>
   <Link to="/buscar-pedidos-email" className={styles.secondaryButton}>Buscar pedidos por email (REST)</Link>
   <Link to="/buscar-pedidos-email-soap" className={styles.secondaryButton}>Buscar pedidos por email (SOAP)</Link>
-        <button className={styles.secondaryButton}>Mi Perfil</button>
+        <Link to="/profile" className={styles.secondaryButton}>Mi Perfil</Link>
       </div>
 
       <button className={styles.logoutButton} onClick={handleLogout}>

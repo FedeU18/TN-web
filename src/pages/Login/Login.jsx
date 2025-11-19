@@ -9,6 +9,7 @@ export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [logeado, setLogeado] = useState(false); //estado logeado
+  const [showModalRepartidor, setShowModalRepartidor] = useState(false);
   const navigate = useNavigate();
 
   const setToken = useAuthStore((state) => state.setToken);
@@ -35,7 +36,13 @@ export default function Login() {
       const response = await loginRequest(form.email, form.password);
       const data = response.data;
 
-      //guarda el token en el store global
+      //bloquear el acceso del repartidor a la web
+      if (data.user.rol === "repartidor") {
+        setShowModalRepartidor(true);
+        return;
+      }
+
+      //guarda el token en el store global solo si no es repartidor
       setToken(data.token);
       setUser(data.user);
 
@@ -50,9 +57,9 @@ export default function Login() {
         case "cliente":
           navigate("/cliente-dashboard");
           break;
-        case "repartidor":
+        /*case "repartidor":
           navigate("/repartidor-dashboard");
-          break;
+          break;*/
         case "vendedor":
           navigate("/vendedor-dashboard");
           break;
@@ -65,47 +72,63 @@ export default function Login() {
   };
 
   return (
-    <form className={styles.centeredContainer} onSubmit={handleSubmit}>
-      <h1 className={styles.title}>Iniciar Sesión</h1>
+    <>
+      <form className={styles.centeredContainer} onSubmit={handleSubmit}>
+        <h1 className={styles.title}>Iniciar Sesión</h1>
 
-      <input
-        type="email"
-        name="email"
-        placeholder="Email"
-        className={styles.inputField}
-        value={form.email}
-        onChange={handleChange}
-        required
-      />
-      <br />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          className={styles.inputField}
+          value={form.email}
+          onChange={handleChange}
+          required
+        />
+        <br />
 
-      <input
-        type="password"
-        name="password"
-        placeholder="Password"
-        className={styles.inputField}
-        value={form.password}
-        onChange={handleChange}
-        required
-      />
-      <br />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          className={styles.inputField}
+          value={form.password}
+          onChange={handleChange}
+          required
+        />
+        <br />
 
-      {error && <p className={styles.errorMessage}>{error}</p>}
+        {error && <p className={styles.errorMessage}>{error}</p>}
 
-      <Link to="/recuperarContra" className={styles.linkForgot}>
-        ¿Olvidaste tu contraseña?
-      </Link>
-      <br />
-
-      <button type="submit" className={`${styles.btn} ${styles.btnLogin}`}>
-        Iniciar sesión
-      </button>
-
-      <div>
-        <Link to="../" className={styles.linkBack}>
-          Volver al menú principal
+        <Link to="/recuperarContra" className={styles.linkForgot}>
+          ¿Olvidaste tu contraseña?
         </Link>
-      </div>
-    </form>
+        <br />
+
+        <button type="submit" className={`${styles.btn} ${styles.btnLogin}`}>
+          Iniciar sesión
+        </button>
+
+        <div>
+          <Link to="../" className={styles.linkBack}>
+            Volver al menú principal
+          </Link>
+        </div>
+      </form>
+
+      {/* modal para repartidores bloqueados */}
+      {showModalRepartidor && (
+        <div className={styles.modalOverlay}>
+          <div className={styles.modalContent}>
+            <h2>Acceso no permitido</h2>
+            <p>Los repartidores solo pueden iniciar sesión desde la aplicación móvil.</p>
+
+            <button onClick={() => setShowModalRepartidor(false)} className={styles.btn}>
+              Entendido
+            </button>
+          </div>
+        </div>
+      )}
+    </>
   );
 }

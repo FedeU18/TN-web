@@ -144,6 +144,7 @@ export default function Register() {
               <option value="">Selecciona un rol</option>
               <option value="cliente">Cliente</option>
               <option value="repartidor">Repartidor</option>
+              <option value="vendedor">Vendedor</option>
             </select>
 
             <div className={styles.buttonGroup}>

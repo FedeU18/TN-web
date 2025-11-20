@@ -46,13 +46,6 @@ export default function HeaderAdmin() {
         >
           Reportes
         </NavLink>
-
-        <NavLink
-          to="/profile"
-          className={({ isActive }) => (isActive ? "active-link" : "")}
-        >
-          Perfil
-        </NavLink>
         <button onClick={(e) => { e.currentTarget.closest('.header')?.classList.remove('menu-open'); handleLogout(); }}>Cerrar Sesión</button>
       </nav>
     </header>

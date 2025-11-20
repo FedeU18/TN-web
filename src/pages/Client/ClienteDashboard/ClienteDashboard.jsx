@@ -11,6 +11,8 @@ export default function ClienteDashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [page, setPage] = useState(1);
+  const [filtroEstado, setFiltroEstado] = useState("Todos");
+
   const PEDIDOS_PER_PAGE = 3;
 
   const handleLogout = () => {
@@ -33,10 +35,27 @@ export default function ClienteDashboard() {
     fetchPedidos();
   }, []);
 
+  // Estados permitidos a mostrar
+  const estadosPermitidos = ["Pendiente", "Asignado", "En Camino"];
+
+  // Primero filtramos los permitidos
+  const pedidosVisibles = pedidos.filter((p) =>
+    estadosPermitidos.includes(p.estado?.nombre_estado)
+  );
+
+  // Luego aplicamos el filtro del usuario
+  const pedidosFiltrados =
+    filtroEstado === "Todos"
+      ? pedidosVisibles
+      : pedidosVisibles.filter(
+          (p) => p.estado?.nombre_estado === filtroEstado
+        );
+
   // Paginación
-  const totalPages = Math.ceil(pedidos.length / PEDIDOS_PER_PAGE);
+  const totalPages = Math.ceil(pedidosFiltrados.length / PEDIDOS_PER_PAGE);
   const startIndex = (page - 1) * PEDIDOS_PER_PAGE;
-  const paginatedPedidos = pedidos.slice(
+
+  const paginatedPedidos = pedidosFiltrados.slice(
     startIndex,
     startIndex + PEDIDOS_PER_PAGE
   );
@@ -44,9 +63,7 @@ export default function ClienteDashboard() {
   return (
     <div className={styles.container}>
       <div className={styles.welcomeContainer}>
-        <h1 className={styles.title}>
-          ¡Bienvenido {user?.nombre || "Usuario"}!
-        </h1>
+        <h1 className={styles.title}>¡Bienvenido {user?.nombre || "Usuario"}!</h1>
         <p className={styles.greeting}>Dashboard del rol Cliente.</p>
         <p className={styles.subtitle}>
           Desde aquí podrás realizar y gestionar tus pedidos.
@@ -54,23 +71,38 @@ export default function ClienteDashboard() {
       </div>
 
       <div className={styles.buttonContainer}>
-        <Link to="/profile" className={styles.secondaryButton}>
-          Mi Perfil
-        </Link>
-        <Link
-          to="/mis-pedidos/sin-calificar"
-          className={styles.secondaryButton}
-        >
+        <Link to="/profile" className={styles.secondaryButton}>Mi Perfil</Link>
+        <Link to="/mis-pedidos/sin-calificar" className={styles.secondaryButton}>
           Pedidos sin calificar
         </Link>
       </div>
 
       <div className={styles.pedidosContainer}>
         <h2>Mis Pedidos</h2>
+
         {loading && <p>Cargando pedidos...</p>}
         {error && <p className={styles.error}>{error}</p>}
+
+        {/* 🔵 FILTRO POR ESTADO */}
+        <div className={styles.filterContainer}>
+          <label>Filtrar por estado:</label>
+          <select
+            value={filtroEstado}
+            onChange={(e) => {
+              setFiltroEstado(e.target.value);
+              setPage(1); // Reinicia paginación
+            }}
+            className={styles.select}
+          >
+            <option value="Todos">Todos</option>
+            <option value="Pendiente">Pendiente</option>
+            <option value="Asignado">Asignado</option>
+            <option value="En Camino">En Camino</option>
+          </select>
+        </div>
+
         {!loading && paginatedPedidos.length === 0 && (
-          <p>No tienes pedidos aún.</p>
+          <p>No tienes pedidos para mostrar.</p>
         )}
 
         <ul className={styles.pedidosList}>
@@ -92,9 +124,8 @@ export default function ClienteDashboard() {
         {/* Paginación */}
         {totalPages > 1 && (
           <div className={styles.pagination}>
-            <button onClick={() => setPage(1)} disabled={page === 1}>
-              «
-            </button>
+            <button onClick={() => setPage(1)} disabled={page === 1}>«</button>
+
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((num) => (
               <button
                 key={num}
@@ -104,6 +135,7 @@ export default function ClienteDashboard() {
                 {num}
               </button>
             ))}
+
             <button
               onClick={() => setPage(totalPages)}
               disabled={page === totalPages}

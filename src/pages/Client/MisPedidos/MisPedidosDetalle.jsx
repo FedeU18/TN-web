@@ -124,12 +124,6 @@ export default function MisPedidosDetalle() {
           Ubicaciones de origen/destino no disponibles.
         </p>
       )}
-
-      <div>
-        <Link to="/cliente-dashboard" className={styles.backLink}>
-          &larr; Volver al Dashboard
-        </Link>
-      </div>
     </div>
   );
 }

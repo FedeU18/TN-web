@@ -1,7 +1,7 @@
 /* ------- COLORES PRINCIPALES ------- */
 :root {
-  --primary: #ff6f3c; /* naranja delivery */
-  --primary-dark: #e65e30;
+  --primary: #d95b24; /* nuevo naranja accesible */
+  --primary-dark: #c6511c;
   --secondary: #1e1e1e;
   --bg: #f8f8f8;
   --card-bg: #ffffff;
@@ -13,8 +13,12 @@
   font-family: "Inter", sans-serif;
   background: var(--bg);
   color: var(--text);
-  margin: 0;
-  padding: 0;
+}
+
+/* Focus accesible */
+:focus-visible {
+  outline: 3px solid #1e1e1e;
+  outline-offset: 3px;
 }
 
 /* HERO */
@@ -27,18 +31,18 @@
 }
 
 .heroContent {
-  max-width: 500px;
+  max-width: 55ch;
 }
 
 .title {
-  font-size: 3.5rem;
+  font-size: 3.2rem;
   font-weight: 800;
 }
 
 .subtitle {
   margin-top: 10px;
   font-size: 1.2rem;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .buttons {
@@ -47,14 +51,16 @@
   gap: 15px;
 }
 
+/* Botones accesibles */
 .btnPrimary {
   background: var(--primary);
-  padding: 12px 28px;
+  padding: 14px 32px;
   color: white;
   border-radius: 12px;
   font-weight: 600;
   text-decoration: none;
   transition: 0.2s;
+  font-size: 1.05rem;
 }
 
 .btnPrimary:hover {
@@ -62,13 +68,14 @@
 }
 
 .btnSecondary {
-  padding: 12px 28px;
+  padding: 14px 32px;
   border-radius: 12px;
   text-decoration: none;
   border: 2px solid var(--primary);
   color: var(--primary);
   font-weight: 600;
   transition: 0.2s;
+  font-size: 1.05rem;
 }
 
 .btnSecondary:hover {
@@ -79,6 +86,13 @@
 .heroImage img {
   width: 420px;
   animation: float 4s ease-in-out infinite;
+}
+
+/* Animación accesible */
+@media (prefers-reduced-motion: reduce) {
+  .heroImage img {
+    animation: none !important;
+  }
 }
 
 @keyframes float {
@@ -112,11 +126,12 @@
 
 .stepCard {
   background: var(--card-bg);
-  padding: 25px;
+  padding: 28px;
   border-radius: 16px;
   text-align: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   transition: 0.2s;
+  min-height: 230px;
 }
 
 .stepCard:hover {
@@ -137,7 +152,7 @@
 
 .card {
   background: var(--card-bg);
-  padding: 25px;
+  padding: 28px;
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
@@ -147,7 +162,7 @@
 }
 
 .card li {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 /* BENEFICIOS */
@@ -163,7 +178,7 @@
 
 .benefitCard {
   background: var(--card-bg);
-  padding: 25px;
+  padding: 28px;
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
@@ -176,13 +191,15 @@
 
 .btnPrimaryLarge {
   background: var(--primary);
-  padding: 16px 40px;
+  padding: 18px 44px;
   color: white;
   border-radius: 14px;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 600;
   text-decoration: none;
   transition: 0.2s;
+  display: inline-block;
+  margin-top: 20px;
 }
 
 .btnPrimaryLarge:hover {
@@ -198,11 +215,16 @@
 
   .heroImage img {
     margin-top: 30px;
+    width: 80%;
   }
 
   .stepsGrid,
   .cardsContainer,
   .benefitsGrid {
     grid-template-columns: 1fr !important;
+  }
+
+  .title {
+    font-size: 2.7rem;
   }
 }

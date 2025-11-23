@@ -7,71 +7,112 @@ export default function Home() {
   const { t } = useTranslation();
 
   return (
-    <div className={styles.container}>
+    <main className={styles.container}>
       {/* HERO */}
-      <section className={styles.heroSection}>
+      <section
+        className={styles.heroSection}
+        aria-labelledby="hero-title"
+        aria-describedby="hero-desc"
+      >
         <div className={styles.heroContent}>
-          <h1 className={styles.title}>Track Now</h1>
-          <p className={styles.subtitle}>
+          <h1 id="hero-title" className={styles.title}>
+            Track Now
+          </h1>
+
+          <p id="hero-desc" className={styles.subtitle}>
             Plataforma inteligente para gestionar entregas en tiempo real.
           </p>
 
           <div className={styles.buttons}>
-            <Link to="/register" className={styles.btnPrimary}>
+            <Link
+              to="/register"
+              className={styles.btnPrimary}
+              aria-label="Crear una cuenta nueva"
+            >
               Crear cuenta
             </Link>
 
-            <Link to="/login" className={styles.btnSecondary}>
+            <Link
+              to="/login"
+              className={styles.btnSecondary}
+              aria-label="Iniciar sesión en Track Now"
+            >
               Iniciar sesión
             </Link>
           </div>
         </div>
 
         <div className={styles.heroImage}>
-          <img src="/pexels-norma-mortenson-4392030.jpg" alt="Delivery" />
+          <img
+            src="/pexels-norma-mortenson-4392030.jpg"
+            alt="Persona realizando una entrega en bicicleta"
+            loading="eager"
+          />
         </div>
       </section>
 
       {/* COMO FUNCIONA */}
-      <section className={styles.stepsSection}>
-        <h2 className={styles.sectionTitle}>¿Cómo funciona?</h2>
+      <section className={styles.stepsSection} aria-labelledby="steps-title">
+        <h2 id="steps-title" className={styles.sectionTitle}>
+          ¿Cómo funciona?
+        </h2>
 
         <div className={styles.stepsGrid}>
-          <div className={styles.stepCard}>
-            <img src="/order.svg" />
+          <article className={styles.stepCard}>
+            <img
+              src="/order.svg"
+              alt="Icono de creación de pedido"
+              loading="lazy"
+            />
             <h3>Creación del pedido</h3>
             <p>El vendedor registra un nuevo pedido desde su panel.</p>
-          </div>
+          </article>
 
-          <div className={styles.stepCard}>
-            <img src="/list.svg" />
+          <article className={styles.stepCard}>
+            <img
+              src="/list.svg"
+              alt="Icono de lista de pedidos disponibles"
+              loading="lazy"
+            />
             <h3>Pedidos disponibles</h3>
             <p>
               Los repartidores ven el listado y toman los pedidos disponibles.
             </p>
-          </div>
+          </article>
 
-          <div className={styles.stepCard}>
-            <img src="/gps.svg" />
+          <article className={styles.stepCard}>
+            <img
+              src="/gps.svg"
+              alt="Icono de geolocalización en tiempo real"
+              loading="lazy"
+            />
             <h3>Seguimiento en tiempo real</h3>
             <p>El cliente ve la ubicación del repartidor en vivo.</p>
-          </div>
+          </article>
 
-          <div className={styles.stepCard}>
-            <img src="/qr.svg" />
+          <article className={styles.stepCard}>
+            <img
+              src="/qr.svg"
+              alt="Icono de validación mediante código QR"
+              loading="lazy"
+            />
             <h3>Validación con QR</h3>
             <p>La entrega se confirma escaneando un código QR del cliente.</p>
-          </div>
+          </article>
         </div>
       </section>
 
       {/* FUNCIONALIDADES */}
-      <section className={styles.featuresSection}>
-        <h2 className={styles.sectionTitle}>Funcionalidades por rol</h2>
+      <section
+        className={styles.featuresSection}
+        aria-labelledby="features-title"
+      >
+        <h2 id="features-title" className={styles.sectionTitle}>
+          Funcionalidades por rol
+        </h2>
 
         <div className={styles.cardsContainer}>
-          {/* ADMIN */}
-          <div className={styles.card}>
+          <article className={styles.card}>
             <h3>Administrador</h3>
             <ul>
               <li>Gestión de usuarios y roles</li>
@@ -79,20 +120,18 @@ export default function Home() {
               <li>Monitoreo en tiempo real</li>
               <li>Control del estado de pedidos</li>
             </ul>
-          </div>
+          </article>
 
-          {/* VENDEDOR */}
-          <div className={styles.card}>
+          <article className={styles.card}>
             <h3>Vendedor</h3>
             <ul>
               <li>Creación de pedidos</li>
               <li>Historial de pedidos creados</li>
               <li>Notificaciones de estado</li>
             </ul>
-          </div>
+          </article>
 
-          {/* REPARTIDOR */}
-          <div className={styles.card}>
+          <article className={styles.card}>
             <h3>Repartidor</h3>
             <ul>
               <li>Listado de pedidos disponibles</li>
@@ -100,48 +139,50 @@ export default function Home() {
               <li>Envío de ubicación en tiempo real</li>
               <li>Validación con QR al entregar</li>
             </ul>
-          </div>
+          </article>
 
-          {/* CLIENTE */}
-          <div className={styles.card}>
+          <article className={styles.card}>
             <h3>Cliente</h3>
             <ul>
               <li>Ver ubicación en vivo del repartidor</li>
               <li>Historial y detalles del pedido</li>
               <li>Calificar repartidor</li>
             </ul>
-          </div>
+          </article>
         </div>
       </section>
 
       {/* BENEFICIOS */}
-      <section className={styles.benefitsSection}>
-        <h2 className={styles.sectionTitle}>¿Por qué usar Track Now?</h2>
+      <section
+        className={styles.benefitsSection}
+        aria-labelledby="benefits-title"
+      >
+        <h2 id="benefits-title" className={styles.sectionTitle}>
+          ¿Por qué usar Track Now?
+        </h2>
 
         <div className={styles.benefitsGrid}>
-          <div className={styles.benefitCard}>
+          <article className={styles.benefitCard}>
             <h3>📡 Seguimiento preciso</h3>
             <p>
               Actualizaciones en tiempo real gracias a geolocalización continua.
             </p>
-          </div>
+          </article>
 
-          <div className={styles.benefitCard}>
+          <article className={styles.benefitCard}>
             <h3>🔐 Sistema seguro</h3>
-            <p>
-              Validación con QR y registros de auditoría para evitar fraudes.
-            </p>
-          </div>
+            <p>Validación con QR y registros de auditoría.</p>
+          </article>
 
-          <div className={styles.benefitCard}>
+          <article className={styles.benefitCard}>
             <h3>⚡ Alta eficiencia</h3>
             <p>Optimización del proceso de entrega para reducir tiempos.</p>
-          </div>
+          </article>
 
-          <div className={styles.benefitCard}>
+          <article className={styles.benefitCard}>
             <h3>📊 Métricas y reportes</h3>
-            <p>Panel avanzado para analizar tiempos, desempeño y flujos.</p>
-          </div>
+            <p>Panel avanzado para analizar tiempos y desempeño.</p>
+          </article>
         </div>
       </section>
 
@@ -149,10 +190,14 @@ export default function Home() {
       <section className={styles.ctaSection}>
         <h2>Empezá a optimizar tus entregas</h2>
         <p>Registro gratuito y acceso inmediato al panel.</p>
-        <Link to="/register" className={styles.btnPrimaryLarge}>
+        <Link
+          to="/register"
+          className={styles.btnPrimaryLarge}
+          aria-label="Crear una cuenta en Track Now"
+        >
           Crear cuenta ahora
         </Link>
       </section>
-    </div>
+    </main>
   );
 }

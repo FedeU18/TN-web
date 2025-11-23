@@ -3,6 +3,7 @@ import mapboxgl from "mapbox-gl";
 import { io } from "socket.io-client";
 import "mapbox-gl/dist/mapbox-gl.css";
 import api from "../../libs/axios";
+import styles from "./MapaRepartidor.module.css";
 
 const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN;
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
@@ -51,23 +52,61 @@ export default function MapaRepartidor({
     });
 
     map.current.on("load", () => {
-      // 🔴 Repartidor
-      marker.current = new mapboxgl.Marker({ color: "red" })
+      // ============================
+      // 🚴 MARCADOR REPARTIDOR
+      // ============================
+      const elRepartidor = document.createElement("div");
+      elRepartidor.style.backgroundImage = "url('/repartidor.png')";
+      elRepartidor.style.width = "40px";
+      elRepartidor.style.height = "40px";
+      elRepartidor.style.backgroundSize = "contain";
+      elRepartidor.style.backgroundRepeat = "no-repeat";
+
+      marker.current = new mapboxgl.Marker({
+        element: elRepartidor,
+        anchor: "bottom",
+      })
         .setLngLat([ubicacion.lng, ubicacion.lat])
-        .setPopup(new mapboxgl.Popup().setText("🚴 Repartidor"))
+        .setPopup(new mapboxgl.Popup().setText("Repartidor"))
         .addTo(map.current);
 
-      // 🟢 Origen
-      if (origen)
-        new mapboxgl.Marker({ color: "green" })
+      // ============================
+      // 🏬 MARCADOR ORIGEN
+      // ============================
+      if (origen) {
+        const elOrigen = document.createElement("div");
+        elOrigen.style.backgroundImage = "url('/commerce.png')";
+        elOrigen.style.width = "36px";
+        elOrigen.style.height = "36px";
+        elOrigen.style.backgroundSize = "contain";
+        elOrigen.style.backgroundRepeat = "no-repeat";
+
+        new mapboxgl.Marker({
+          element: elOrigen,
+          anchor: "bottom",
+        })
           .setLngLat([origen.lng, origen.lat])
           .addTo(map.current);
+      }
 
-      // 🔵 Destino
-      if (destino)
-        new mapboxgl.Marker({ color: "blue" })
+      // ============================
+      // 🏠 MARCADOR DESTINO
+      // ============================
+      if (destino) {
+        const elDestino = document.createElement("div");
+        elDestino.style.backgroundImage = "url('/home.png')";
+        elDestino.style.width = "36px";
+        elDestino.style.height = "36px";
+        elDestino.style.backgroundSize = "contain";
+        elDestino.style.backgroundRepeat = "no-repeat";
+
+        new mapboxgl.Marker({
+          element: elDestino,
+          anchor: "bottom",
+        })
           .setLngLat([destino.lng, destino.lat])
           .addTo(map.current);
+      }
     });
 
     return () => map.current.remove();
@@ -149,59 +188,39 @@ export default function MapaRepartidor({
   // =====================================================
   return (
     <div style={{ width: "100%", height: "100%", position: "relative" }}>
-      <div
-        ref={mapContainer}
-        style={{
-          width: "100%",
-          height: "350px",
-          borderRadius: "12px",
-          overflow: "hidden",
-        }}
-      />
+      <div ref={mapContainer} className={styles.mapContainer} />
 
       {/* ⭐ Distancia Restante */}
       {distanciaRestante && (
-        <div
-          style={{
-            position: "absolute",
-            top: "10px",
-            right: "10px",
-            padding: "10px 14px",
-            backgroundColor: "white",
-            borderRadius: "8px",
-            boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
-            fontWeight: "600",
-            fontSize: "15px",
-            zIndex: 10,
-          }}
-        >
+        <div className={styles.distanciaBox}>
           📏 Distancia restante: {distanciaRestante} km
         </div>
       )}
 
       {/* 🧭 Leyenda */}
-      <div
-        style={{
-          marginTop: "8px",
-          backgroundColor: "#f9f9f9",
-          borderRadius: "8px",
-          padding: "8px",
-          fontSize: "14px",
-          boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
-          display: "flex",
-          justifyContent: "center",
-          gap: "16px",
-        }}
-      >
-        <span>
-          <span style={{ color: "green", fontWeight: "bold" }}>●</span> Origen
-        </span>
-        <span>
-          <span style={{ color: "blue", fontWeight: "bold" }}>●</span> Destino
-        </span>
-        <span>
-          <span style={{ color: "red", fontWeight: "bold" }}>●</span> Repartidor
-        </span>
+      <div className={styles.leyendaContainer}>
+        <div className={styles.leyendaItem}>
+          <img
+            src="/commerce.png"
+            alt="Origen"
+            className={styles.leyendaIcon}
+          />
+          <span>Origen</span>
+        </div>
+
+        <div className={styles.leyendaItem}>
+          <img src="/home.png" alt="Destino" className={styles.leyendaIcon} />
+          <span>Destino</span>
+        </div>
+
+        <div className={styles.leyendaItem}>
+          <img
+            src="/repartidor.png"
+            alt="Repartidor"
+            className={styles.leyendaIcon}
+          />
+          <span>Repartidor</span>
+        </div>
       </div>
     </div>
   );

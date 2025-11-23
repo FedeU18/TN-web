@@ -32,15 +32,14 @@ export default function MisPedidosDetalle() {
   const fetchPedido = async () => {
     try {
       const data = await getDetallePedidoCliente(id);
-      const origenCoords = await geocodeDireccion(data.direccion_origen);
-      const destinoCoords = await geocodeDireccion(data.direccion_destino);
 
+      // 🚨 USAMOS SOLO LO QUE VIENE DEL BACKEND
       setPedido({
         ...data,
-        origen_latitud: origenCoords.lat,
-        origen_longitud: origenCoords.lng,
-        destino_latitud: destinoCoords.lat,
-        destino_longitud: destinoCoords.lng,
+        origen_latitud: Number(data.origen_latitud),
+        origen_longitud: Number(data.origen_longitud),
+        destino_latitud: Number(data.destino_latitud),
+        destino_longitud: Number(data.destino_longitud),
       });
     } catch (err) {
       setError("No se pudo obtener la información del pedido.");

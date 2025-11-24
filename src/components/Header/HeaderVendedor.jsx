@@ -30,7 +30,7 @@ export default function HeaderVendedor() {
           className={({ isActive }) => (isActive ? "active-link" : "")}
           onClick={(e) => e.currentTarget.closest('.header')?.classList.remove('menu-open')}
         >
-          Nuevo Pedido
+          Crear Pedido
         </NavLink>
         <NavLink
           to="/profile"
@@ -38,8 +38,7 @@ export default function HeaderVendedor() {
         >
           Perfil
         </NavLink>
-        <button onClick={(e) => { e.currentTarget.closest('.header')?.classList.remove('menu-open'); handleLogout(); }}>Cerrar Sesión</button>
-      </nav>
+              </nav>
     </header>
   );
 }

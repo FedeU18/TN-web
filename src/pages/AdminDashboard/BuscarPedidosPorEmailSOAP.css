@@ -47,16 +47,15 @@
 .soap-table th { font-weight: 700; font-size: 13px; color: #222; }
 .soap-empty { color: #666; margin-top: 12px; }
 
-/* Back button container placed below the search bar */
 .soap-back-button-container {
   display: flex;
-  justify-content: center; /* center the button under the input */
+  justify-content: center;
   margin-top: 8px;
 }
 
 .soap-back-button {
   padding: 8px 14px;
-  background: #6c757d; /* secondary color */
+  background: #6c757d;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -73,7 +72,6 @@
   cursor: not-allowed;
 }
 
-/* Small screens: center the button and make it full width under the form */
 @media (max-width: 640px) {
   .soap-search-card { width: 100%; padding: 18px; }
   .soap-search-form { flex-direction: column; align-items: stretch; }

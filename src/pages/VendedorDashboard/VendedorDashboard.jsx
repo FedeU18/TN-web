@@ -242,7 +242,7 @@ export default function VendedorDashboard() {
           </label>
 
           {/* ORIGEN */}
-          <label>Dirección Origen:</label>
+          <label>Dirección de origen:</label>
           <input
             type="text"
             value={formData.direccion_origen}
@@ -269,7 +269,7 @@ export default function VendedorDashboard() {
           )}
 
           {/* DESTINO */}
-          <label>Dirección Destino:</label>
+          <label>Dirección de destino:</label>
           <input
             type="text"
             value={formData.direccion_destino}

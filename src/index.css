@@ -1,13 +1,73 @@
 :root {
+  /* ====== BASE ====== */
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  /* Breakpoints (mobile-first) */
+
+  /* Breakpoints */
   --bp-sm: 480px;
   --bp-md: 768px;
   --bp-lg: 1024px;
   --bp-xl: 1280px;
-  /* Layout heights (tune if header/footer sizes change) */
+
+  /* Layout */
   --header-height: 60px;
   --footer-height: 56px;
+
+  /* ====== PRIMARY ====== */
+  --primary: #0066cc;
+  --primary-dark: #0052a3;
+  --primary-light: #e6f0ff;
+
+  /* ====== SUCCESS ====== */
+  --success: #10b981;
+  --success-dark: #059669;
+  --success-light: #d1fae5;
+
+  /* ====== WARNING ====== */
+  --warning: #f97316;
+  --warning-dark: #ea580c;
+  --warning-light: #fed7aa;
+
+  /* ====== ERROR ====== */
+  --error: #ef4444;
+  --error-dark: #dc2626;
+  --error-light: #fee2e2;
+
+  /* ====== INFO ====== */
+  --info: #6b7280;
+  --info-dark: #4b5563;
+  --info-light: #f3f4f6;
+
+  /* ====== NEUTROS ====== */
+  --white: #ffffff;
+  --black: #000000;
+
+  /* ====== GRAYS ====== */
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+
+  /* ====== STATUS ====== */
+  --status-pending: #fbbf24;
+  --status-in-transit: #f97316;
+  --status-delivered: #10b981;
+  --status-cancelled: #ef4444;
+  --status-assigned: #0066cc;
+
+  /* ====== LEGACY ====== */
+  --legacy-blue: #0950c3;
+  --legacy-green: #1d6325;
+  --legacy-red: #ef4444;
+  --legacy-darkgray: #1f2937;
+  --legacy-lightgray: #f3f4f6;
+  --legacy-bordergray: #d1d5db;
+  --legacy-textgray: #666;
 }
 
 .title {
@@ -66,7 +126,8 @@ h1 {
   color: white;
   border: none;
   border-radius: 0.75rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
   transition: background-color 0.2s ease-in-out;
   cursor: pointer;
   font-weight: 500;
@@ -78,7 +139,7 @@ h1 {
 
 .btn-register:hover {
   background-color: #1b5be3;
-  color:white;
+  color: white;
 }
 
 .btn-login {
@@ -87,7 +148,7 @@ h1 {
 
 .btn-login:hover {
   background-color: #039667;
-  color:white;
+  color: white;
 }
 
 .centered-container {

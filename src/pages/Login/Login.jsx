@@ -72,7 +72,12 @@ export default function Login() {
   };
 
   return (
-    <>
+    <div className={styles.conteiner}>
+      <div className={styles.logoContainer}>
+        <img src="/2630732.png" alt="logo" />
+        <h2>Track Now</h2>
+        <h3>Tu solución de seguimiento de paquetes</h3>
+      </div>
       <form className={styles.centeredContainer} onSubmit={handleSubmit}>
         <h1 className={styles.title}>Iniciar Sesión</h1>
 
@@ -121,14 +126,20 @@ export default function Login() {
         <div className={styles.modalOverlay}>
           <div className={styles.modalContent}>
             <h2>Acceso no permitido</h2>
-            <p>Los repartidores solo pueden iniciar sesión desde la aplicación móvil.</p>
+            <p>
+              Los repartidores solo pueden iniciar sesión desde la aplicación
+              móvil.
+            </p>
 
-            <button onClick={() => setShowModalRepartidor(false)} className={styles.btn}>
+            <button
+              onClick={() => setShowModalRepartidor(false)}
+              className={styles.btn}
+            >
               Entendido
             </button>
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }

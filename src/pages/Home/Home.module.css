@@ -1,13 +1,3 @@
-/* ------- COLORES PRINCIPALES ------- */
-:root {
-  --primary: #d95b24; /* nuevo naranja accesible */
-  --primary-dark: #c6511c;
-  --secondary: #1e1e1e;
-  --bg: #f8f8f8;
-  --card-bg: #ffffff;
-  --text: #333;
-}
-
 /* Contenedor general */
 .container {
   font-family: "Inter", sans-serif;
@@ -17,7 +7,7 @@
 
 /* Focus accesible */
 :focus-visible {
-  outline: 3px solid #1e1e1e;
+  outline: 3px solid var(--focus-outline);
   outline-offset: 3px;
 }
 
@@ -37,6 +27,7 @@
 .title {
   font-size: 3.2rem;
   font-weight: 800;
+  color: var(--text);
 }
 
 .subtitle {
@@ -53,7 +44,7 @@
 
 /* Botones accesibles */
 .btnPrimary {
-  background: var(--primary);
+  background: var(--success-dark);
   padding: 14px 32px;
   color: white;
   border-radius: 12px;
@@ -64,22 +55,23 @@
 }
 
 .btnPrimary:hover {
-  background: var(--primary-dark);
+  background: var(--success-light);
+  color: var(--black);
 }
 
 .btnSecondary {
   padding: 14px 32px;
   border-radius: 12px;
   text-decoration: none;
-  border: 2px solid var(--primary);
-  color: var(--primary);
+  border: 2px solid var(--success-dark);
+  color: var(--success-dark);
   font-weight: 600;
   transition: 0.2s;
   font-size: 1.05rem;
 }
 
 .btnSecondary:hover {
-  background: var(--primary);
+  background: var(--success-dark);
   color: white;
 }
 
@@ -111,6 +103,7 @@
   font-size: 2.2rem;
   margin-bottom: 40px;
   font-weight: 700;
+  color: var(--text);
 }
 
 /* COMO FUNCIONA */
@@ -132,6 +125,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   transition: 0.2s;
   min-height: 230px;
+  color: var(--text);
 }
 
 .stepCard:hover {
@@ -155,6 +149,7 @@
   padding: 28px;
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  color: var(--text);
 }
 
 .card ul {
@@ -181,6 +176,7 @@
   padding: 28px;
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  color: var(--text);
 }
 
 /* CTA FINAL */
@@ -190,7 +186,7 @@
 }
 
 .btnPrimaryLarge {
-  background: var(--primary);
+  background: var(--success-dark);
   padding: 18px 44px;
   color: white;
   border-radius: 14px;
@@ -203,7 +199,8 @@
 }
 
 .btnPrimaryLarge:hover {
-  background: var(--primary-dark);
+  background: var(--success-light);
+  color: var(--black);
 }
 
 /* RESPONSIVE */

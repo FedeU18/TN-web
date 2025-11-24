@@ -60,14 +60,17 @@ export default function Register() {
   };
 
   return (
-    <div>
-      <h1 className={styles.title}>Registro</h1>
-      <form
-        className={styles.centeredContainer}
-        onSubmit={handleSubmit}
-      >
+    <div className={styles.conteiner}>
+      <div className={styles.logoContainer}>
+        <img src="/2630732.png" alt="logo" />
+        <h2>Track Now</h2>
+        <h3>Tu solución de seguimiento de paquetes</h3>
+      </div>
+      <form className={styles.centeredContainer} onSubmit={handleSubmit}>
+        <h1 className={styles.title}>Registro</h1>
         {step === 1 && (
           <>
+            <p className={styles.paso}>Paso 1: información personal</p>
             <input
               name="nombre"
               placeholder="Nombre"
@@ -90,6 +93,19 @@ export default function Register() {
               value={form.telefono}
               onChange={handleChange}
             />
+            <select
+              name="rol"
+              className="input-field"
+              value={form.rol || ""}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Selecciona un rol</option>
+              <option value="cliente">Cliente</option>
+              <option value="repartidor">Repartidor</option>
+              <option value="vendedor">Vendedor</option>
+            </select>
+            {error && <p className={styles.errorMessage}>{error}</p>}
 
             <div className={styles.buttonGroup}>
               <button
@@ -109,6 +125,8 @@ export default function Register() {
 
         {step === 2 && (
           <>
+            <p className={styles.paso}>Paso 2: Datos de acceso</p>
+
             <input
               name="email"
               type="email"
@@ -133,19 +151,7 @@ export default function Register() {
               value={form.confirmPassword}
               onChange={handleChange}
             />
-
-            <select
-              name="rol"
-              className="input-field"
-              value={form.rol || ""}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Selecciona un rol</option>
-              <option value="cliente">Cliente</option>
-              <option value="repartidor">Repartidor</option>
-              <option value="vendedor">Vendedor</option>
-            </select>
+            {error && <p className={styles.errorMessage}>{error}</p>}
 
             <div className={styles.buttonGroup}>
               <button
@@ -170,8 +176,6 @@ export default function Register() {
           </>
         )}
       </form>
-
-      {error && <p className={styles.errorMessage}>{error}</p>}
     </div>
   );
 }

@@ -1,12 +1,44 @@
+.conteiner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 5rem;
+}
+
+.logoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.logoContainer img {
+  width: 200px;
+  height: auto;
+  margin-bottom: 1rem;
+}
+.logoContainer h2 {
+  color: var(--primary);
+  margin: 0;
+}
+.logoContainer h3 {
+  color: var(--gray-600);
+  margin: 0;
+}
+
 .centeredContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin-bottom: 3rem;
+  background-color: var(--primary);
+  padding: 2rem;
+  border-radius: 10px;
 }
 
 .title {
+  color: var(--white);
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 1.5rem;
@@ -17,20 +49,25 @@
   width: 300px;
   padding: 10px;
   margin: 8px 0;
-  border: 1px solid #ccc;
+  border: 1px solid var(--gray-300);
   border-radius: 8px;
   font-size: 14px;
 }
 
 .errorMessage {
-  color: red;
-  margin-top: 8px;
+  color: var(--white);
+  background-color: var(--error);
+  padding: 4px 16px;
+  border-radius: 10px;
+  margin-top: 4px;
   font-size: 14px;
+  font-weight: bold;
+  border-bottom: 1px solid var(--error);
 }
 
 .linkForgot {
   font-size: 12px;
-  color: blue;
+  color: var(--white);
   text-decoration: underline;
   cursor: pointer;
 }
@@ -45,8 +82,9 @@
 
 .btnLogin {
   width: 300px;
-  background: #007bff;
-  color: white;
+  background: var(--white);
+  color: var(--primary);
+  border-color: var(--gray-300);
   font-weight: bold;
   transition: background 0.3s ease;
 }

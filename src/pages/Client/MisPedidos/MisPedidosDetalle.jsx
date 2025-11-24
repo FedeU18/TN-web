@@ -78,7 +78,16 @@ export default function MisPedidosDetalle() {
 
   if (error) return <p className={styles.error}>{error}</p>;
   if (!pedido) return <p className={styles.loading}>Cargando pedido...</p>;
-  console.log(pedido);
+  const formatearFecha = (isoString) => {
+    const fecha = new Date(isoString);
+    const dia = String(fecha.getDate()).padStart(2, "0");
+    const mes = String(fecha.getMonth() + 1).padStart(2, "0");
+    const año = String(fecha.getFullYear()).slice(2);
+    const horas = String(fecha.getHours()).padStart(2, "0");
+    const minutos = String(fecha.getMinutes()).padStart(2, "0");
+
+    return `${dia}/${mes}/${año}, ${horas}:${minutos}`;
+  };
   return (
     <div className={styles.detalleContainer}>
       <div className={styles.detalleHeader}>
@@ -90,7 +99,7 @@ export default function MisPedidosDetalle() {
               Este pedido aún no fue asignado a un repartidor.
             </p>
             <p>Dirección de entrega: {pedido.direccion_destino} </p>
-            <p>Fecha creación: {pedido.fecha_creacion}</p>
+            <p>Fecha creación: {formatearFecha(pedido.fecha_creacion)}</p>
           </div>
         ) : (
           <div>

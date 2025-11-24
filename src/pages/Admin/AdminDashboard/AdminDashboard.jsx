@@ -7,6 +7,13 @@ export default function AdminDashboard() {
   const navigate = useNavigate();
   const { user, logout } = useAuthStore();
 
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return 'Buenos días,';
+    if (hour < 20) return 'Buenas tardes,';
+    return 'Buenas noches,';
+  };
+
   const handleLogout = () => {
     logout(); //limpia el token
     navigate("/"); //redirige al home
@@ -16,7 +23,7 @@ export default function AdminDashboard() {
     <div className={styles.container}>
       <div className={styles.welcomeContainer}>
         <h1 className={styles.title}>
-          ¡Bienvenido {user?.nombre || "Usuario"}!
+          ¡{getGreeting()} {user?.nombre || "Usuario"}!
         </h1>
         <p className={styles.subtitle}>
           Desde aquí podrás administrar todo el sistema.

@@ -5,16 +5,23 @@ import styles from "./ClienteDashboard.module.css";
 export default function ClienteDashboard() {
   const { user } = useAuthStore();
 
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return 'Buenos días,';
+    if (hour < 20) return 'Buenas tardes,';
+    return 'Buenas noches,';
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.welcomeContainer}>
         <h1 className={styles.title}>
-          ¡Bienvenido {user?.nombre || "Usuario"}!
+          ¡{getGreeting()} {user?.nombre || "Usuario"}!
         </h1>
         <div className={styles.optionsContainer}>
           <div>
             <h2 className={styles.subtitle}>
-              Desde aquí podrás gestionar y seguir las entregas de tus pedidos.
+              Desde aquí podrás gestionar y seguir las entregas de tus pedidos
             </h2>
             <Link to="/mis-pedidos" className={styles.primaryButton}>
               Mis Pedidos

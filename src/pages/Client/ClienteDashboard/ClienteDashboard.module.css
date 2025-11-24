@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  min-height: auto;
+  justify-content: center;
+  min-height: 75vh;
 }
 
 .optionsContainer {

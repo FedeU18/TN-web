@@ -108,7 +108,7 @@ export default function MisPedidosDetalle() {
               {pedido.repartidor.apellido}
             </p>
             <p>Dirección de entrega: {pedido.direccion_destino} </p>
-            <p>Fecha creación: {pedido.fecha_creacion}</p>
+            <p>Fecha creación: {formatearFecha(pedido.fecha_creacion)}</p>
           </div>
         )}
 

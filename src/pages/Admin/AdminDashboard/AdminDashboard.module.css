@@ -2,35 +2,27 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
   min-height: 60vh;
   background-color: #f9fafb;
-  padding: 20px; /* móvil/tablet */
-}
-
-@media (min-width: 768px) {
-  .container {
-    padding: 40px; /* tablet grande */
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    padding: 40px 60px; /* desktop */
-  }
+  padding: 20px;
 }
 
 .welcomeContainer {
   text-align: center;
-  margin: 40px auto;
+  margin: 32px auto;
   max-width: 800px;
 }
 
 .title {
-  font-size: 36px;
+  font-size: 28px;
   font-weight: bold;
   color: #1f2937;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #4b5563;
 }
 
 .greeting {
@@ -39,35 +31,28 @@
   margin-bottom: 10px;
 }
 
-.subtitle {
-  font-size: 16px;
-  color: #4b5563;
-}
-
 .buttonContainer {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  margin: 40px 0;
+  flex-direction: column;
+  width: 100%;
+  max-width: 210px;
+  gap: 14px;
+  margin-top: 32px;
+  margin-right: 32px
 }
 
 .primaryButton {
   background-color: var(--primary);
   color: white;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
-  min-width: 200px;
-  padding: 16px 24px;
+  width: 100%;
+  padding: 14px 20px;
   border-radius: 12px;
-  border: none;
   cursor: pointer;
-  box-shadow: 0 4px 8px rgba(107, 33, 168, 0.3);
-  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .primaryButton:hover {
-  transform: translateY(-2px);
   background-color: var(--white);
   color: var(--primary);
   border: 1px solid var(--primary);
@@ -103,4 +88,26 @@
   cursor: pointer;
   margin-top: 30px; /* Espacio justo debajo de los botones */
   align-self: center; /* Lo centra horizontalmente */
+}
+
+/* ✅ Tablet */
+@media (min-width: 768px) {
+  .title { font-size: 34px; }
+  .subtitle { font-size: 16px; }
+
+  .buttonContainer {
+    flex-direction: row;
+    justify-content: center;
+    max-width: 700px;
+  }
+
+  .primaryButton {
+    min-width: 180px;
+    width: auto;
+  }
+}
+
+/* ✅ Desktop */
+@media (min-width: 1024px) {
+  .title { font-size: 38px; }
 }

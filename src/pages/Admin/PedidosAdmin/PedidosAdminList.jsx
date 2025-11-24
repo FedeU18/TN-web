@@ -99,9 +99,6 @@ export default function PedidosAdminList() {
       )}
 
         <br />
-      <div>
-        <Link to="/admin-dashboard" className={styles.backLink}>Volver al Dashboard</Link>
-      </div>
     </div>
   );
 }

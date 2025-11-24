@@ -27,7 +27,7 @@ export default function AdminDashboard() {
         <Link to="/reports-panel" className={styles.primaryButton}>
           Reportes
         </Link>
-        <Link to="/admin-panel" className={styles.secondaryButton}>
+        <Link to="/admin-panel" className={styles.primaryButton}>
           Panel
         </Link>
         <Link to="/admin-panel/pedidos" className={styles.primaryButton}>

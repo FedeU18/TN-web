@@ -1,0 +1,42 @@
+.container {
+  text-align: left;
+  margin-top: 20px;
+}
+
+.loadingText {
+  text-align: center;
+}
+
+.estadoBadge {
+  border-radius: 8px;
+  display: inline-block;
+  font-weight: bold;
+  padding: 8px 16px;
+
+  color: var(--white);
+}
+
+/* Colores por estado */
+.pendiente {
+  background: var(--status-pending);
+}
+
+.asignado {
+  background: var(--status-assigned);
+}
+
+.enCamino {
+  background: var(--status-in-transit);
+}
+
+.entregado {
+  background: var(--status-delivered);
+}
+
+.cancelado {
+  background: var(--status-cancelled);
+}
+
+.defaultColor {
+  background: var(--success-dark);
+}

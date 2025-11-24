@@ -78,34 +78,39 @@ export default function MisPedidosDetalle() {
 
   if (error) return <p className={styles.error}>{error}</p>;
   if (!pedido) return <p className={styles.loading}>Cargando pedido...</p>;
-
+  console.log(pedido);
   return (
     <div className={styles.detalleContainer}>
-      <h1>Pedido</h1>
+      <div className={styles.detalleHeader}>
+        <h1>Pedido #{pedido.id_pedido}</h1>
 
-      {!pedido.repartidor ? (
-        <p className={styles.info}>
-          Este pedido aún no fue asignado a un repartidor.
-        </p>
-      ) : (
-        <p>
-          <strong>Repartidor:</strong> {pedido.repartidor.nombre}{" "}
-          {pedido.repartidor.apellido} ({pedido.repartidor.telefono})
-        </p>
-      )}
+        {!pedido.repartidor ? (
+          <div>
+            <p className={styles.info}>
+              Este pedido aún no fue asignado a un repartidor.
+            </p>
+            <p>Dirección de entrega: {pedido.direccion_destino} </p>
+            <p>Fecha creación: {pedido.fecha_creacion}</p>
+          </div>
+        ) : (
+          <div>
+            <p className={styles.repartidor}>
+              <strong>Repartidor:</strong> {pedido.repartidor.nombre}{" "}
+              {pedido.repartidor.apellido}
+            </p>
+            <p>Dirección de entrega: {pedido.direccion_destino} </p>
+            <p>Fecha creación: {pedido.fecha_creacion}</p>
+          </div>
+        )}
 
-      {pedido.estado === "En camino" && (
-        <p className={styles.estado}>🚚 Repartidor en camino</p>
-      )}
-
-      <MonitorPedido pedidoId={id} />
-      <br />
+        <MonitorPedido pedidoId={id} />
+      </div>
 
       {pedido.origen_latitud &&
       pedido.origen_longitud &&
       pedido.destino_latitud &&
       pedido.destino_longitud ? (
-        <div style={{ width: "100%", height: "350px", marginBottom: "20px" }}>
+        <div className={styles.mapaWrapper}>
           <MapaRepartidor
             pedidoId={id}
             estadoPedido={pedido.estado?.nombre_estado}

@@ -123,7 +123,18 @@ export default function Profile() {
           </button>
         </div>
       ) : (
-        <p>No se pudo cargar la información del usuario.</p>
+        <div>
+          <p>No se pudo cargar la información del usuario.</p>
+          <button
+            onClick={(e) => {
+              e.currentTarget.closest(".header")?.classList.remove("menu-open");
+              handleLogout();
+            }}
+            className={styles.cerrarSesión}
+          >
+            Cerrar Sesión
+          </button>
+        </div>
       )}
       <div className={styles.actionsSection}>
         <div className={styles.actionsContainer}>

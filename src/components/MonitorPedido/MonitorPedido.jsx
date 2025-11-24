@@ -4,6 +4,8 @@ import { getDetallePedidoCliente } from "../../services/pedidosCliente";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import styles from "./MonitorPedido.module.css";
+
 export default function MonitorPedido({ pedidoId }) {
   const [estado, setEstado] = useState("");
   const [loading, setLoading] = useState(true);
@@ -36,14 +38,9 @@ export default function MonitorPedido({ pedidoId }) {
       if (data.pedidoId === Number(pedidoId)) {
         setEstado(data.nuevoEstado);
 
-        // 🟢 Notificación visual
         toast.info(`El pedido cambió de estado: ${data.nuevoEstado}`, {
           position: "top-center",
           autoClose: 4000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
         });
       }
     });
@@ -56,37 +53,26 @@ export default function MonitorPedido({ pedidoId }) {
   }, [pedidoId]);
 
   if (loading) {
-    return <p style={{ textAlign: "center" }}>Cargando estado del pedido...</p>;
+    return <p className={styles.loadingText}>Cargando estado del pedido...</p>;
   }
 
-  const color =
-    estado === "Pendiente"
-      ? "gray"
-      : estado === "Asignado"
-      ? "orange"
-      : estado === "En camino"
-      ? "blue"
-      : estado === "Entregado"
-      ? "green"
-      : estado === "Cancelado"
-      ? "red"
-      : "black";
+  // Mapear estado → clase
+  const estadoToClass = {
+    Pendiente: styles.pendiente,
+    Asignado: styles.asignado,
+    "En camino": styles.enCamino,
+    Entregado: styles.entregado,
+    Cancelado: styles.cancelado,
+  };
+
+  const colorClass = estadoToClass[estado] || styles.defaultColor;
 
   return (
-    <div style={{ textAlign: "center", marginTop: 20 }}>
-      {/* Contenedor de notificaciones */}
+    <div className={styles.container}>
       <ToastContainer />
-      <h2>Estado del pedido</h2>
-      <div
-        style={{
-          backgroundColor: color,
-          color: "white",
-          padding: "10px 20px",
-          borderRadius: "8px",
-          display: "inline-block",
-        }}
-      >
-        {estado}
+
+      <div className={`${styles.estadoBadge} ${colorClass}`}>
+        Estado: {estado}
       </div>
     </div>
   );

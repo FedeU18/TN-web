@@ -1,26 +1,31 @@
 .detalleContainer {
   background-color: #ffffff;
   border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  max-width: 700px;
-  margin: 20px auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  width: 90%;
+  margin: 10px auto;
   padding: 20px;
   text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .detalleContainer h1 {
   font-size: 36px;
   font-weight: 700;
-  color: #1f2937;
+  color: var(--primary-dark);
   margin-bottom: 20px;
 }
 
 .detalleContainer p {
   font-size: 18px;
-  color: #4b5563;
   margin-bottom: 24px;
 }
 
+.repartidor {
+  color: var(--success-dark);
+}
 .estado {
   display: inline-block;
   padding: 12px 28px;
@@ -28,7 +33,7 @@
   font-weight: 600;
   font-size: 18px;
   color: #111827;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   margin-bottom: 30px;
 }
 
@@ -76,4 +81,14 @@
 
 .estadoPendiente {
   animation: blink 1.5s infinite;
+}
+.mapaWrapper {
+  width: 80%;
+  height: 500px;
+  margin-bottom: 20px;
+}
+
+.detalleHeader {
+  margin-bottom: 30px;
+  text-align: left;
 }

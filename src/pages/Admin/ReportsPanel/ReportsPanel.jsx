@@ -188,7 +188,7 @@ export default function ReportsPanel() {
           Limpiar
         </button>
         <button
-          className={styles.applyButton}
+          className={styles.excelButton}
           onClick={exportToExcel}
           disabled={loading || series.length === 0}
         >
@@ -212,21 +212,25 @@ export default function ReportsPanel() {
 
       <div className={styles.chartGrid}>
         {/* GRÁFICO 1 */}
+
         <div className={styles.chartSection}>
-          <h2>Productividad (Pedidos entregados vs cancelados)</h2>
+          <h2>Satisfacción (Promedio de calificación)</h2>
           <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={series}>
+            <LineChart data={series}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="fecha" />
-              <YAxis />
+              <YAxis domain={[0, 5]} />
               <Tooltip />
               <Legend />
-              <Bar dataKey="entregados" fill="#4caf50" name="Entregados" />
-              <Bar dataKey="cancelados" fill="#f44336" name="Cancelados" />
-            </BarChart>
+              <Line
+                type="monotone"
+                dataKey="promedioCalificacion"
+                stroke="#ff9800"
+                name="Promedio calificación"
+              />
+            </LineChart>
           </ResponsiveContainer>
         </div>
-
         {/* GRÁFICO 2 */}
         <div className={styles.chartSection}>
           <h2>Eficiencia (Tiempo promedio de entrega)</h2>
@@ -248,34 +252,26 @@ export default function ReportsPanel() {
         </div>
 
         {/* GRÁFICO 3 */}
+
         <div className={`${styles.chartSection} ${styles.chartFull}`}>
-          <h2>Satisfacción (Promedio de calificación)</h2>
+          <h2>Productividad (Pedidos entregados vs cancelados)</h2>
           <ResponsiveContainer width="100%" height={300}>
-            <LineChart data={series}>
+            <BarChart data={series}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="fecha" />
-              <YAxis domain={[0, 5]} />
+              <YAxis />
               <Tooltip />
               <Legend />
-              <Line
-                type="monotone"
-                dataKey="promedioCalificacion"
-                stroke="#ff9800"
-                name="Promedio calificación"
-              />
-            </LineChart>
+              <Bar dataKey="entregados" fill="#4caf50" name="Entregados" />
+              <Bar dataKey="cancelados" fill="#f44336" name="Cancelados" />
+            </BarChart>
           </ResponsiveContainer>
         </div>
-      </div>
-
-      {series.length === 0 && !loading && (
-        <div className={styles.noData}>
-          No hay datos para el rango seleccionado.
-        </div>
-      )}
-
-      <div className={styles.backLink}>
-        <Link to="/admin-dashboard">← Volver al Dashboard</Link>
+        {series.length === 0 && !loading && (
+          <div className={styles.noData}>
+            No hay datos para el rango seleccionado.
+          </div>
+        )}
       </div>
     </div>
   );

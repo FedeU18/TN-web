@@ -5,18 +5,18 @@
   justify-content: flex-start;
   min-height: 60vh;
   background-color: #f9fafb;
-  padding: 20px;          /* móvil/tablet */
+  padding: 20px; /* móvil/tablet */
 }
 
 @media (min-width: 768px) {
   .container {
-    padding: 40px;        /* tablet grande */
+    padding: 40px; /* tablet grande */
   }
 }
 
 @media (min-width: 1024px) {
   .container {
-    padding: 40px 60px;   /* desktop */
+    padding: 40px 60px; /* desktop */
   }
 }
 
@@ -53,7 +53,7 @@
 }
 
 .primaryButton {
-  background-color: #6b21a8;
+  background-color: var(--primary);
   color: white;
   font-size: 18px;
   font-weight: 600;
@@ -68,17 +68,19 @@
 
 .primaryButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(107, 33, 168, 0.4);
+  background-color: var(--white);
+  color: var(--primary);
+  border: 1px solid var(--primary);
 }
 
 .secondaryButton {
   background-color: white;
-  color: #6b21a8;
+  color: var(--primary);
   font-size: 16px;
   font-weight: 500;
   min-width: 200px;
   padding: 16px 24px;
-  border: 2px solid #d1d5db;
+  border: 2px solid var(--primary);
   border-radius: 12px;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
@@ -86,7 +88,8 @@
 
 .secondaryButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  background-color: var(--primary);
+  color: var(--white);
 }
 
 .logoutButton {
@@ -98,6 +101,6 @@
   border-radius: 12px;
   border: none;
   cursor: pointer;
-  margin-top: 30px;   /* Espacio justo debajo de los botones */
+  margin-top: 30px; /* Espacio justo debajo de los botones */
   align-self: center; /* Lo centra horizontalmente */
 }

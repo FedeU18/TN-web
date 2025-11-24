@@ -6,20 +6,20 @@
   padding: 16px;
   text-align: center;
 
-  width: 100%;       /* OCUPA ANCHO COMPLETO EN MÓVIL */
-  max-width: 260px;  /* PARA QUE NO SE ESTIRE DEMÁS */
-  margin: 0 auto;    /* CENTRADO */
+  width: 100%; /* OCUPA ANCHO COMPLETO EN MÓVIL */
+  max-width: 260px; /* PARA QUE NO SE ESTIRE DEMÁS */
+  margin: 0 auto; /* CENTRADO */
 }
 
 .title {
   font-size: 12px;
-  color: #6b7280;
+  color: var(--gray-700);
 }
 
 .value {
   font-size: 20px;
   font-weight: 700;
-  color: #111827;
+  color: var(--success-dark);
   margin-top: 6px;
 }
 

@@ -22,6 +22,19 @@ export default function Register() {
   });
   const [error, setError] = useState("");
 
+  // Password validation requirements
+  const validatePasswordRequirements = (password) => {
+    return {
+      minLength: password.length >= 6,
+      hasNumber: /\d/.test(password),
+      hasLetter: /[a-zA-Z]/.test(password),
+      hasSpecialChar: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password),
+    };
+  };
+
+  const passwordRequirements = validatePasswordRequirements(form.password);
+  const allRequirementsMet = Object.values(passwordRequirements).every((req) => req);
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -143,6 +156,36 @@ export default function Register() {
               value={form.password}
               onChange={handleChange}
             />
+            
+            {/* Password Requirements Display */}
+            <div className={styles.passwordRequirements}>
+              <p className={styles.requirementsTitle}>La contraseña debe contener:</p>
+              <div className={styles.requirementItem}>
+                <span className={passwordRequirements.minLength ? styles.requirementMet : styles.requirementNotMet}>
+                  {passwordRequirements.minLength ? '✓' : '○'}
+                </span>
+                <span>Al menos 6 caracteres</span>
+              </div>
+              <div className={styles.requirementItem}>
+                <span className={passwordRequirements.hasNumber ? styles.requirementMet : styles.requirementNotMet}>
+                  {passwordRequirements.hasNumber ? '✓' : '○'}
+                </span>
+                <span>Al menos un número</span>
+              </div>
+              <div className={styles.requirementItem}>
+                <span className={passwordRequirements.hasLetter ? styles.requirementMet : styles.requirementNotMet}>
+                  {passwordRequirements.hasLetter ? '✓' : '○'}
+                </span>
+                <span>Al menos una letra</span>
+              </div>
+              <div className={styles.requirementItem}>
+                <span className={passwordRequirements.hasSpecialChar ? styles.requirementMet : styles.requirementNotMet}>
+                  {passwordRequirements.hasSpecialChar ? '✓' : '○'}
+                </span>
+                <span>Al menos un carácter especial (como ! o &)</span>
+              </div>
+            </div>
+
             <input
               name="confirmPassword"
               type="password"

@@ -30,14 +30,22 @@ export default function HeaderAdmin() {
           className={({ isActive }) => (isActive ? "active-link" : "")}
           onClick={(e) => e.currentTarget.closest('.header')?.classList.remove('menu-open')}
         >
-          Dashboard
+          Inicio
         </NavLink>
 
         <NavLink
           to="/admin-panel"
+          end
           className={({ isActive }) => (isActive ? "active-link" : "")}
         >
           Panel
+        </NavLink>
+
+        <NavLink
+          to="/admin-panel/pedidos"
+          className={({ isActive }) => (isActive ? "active-link" : "")}
+        >
+          Pedidos
         </NavLink>
 
         <NavLink

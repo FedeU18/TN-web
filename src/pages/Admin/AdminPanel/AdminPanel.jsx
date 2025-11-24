@@ -117,10 +117,6 @@ export default function AdminPanel() {
             )}
         </>
       )}
-
-      <div className={styles.backLink}>
-        <Link to="/admin-dashboard">Volver al Dashboard</Link>
-      </div>
     </div>
   );
 }

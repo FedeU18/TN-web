@@ -73,3 +73,44 @@ h2 {
 .calificarBtn:hover {
   background-color: #0056b3;
 }
+
+/* -------- RESPONSIVE -------- */
+
+.tableWrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+@media (max-width: 800px) {
+  .container {
+    padding: 1.5rem;
+  }
+
+  table th,
+  table td {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .calificarBtn {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 500px) {
+  h2 {
+    font-size: 20px;
+  }
+
+  table th,
+  table td {
+    font-size: 13px;
+    padding: 6px;
+  }
+
+  .calificarBtn {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+}

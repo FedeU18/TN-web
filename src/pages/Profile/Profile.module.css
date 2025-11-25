@@ -5,98 +5,37 @@
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
 }
 
-.userInfoCard {
-  background: #ffffff;
-  padding: 20px;
-  border-radius: 14px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-  width: 300px;
-  text-align: left;
-}
-.actionsContainer {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-  justify-content: space-evenly;
-  margin-bottom: 32px;
-}
-.backLink {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.backLink a {
-  color: #2563eb;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s ease;
-}
-
-.backLink a:hover {
-  color: #1d4ed8;
-}
-
-hr {
-  margin: 24px 0;
-  border: 0.5px solid #d1d5db;
-}
-
-.historyBtn {
-  display: inline-block;
-  padding: 16spx;
-  background-color: #3b82f6;
-  color: white;
-  font-weight: 600;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.historyBtn:hover {
-  background-color: #2563eb;
-}
-
-.historyBtn:active {
-  background-color: #1d4ed8;
-}
-.userHeader {
-  background: #ffffff;
-  padding: 20px;
-  border-radius: 14px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-  margin-bottom: 25px;
-}
-
-.userHeader h2 {
-  margin-bottom: 10px;
-  font-size: 24px;
-  font-weight: 600;
-}
-
-.userHeader p {
-  margin: 5px 0;
-  font-size: 16px;
-  color: #333;
-}
+/* Ajuste de la card */
 .profileCard {
   background: var(--white);
   padding: 24px;
   border-radius: 16px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
   width: 340px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  min-width: 280px
 }
 
 .header {
   display: flex;
   align-items: center;
   gap: 16px;
+}
+
+.historyWrapper {
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 0 12px;
+}
+
+.tableResponsive {
+  width: 100%;
+  overflow-x: auto;
 }
 
 .avatar {
@@ -112,6 +51,7 @@ hr {
   align-items: center;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
 }
+
 .avatarImg {
   width: 60px;
   height: 60px;
@@ -129,18 +69,6 @@ hr {
 .role {
   font-size: 14px;
   color: var(--gray-700);
-  margin: 0;
-}
-
-.infoSection p {
-  margin: 6px 0;
-  font-size: 15px;
-  color: #333;
-  text-align: left;
-}
-
-.infoSection strong {
-  color: var(--primary-dark);
 }
 
 .userDetails {
@@ -151,7 +79,11 @@ hr {
   border-top: 1px solid #e5e7eb;
   padding-top: 16px;
 }
+
 .infoSection p {
+  margin: 6px 0;
+  font-size: 15px;
+  color: #333;
   border: 1px solid var(--gray-200);
   padding: 1rem;
   border-radius: 0.5rem;
@@ -165,28 +97,85 @@ hr {
   color: white;
   border: none;
   border-radius: 0.75rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  transition: background-color 0.2s ease-in-out;
   cursor: pointer;
   font-weight: bold;
   font-size: 1rem;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .cerrarSesión:hover {
   background-color: var(--error);
-  color: white;
 }
 
+/* SECCIÓN DE BOTONES Y VISTAS */
 .actionsSection {
   display: flex;
-  gap: 12px;
   flex-direction: column;
+  gap: 12px;
   width: 60%;
 }
 
+.actionsContainer {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-bottom: 32px;
+}
+
+.historyBtn {
+  padding: 12px 16px;
+  background-color: #3b82f6;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.historyBtn:hover {
+  background-color: #2563eb;
+}
+
 .activeSection {
-  background-color: var(--white);
+  background-color: white;
   color: var(--primary-dark);
   border: 1px solid var(--primary);
+}
+
+@media (max-width: 1024px) {
+  .profileContainer {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .actionsSection {
+    width: 100%;
+    max-width: 500px;
+  }
+}
+
+@media (max-width: 768px) {
+  .actionsContainer {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .historyBtn {
+    width: 100%;
+  }
+
+  .profileCard {
+    width: 100%;
+    max-width: 550px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profileContainer {
+    padding: 12px;
+  }
 }

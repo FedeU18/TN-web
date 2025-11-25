@@ -15,9 +15,10 @@
 }
 
 .filters {
-  flex-wrap: wrap;
-  justify-content: center;
-  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 16px 0;
 }
 
 .kpiContainer {
@@ -28,7 +29,6 @@
 
 .chartGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 2rem;
   width: 100%;
 }
@@ -145,7 +145,6 @@
   .excelButton {
     margin-bottom: 10px;
   }
-
 }
 /* KPIs -> se apilan verticalmente */
 @media (max-width: 900px) {

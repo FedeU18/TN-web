@@ -10,6 +10,7 @@
   margin-top: 20px;
 }
 
+/* FORMULARIO */
 .form {
   width: 45%;
   display: flex;
@@ -17,6 +18,7 @@
   gap: 15px;
 }
 
+/* MAPA */
 .map {
   width: 55%;
   height: 300px;
@@ -24,6 +26,7 @@
   border: 1px solid #ddd;
 }
 
+/* AUTOCOMPLETE */
 .suggestions {
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -44,6 +47,7 @@
   background: #f0f0f0;
 }
 
+/* BOTÓN */
 .submitButton {
   margin-top: 20px;
   padding: 12px;
@@ -58,7 +62,55 @@
 .success {
   color: green;
 }
-
 .error {
   color: red;
+}
+
+/* ---------------------------------------------------
+   📱 RESPONSIVE
+----------------------------------------------------*/
+
+/* TABLETS */
+@media (max-width: 900px) {
+  .content {
+    flex-direction: column;
+  }
+
+  .form,
+  .map {
+    width: 100%;
+  }
+
+  .map {
+    height: 350px;
+  }
+}
+
+/* CELULARES */
+@media (max-width: 600px) {
+  .container {
+    padding: 15px;
+  }
+
+  h2 {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .form {
+    gap: 12px;
+  }
+
+  .submitButton {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .map {
+    height: 250px;
+  }
+
+  .suggestions li {
+    font-size: 14px;
+  }
 }

@@ -1,12 +1,12 @@
 .profileContainer {
-  padding: 24px;
+  padding: 32px;
   background-color: var(--white);
   color: #111827;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   justify-content: center;
-  gap: 2rem;
+  gap: 3rem;
   flex-wrap: wrap;
 }
 
@@ -28,7 +28,7 @@
 
 .historyWrapper {
   width: 100%;
-  max-width: 650px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 12px;
 }
@@ -77,11 +77,12 @@
 
 .infoSection {
   border-top: 1px solid #e5e7eb;
-  padding-top: 16px;
+  padding-top: 20px;
+  margin-top: 20px;
 }
 
 .infoSection p {
-  margin: 6px 0;
+  margin: 12px 0;
   font-size: 15px;
   color: #333;
   border: 1px solid var(--gray-200);
@@ -111,16 +112,18 @@
 .actionsSection {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  width: 60%;
+  gap: 20px;
+  width: 100%;
+  max-width: 1100px;
 }
 
 .actionsContainer {
   display: flex;
-  gap: 16px;
+  gap: 20px;
   align-items: center;
   justify-content: space-evenly;
-  margin-bottom: 32px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
 }
 
 .historyBtn {

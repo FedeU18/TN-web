@@ -3,7 +3,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
-  margin-top: 1rem;
+  margin-top: 5rem;
   padding: 0 1rem;
   gap: 2rem;
 }
@@ -61,6 +61,14 @@
   border: 1px solid var(--gray-600);
   border-radius: 8px;
   font-size: 14px;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+}
+
+.inputField:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 5px rgba(9, 80, 195, 0.3);
 }
 
 .errorMessage {

@@ -1,71 +1,185 @@
 .ordersContainer {
   background: #ffffff;
-  padding: 16px;
-  border-radius: 10px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
 .ordersContainer h2 {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 700;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
   color: #1f2937;
+  letter-spacing: -0.5px;
 }
 
-.ordersContainer table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.ordersContainer th,
-.ordersContainer td {
-  text-align: left;
-  padding: 8px;
-  border-bottom: 1px solid #e5e7eb;
-  font-size: 14px;
-  color: #111827;
-}
-
-.ordersContainer th {
-  font-weight: 600;
-  color: #374151;
-}
-
+/* ========================
+   FILTROS
+   ======================== */
 .filters {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 16px;
-  margin-bottom: 20px;
-  padding: 12px;
-  background: #f9fafb;
+  margin-bottom: 24px;
+  padding: 16px;
+  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
   border: 1px solid #e5e7eb;
-  border-radius: 8px;
+  border-radius: 10px;
 }
 
 .filters div {
   display: flex;
   flex-direction: column;
+  gap: 6px;
 }
 
 .filters label {
   font-size: 13px;
+  font-weight: 600;
   color: #374151;
-  margin-bottom: 4px;
-  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .filters input,
 .filters select {
-  padding: 6px 8px;
+  padding: 10px 12px;
   font-size: 14px;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
+  border: 1.5px solid #d1d5db;
+  border-radius: 8px;
   background: white;
   color: #111827;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.filters input:hover,
+.filters select:hover {
+  border-color: #9ca3af;
+  background-color: #fafbfc;
 }
 
 .filters input:focus,
 .filters select:focus {
   outline: none;
   border-color: #3b82f6;
-  box-shadow: 0 0 0 1px #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  background-color: #f0f9ff;
+}
+
+/* ========================
+   TABLA
+   ======================== */
+.tableWrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ordersContainer table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  font-size: 13px;
+}
+
+.ordersContainer thead {
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+  border-bottom: 2px solid #d1d5db;
+}
+
+.ordersContainer th {
+  text-align: left;
+  padding: 10px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.ordersContainer tbody tr {
+  border-bottom: 1px solid #e5e7eb;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.ordersContainer tbody tr:hover {
+  background-color: #f9fafb;
+  box-shadow: inset 0 0 0 1px #f3f4f6;
+}
+
+.ordersContainer tbody tr:last-child {
+  border-bottom: none;
+}
+
+.ordersContainer td {
+  padding: 10px 8px;
+  font-size: 12px;
+  color: #374151;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.ordersContainer td:first-child {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+/* ========================
+   ESTADOS DE CARGA Y ERROR
+   ======================== */
+.loading,
+.error,
+.noPedidos {
+  text-align: center;
+  padding: 32px 24px;
+  font-size: 15px;
+  border-radius: 10px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+}
+
+.loading {
+  color: #6b7280;
+}
+
+.error {
+  color: #991b1b;
+  background-color: #fee2e2;
+  border: 1px solid #fecaca;
+}
+
+.noPedidos {
+  color: #6b7280;
+}
+
+@media (max-width: 1024px) {
+  .filters {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .ordersContainer {
+    padding: 16px;
+  }
+
+  .filters {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .ordersContainer table {
+    font-size: 12px;
+  }
+
+  .ordersContainer th,
+  .ordersContainer td {
+    padding: 10px 8px;
+  }
 }

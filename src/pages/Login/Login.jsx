@@ -3,6 +3,7 @@ import { validateLogin } from "../../utils/validations";
 import { loginRequest } from "../../api/auth";
 import { useAuthStore } from "../../store/auth";
 import { useState } from "react";
+import PasswordInput from "../../components/PasswordInput/PasswordInput";
 import styles from "./Login.module.css";
 
 export default function Login() {
@@ -92,11 +93,9 @@ export default function Login() {
         />
         <br />
 
-        <input
-          type="password"
+        <PasswordInput
           name="password"
-          placeholder="Password"
-          className={styles.inputField}
+          placeholder="Contraseña"
           value={form.password}
           onChange={handleChange}
           required

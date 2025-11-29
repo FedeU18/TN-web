@@ -82,7 +82,7 @@ export default function Profile() {
               <h2 className={styles.name}>
                 {user.nombre} {user.apellido}
               </h2>
-              <p className={styles.role}>{user.rol}</p>
+              <p className={styles.role}>{user.rol?.charAt(0).toUpperCase() + user.rol?.slice(1)}</p>
             </div>
           </div>
 

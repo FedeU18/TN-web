@@ -1,23 +1,63 @@
 import { useEffect, useState } from "react";
 import axios from "../../libs/axios";
+import { useAuthStore } from "../../store/auth";
 import styles from "./OrderHistory.module.css";
+
+const getStatusColor = (status) => {
+  const statusLower = status?.toLowerCase() || "";
+  if (statusLower.includes("entregado")) return "#10b981"; 
+  if (statusLower.includes("cancelado")) return "#ef4444"; 
+  return "#6b7280"; 
+};
 
 export default function OrderHistory() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   // Filtros
   const [dateFrom, setDateFrom] = useState("");
   const [dateTo, setDateTo] = useState("");
   const [statusFilter, setStatusFilter] = useState("todos");
 
+  const { user } = useAuthStore();
+
   const fetchOrders = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("/users/me/orders");
-      setOrders(res.data);
+      let rawOrders = [];
+      
+      // Detectar rol y usar endpoint correspondiente
+      if (user?.rol === "vendedor") {
+        const res = await axios.get("/vendedor/mis-pedidos");
+        rawOrders = res.data.pedidos || [];
+        // Normalizar datos del vendedor
+        rawOrders = rawOrders.map(o => ({
+          id_pedido: o.id_pedido,
+          fecha: o.fecha_creacion,
+          direccion: o.direccion_destino,
+          estado: o.estado?.nombre_estado || "Desconocido"
+        }));
+      } else if (user?.rol === "repartidor") {
+        const res = await axios.get("/repartidor/mis-entregas");
+        rawOrders = res.data.entregas || [];
+        // Normalizar datos del repartidor
+        rawOrders = rawOrders.map(o => ({
+          id_pedido: o.id_pedido,
+          fecha: o.fecha_entrega || o.fecha_creacion,
+          direccion: o.direccion_destino,
+          estado: o.estado?.nombre_estado || "Desconocido"
+        }));
+      } else {
+        // Cliente
+        const res = await axios.get("/users/me/orders");
+        rawOrders = res.data || [];
+      }
+      
+      setOrders(rawOrders);
     } catch (e) {
       console.error(e);
+      setError("Error al cargar los pedidos");
     } finally {
       setLoading(false);
     }
@@ -25,10 +65,11 @@ export default function OrderHistory() {
 
   useEffect(() => {
     fetchOrders();
-  }, []);
+  }, [user?.rol]);
 
-  if (loading) return <div>Cargando pedidos...</div>;
-  if (orders.length === 0) return <div>No hay pedidos registrados</div>;
+  if (loading) return <div className={styles.loading}>⏳ Cargando pedidos...</div>;
+  if (error) return <div className={styles.error}>⚠️ {error}</div>;
+  if (orders.length === 0) return <div className={styles.noPedidos}>No hay pedidos registrados</div>;
 
   // -------------------------
   // FILTRADO DE PEDIDOS
@@ -95,30 +136,40 @@ export default function OrderHistory() {
       {/* -------------------------
           TABLA DE PEDIDOS
       --------------------------- */}
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Fecha</th>
-            <th>Dirección</th>
-            <th>Estado</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {filteredOrders.map(o => (
-            <tr key={o.id_pedido}>
-              <td>{o.id_pedido}</td>
-              <td>{new Date(o.fecha).toLocaleString()}</td>
-              <td>{o.direccion}</td>
-              <td>{o.estado}</td>
+      {filteredOrders.length === 0 ? (
+        <div className={styles.noPedidos}>No hay pedidos que coincidan con los filtros</div>
+      ) : (
+        <div className={styles.tableWrapper}>
+          <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Fecha</th>
+              <th>Dirección</th>
+              <th>Estado</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
 
-      {filteredOrders.length === 0 && (
-        <p>No hay pedidos que coincidan con los filtros.</p>
+          <tbody>
+            {filteredOrders.map(o => (
+              <tr key={o.id_pedido}>
+                <td>#{o.id_pedido}</td>
+                <td>{new Date(o.fecha).toLocaleString("es-AR")}</td>
+                <td title={o.direccion}>{o.direccion?.substring(0, 30)}...</td>
+                <td>
+                  <span style={{ 
+                    color: getStatusColor(o.estado),
+                    fontWeight: "700",
+                    fontSize: "13px"
+                  }}>
+                    ● {o.estado}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+          </table>
+        </div>
       )}
     </div>
   );

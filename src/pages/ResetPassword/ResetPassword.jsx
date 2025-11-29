@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { resetPasswordRequest } from "../../api/auth";
 import { useNavigate, useLocation } from "react-router-dom";
+import PasswordInput from "../../components/PasswordInput/PasswordInput";
 import styles from "./ResetPassword.module.css";
 
 export default function ResetPassword() {
@@ -63,21 +64,19 @@ export default function ResetPassword() {
         {error && <p className={styles.error}>{error}</p>}
         {success && <p className={styles.success}>{success}</p>}
 
-        <input
-          className={styles.inputField}
-          type="password"
+        <PasswordInput
+          name="newPassword"
+          placeholder="Nueva contraseña"
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
-          placeholder="Nueva contraseña"
           required
         />
 
-        <input
-          className={styles.inputField}
-          type="password"
+        <PasswordInput
+          name="confirmPassword"
+          placeholder="Confirmar contraseña"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
-          placeholder="Confirmar contraseña"
           required
         />
 

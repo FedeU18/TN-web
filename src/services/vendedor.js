@@ -20,3 +20,23 @@ export async function getAllClientes() {
     throw error.response?.data || error;
   }
 }
+
+export async function getMisPedidosVendedor() {
+  try {
+    const { data } = await api.get("/vendedor/mis-pedidos");
+    return data;
+  } catch (error) {
+    console.error("Error obteniendo pedidos del vendedor:", error);
+    throw error.response?.data || error;
+  }
+}
+
+export async function getDetallePedidoVendedor(id_pedido) {
+  try {
+    const { data } = await api.get(`/vendedor/pedido/${id_pedido}`);
+    return data;
+  } catch (error) {
+    console.error("Error obteniendo detalle del pedido:", error);
+    throw error.response?.data || error;
+  }
+}

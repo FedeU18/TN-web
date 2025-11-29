@@ -5,6 +5,7 @@ import {
   validateRegistrationStep1,
   validateRegistrationStep2,
 } from "../../utils/validations";
+import PasswordInput from "../../components/PasswordInput/PasswordInput";
 
 import styles from "./Register.module.css";
 
@@ -148,11 +149,9 @@ export default function Register() {
               value={form.email}
               onChange={handleChange}
             />
-            <input
+            <PasswordInput
               name="password"
-              type="password"
               placeholder="Contraseña"
-              className={styles.inputField}
               value={form.password}
               onChange={handleChange}
             />
@@ -186,11 +185,9 @@ export default function Register() {
               </div>
             </div>
 
-            <input
+            <PasswordInput
               name="confirmPassword"
-              type="password"
               placeholder="Confirmar Contraseña"
-              className={styles.inputField}
               value={form.confirmPassword}
               onChange={handleChange}
             />

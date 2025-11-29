@@ -51,6 +51,7 @@ export default function MisPedidosList() {
   };
 
   const estadoClass = {
+    "No pagado": styles.estadoNoPagado,
     Pendiente: styles.estadoPendiente,
     Asignado: styles.estadoAsignado,
     "En camino": styles.estadoEnCurso,
@@ -78,12 +79,17 @@ export default function MisPedidosList() {
             </div>
 
             <div className={styles.secondColumn}>
+              {/* Badge de pago - solo si está pagado */}
+              {pedido.estado_pago === "pagado" && (
+                <span className={styles.badgePagado}>✅ Pagado</span>
+              )}
+
               <p
                 className={`${estadoClass[pedido.estado?.nombre_estado]} ${
                   styles.estado
                 }`}
               >
-                {pedido.estado?.nombre_estado || "Sin estado"}
+                {pedido.estado?.nombre_estado === "No pagado" ? "No pagado" : pedido.estado?.nombre_estado || "Sin estado"}
               </p>
 
               <Link

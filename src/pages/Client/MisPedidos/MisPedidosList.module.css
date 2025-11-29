@@ -69,6 +69,31 @@
   color: var(--success-dark);
   font-weight: 600;
 }
+
+.badgeNoPagado {
+  display: inline-block;
+  background-color: #fee2e2;
+  color: #991b1b;
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  border-left: 3px solid #dc2626;
+}
+
+.badgePagado {
+  display: inline-block;
+  background-color: #dcfce7;
+  color: #166534;
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  border-left: 3px solid #16a34a;
+}
+
 .secondColumn {
   height: 100%;
   display: flex;
@@ -90,6 +115,9 @@
 }
 .estadoEnCurso {
   background-color: var(--status-in-transit);
+}
+.estadoNoPagado {
+  background-color: #f97316;
 }
 .link {
   color: var(--primary-dark);

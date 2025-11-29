@@ -15,6 +15,7 @@ export default function VendedorDashboard() {
     origen_longitud: "",
     destino_latitud: "",
     destino_longitud: "",
+    monto_pedido: "",
   });
 
   const [clientes, setClientes] = useState([]);
@@ -294,6 +295,23 @@ export default function VendedorDashboard() {
               ))}
             </ul>
           )}
+
+          {/* MONTO */}
+          <label>Monto del pedido ($):</label>
+          <input
+            type="number"
+            min="0"
+            step="0.01"
+            value={formData.monto_pedido}
+            onChange={(e) =>
+              setFormData((prev) => ({
+                ...prev,
+                monto_pedido: e.target.value,
+              }))
+            }
+            placeholder="Ej: 100.00"
+            required
+          />
 
           <button
             className={styles.submitButton}

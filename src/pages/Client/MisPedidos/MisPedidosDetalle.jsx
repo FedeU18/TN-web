@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useSearchParams } from "react-router-dom";
 import { getDetallePedidoCliente } from "../../../services/pedidosCliente";
 import MonitorPedido from "../../../components/MonitorPedido/MonitorPedido";
 import MapaRepartidor from "../../../components/MapaRepartidor/MapaRepartidor";
+import PaymentStatus from "../../../components/PaymentStatus/PaymentStatus";
+import PaymentButton from "../../../components/PaymentButton/PaymentButton";
 import io from "socket.io-client";
 import styles from "./MisPedidosDetalle.module.css";
 
@@ -10,8 +12,10 @@ const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN;
 
 export default function MisPedidosDetalle() {
   const { id } = useParams();
+  const [searchParams] = useSearchParams();
   const [pedido, setPedido] = useState(null);
   const [error, setError] = useState("");
+  const [paymentMessage, setPaymentMessage] = useState("");
 
   const geocodeDireccion = async (direccion) => {
     try {
@@ -50,7 +54,16 @@ export default function MisPedidosDetalle() {
   // 🔹 Fetch inicial
   useEffect(() => {
     fetchPedido();
-  }, [id]);
+    
+    // Mostrar mensaje si vuelve desde pago
+    const paymentStatus = searchParams.get("payment");
+    if (paymentStatus === "success") {
+      setPaymentMessage("✅ Pago procesado. Recargando información...");
+      setTimeout(() => setPaymentMessage(""), 3000);
+    } else if (paymentStatus === "failure") {
+      setPaymentMessage("❌ El pago fue rechazado. Intenta nuevamente.");
+    }
+  }, [id, searchParams]);
 
   // 🔹 Escuchar en tiempo real el cambio de estado
   useEffect(() => {
@@ -92,6 +105,25 @@ export default function MisPedidosDetalle() {
     <div className={styles.detalleContainer}>
       <div className={styles.detalleHeader}>
         <h1>Pedido #{pedido.id_pedido}</h1>
+
+        {paymentMessage && (
+          <p className={styles.paymentMessage}>{paymentMessage}</p>
+        )}
+
+        {/* Estado de Pago */}
+        <PaymentStatus
+          estado_pago={pedido.estado_pago}
+          monto_pedido={pedido.monto_pedido}
+          fecha_pago={pedido.fecha_pago}
+        />
+
+        {/* Botón de Pago */}
+        <PaymentButton
+          id_pedido={pedido.id_pedido}
+          estado_pago={pedido.estado_pago}
+          estado_pedido={pedido.estado?.nombre_estado}
+          monto={pedido.monto_pedido}
+        />
 
         {!pedido.repartidor ? (
           <div>

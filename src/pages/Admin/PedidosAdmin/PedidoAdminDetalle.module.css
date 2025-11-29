@@ -2,28 +2,28 @@
   background-color: #ffffff;
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  max-width: 700px;
+  max-width: 900px; /* ✔ más ancho para mapas */
   margin: 10px auto;
   padding: 20px;
-  text-align: center;
 }
 
 .detalleContainer h1 {
-  font-size: 36px;
-  font-weight: 700;
-  color: #1f2937;
-  margin-bottom: 20px;
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 16px;
 }
 
 .detalleContainer p {
   font-size: 18px;
   color: #4b5563;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
+  text-align: left; /* ✔ evita afectar el mapa */
 }
 
+/* Estado */
 .estado {
   display: inline-block;
-  padding: 12px 28px;
+  padding: 12px 24px;
   border-radius: 10px;
   font-weight: 600;
   font-size: 18px;
@@ -48,6 +48,7 @@
   color: #166534;
 }
 
+/* Link */
 .backLink {
   display: inline-block;
   color: #0950c3;
@@ -61,10 +62,11 @@
   color: #063a8e;
 }
 
+/* Loading/Error */
 .loading,
 .error {
   text-align: center;
-  margin-top: 100px;
+  margin-top: 60px;
   color: #6b7280;
   font-size: 18px;
 }
@@ -72,5 +74,55 @@
 @keyframes blink {
   50% {
     opacity: 0.5;
+  }
+}
+
+
+/* Tablets */
+@media (max-width: 768px) {
+  .detalleContainer {
+    padding: 16px;
+  }
+
+  .detalleContainer h1 {
+    font-size: 28px;
+  }
+
+  .detalleContainer p {
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+
+  .estado {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+}
+
+/* Móviles */
+@media (max-width: 480px) {
+  .detalleContainer {
+    width: 95%;
+    padding: 14px;
+  }
+
+  .detalleContainer h1 {
+    font-size: 24px;
+  }
+
+  .detalleContainer p {
+    font-size: 15px;
+    margin-bottom: 14px;
+  }
+
+  .estado {
+    font-size: 15px;
+    padding: 8px 16px;
+  }
+
+  /* Para mapas o contenedores incrustados */
+  .mapContainer {
+    width: 100% !important;
+    height: 260px !important;
   }
 }

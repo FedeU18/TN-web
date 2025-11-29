@@ -4,6 +4,8 @@
   align-items: center;
   justify-content: space-evenly;
   margin-top: 5rem;
+  padding: 0 1rem;
+  gap: 2rem;
 }
 
 .logoContainer {
@@ -120,6 +122,8 @@
   transition: background 0.3s ease;
 }
 
+/* Modal */
+
 .modalOverlay {
   position: fixed;
   top: 0;
@@ -130,7 +134,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 99999; /* <-- SUPER IMPORTANTE */
+  z-index: 99999;
 }
 
 .modalContent {
@@ -140,21 +144,63 @@
   width: 90%;
   max-width: 400px;
   text-align: center;
-  z-index: 100000; /* encima del overlay */
+  z-index: 100000;
+}
+
+/* ------------------- RESPONSIVE ------------------- */
+
+/* Tablets */
+@media (max-width: 900px) {
+  .conteiner {
+    flex-direction: column;
+    margin-top: 2rem;
+    gap: 1rem;
+  }
+
+  .logoContainer img {
+    width: 160px;
+  }
+
+  .centeredContainer {
+    width: 100%;
+    max-width: 400px;
+  }
 }
 
 @media (max-width: 480px) {
+  .conteiner {
+    margin-top: 1rem;
+    padding: 0 0.5rem;
+  }
+
+  .logoContainer img {
+    width: 130px;
+  }
+
   .inputField,
   .btnLogin,
   .linkBack {
     width: 100%;
     max-width: 350px;
   }
-}
 
-@media (max-width: 480px) {
+  .centeredContainer {
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 350px;
+  }
+
   .modalContent {
     width: 95%;
     padding: 1.5rem;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .linkBack {
+    font-size: 14px;
+    padding: 10px 0;
   }
 }

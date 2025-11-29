@@ -6,9 +6,7 @@
   margin: 10px auto;
   padding: 20px;
   text-align: center;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: block;
 }
 
 .detalleContainer h1 {
@@ -26,6 +24,7 @@
 .repartidor {
   color: var(--success-dark);
 }
+
 .estado {
   display: inline-block;
   padding: 12px 28px;
@@ -40,6 +39,7 @@
 .estadoPendiente {
   background-color: #fde68a;
   color: #92400e;
+  animation: blink 1.5s infinite;
 }
 
 .estadoEnCamino {
@@ -79,16 +79,62 @@
   }
 }
 
-.estadoPendiente {
-  animation: blink 1.5s infinite;
-}
 .mapaWrapper {
-  width: 80%;
-  height: 500px;
-  margin-bottom: 20px;
+  width: 100%;
+  height: 420px; 
+  margin: 20px 0;
+  margin-bottom: 200px;
+  position: relative;
+}
+
+.mapaWrapper > * {
+  position: static !important;
 }
 
 .detalleHeader {
   margin-bottom: 30px;
   text-align: left;
+}
+
+/* -------- RESPONSIVE -------- */
+
+@media (max-width: 1100px) {
+  .detalleContainer {
+    padding: 16px;
+  }
+
+  .detalleHeader {
+    width: 100%;
+    text-align: center;
+  }
+
+  .mapaWrapper {
+    height: 320px;
+  }
+}
+
+@media (max-width: 600px) {
+  .detalleContainer h1 {
+    font-size: 26px;
+  }
+
+  .detalleContainer p {
+    font-size: 16px;
+  }
+
+  .detalleHeader {
+    width: 100%;
+  }
+
+  .mapaWrapper {
+    height: 240px !important;
+  }
+}
+
+.mapaWrapper {
+  order: 1;
+}
+
+.detalleHeader {
+  order: 0;
 }

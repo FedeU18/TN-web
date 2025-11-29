@@ -166,7 +166,13 @@ export default function Profile() {
           </button>
         </div>
         <div>
-          {showHistory && <OrderHistory />}
+          {showHistory && (
+            <div className={styles.historyWrapper}>
+              <div className={styles.tableResponsive}>
+                <OrderHistory />
+              </div>
+            </div>
+          )}
           {showEdit && <UserProfile />}
           {showForm && <ChangePassword />}
         </div>

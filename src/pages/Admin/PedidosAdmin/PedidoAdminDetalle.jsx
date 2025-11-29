@@ -81,7 +81,7 @@ export default function PedidoAdminDetalle() {
 
       {pedido.origen_latitud && pedido.origen_longitud &&
        pedido.destino_latitud && pedido.destino_longitud ? (
-        <div style={{ width: "100%", height: "350px", marginBottom: "20px" }}>
+        <div className={styles.mapWrapper}>
           <MapaRepartidor
             pedidoId={id}
             origen={{ lat: pedido.origen_latitud, lng: pedido.origen_longitud }}

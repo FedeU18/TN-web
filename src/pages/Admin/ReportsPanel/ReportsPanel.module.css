@@ -1,10 +1,10 @@
-.container {
+.reportContainer {
   padding: 2rem;
   background-color: var(--gray-100);
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
 }
 
@@ -16,8 +16,9 @@
 
 .filters {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  align-items: center;
+  justify-content: space-around;
+  margin: 16px 0;
 }
 
 .kpiContainer {
@@ -28,12 +29,8 @@
 
 .chartGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
   gap: 2rem;
   width: 100%;
-  background: var(--white);
-  padding: 1rem;
-  border-radius: 10px;
 }
 
 .chartFull {
@@ -119,4 +116,68 @@
 }
 .excelButton:hover {
   background-color: var(--success-dark);
+}
+
+/* ============================= */
+/* 📱 MOBILE & TABLET RESPONSIVE */
+/* ============================= */
+
+/* Filtros -> pasan a columna en pantallas chicas */
+@media (max-width: 900px) {
+  .filters {
+    flex-direction: column;
+    width: 100%;
+    gap: 1.5rem;
+  }
+
+  .filterGroup {
+    width: 100%;
+  }
+
+  .applyButton,
+  .clearButton,
+  .excelButton {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .excelButton {
+    margin-bottom: 10px;
+  }
+}
+/* KPIs -> se apilan verticalmente */
+@media (max-width: 900px) {
+  .kpiContainer {
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+  }
+}
+
+/* Charts -> cada gráfico ocupa toda la fila */
+@media (max-width: 1100px) {
+  .chartGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .chartFull {
+    grid-column: span 1;
+  }
+}
+
+/* Ajuste general de padding para pantallas pequeñas */
+@media (max-width: 600px) {
+  .reportContainer {
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .chartSection {
+    padding: 0.75rem;
+  }
 }

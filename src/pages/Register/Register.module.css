@@ -4,6 +4,8 @@
   align-items: center;
   justify-content: space-evenly;
   margin-top: 1rem;
+  padding: 0 1rem;
+  gap: 2rem;
 }
 
 .logoContainer {
@@ -25,6 +27,7 @@
   color: var(--gray-600);
   margin: 0;
 }
+
 .centeredContainer {
   display: flex;
   flex-direction: column;
@@ -35,13 +38,14 @@
   padding: 2rem;
   border-radius: 10px;
 }
+
 .paso {
   color: var(--white);
   font-size: 18px;
-  margin: 0;
   margin-bottom: 1rem;
   font-weight: bold;
 }
+
 .title {
   color: var(--white);
   font-size: 24px;
@@ -67,7 +71,6 @@
   margin-top: 4px;
   font-size: 14px;
   font-weight: bold;
-  border-bottom: 1px solid var(--error);
 }
 
 .btn {
@@ -115,7 +118,6 @@
 
 .linkBack:hover {
   background: #333;
-  color: white; /* 👈 evita que se ponga azul */
 }
 
 .buttonGroup {
@@ -123,4 +125,97 @@
   flex-direction: column;
   gap: 10px;
   margin-top: 1rem;
+}
+
+/* Password requirements */
+.passwordRequirements {
+  width: 300px;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin: 12px 0;
+  border-left: 4px solid #60a5fa;
+}
+
+.requirementsTitle {
+  color: var(--white);
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.requirementItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--white);
+  font-size: 13px;
+  margin: 6px 0;
+}
+
+.requirementMet {
+  color: #4ade80;
+  font-weight: bold;
+  width: 20px;
+  text-align: center;
+}
+
+.requirementNotMet {
+  color: #999;
+  font-weight: bold;
+  width: 20px;
+  text-align: center;
+}
+
+/* ------------------- RESPONSIVE ------------------- */
+
+/* Tablets */
+@media (max-width: 900px) {
+  .conteiner {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  .logoContainer img {
+    width: 160px;
+  }
+
+  .centeredContainer {
+    width: 100%;
+    max-width: 450px;
+  }
+}
+
+/* Teléfonos */
+@media (max-width: 480px) {
+  .conteiner {
+    margin-top: 1rem;
+    padding: 0 0.5rem;
+  }
+
+  .logoContainer img {
+    width: 130px;
+  }
+
+  .inputField,
+  .btn,
+  .linkBack {
+    width: 100%;
+    max-width: 350px;
+  }
+
+  .centeredContainer {
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 350px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .passwordRequirements {
+    width: 100%;
+  }
 }

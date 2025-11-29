@@ -135,7 +135,7 @@ export default function ReportsPanel() {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.reportContainer}>
       <h1 className={styles.title}>Reporte de Desempeño</h1>
 
       {/* Filtros */}

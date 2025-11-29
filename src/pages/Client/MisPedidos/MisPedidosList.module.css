@@ -128,3 +128,50 @@
   padding: 40px;
   color: var(--primary-dark);
 }
+
+/* -------- RESPONSIVE -------- */
+
+@media (max-width: 900px) {
+  .item {
+    height: auto;
+    padding: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .secondColumn {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .estado {
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+
+  .link {
+    padding: 8px 14px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 500px) {
+  .title {
+    font-size: 26px;
+  }
+
+  .item {
+    padding: 14px;
+  }
+
+  .firstColumn h3 {
+    font-size: 16px;
+  }
+
+  .firstColumn p {
+    font-size: 13px;
+  }
+}

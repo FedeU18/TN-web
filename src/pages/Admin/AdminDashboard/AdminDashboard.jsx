@@ -40,6 +40,12 @@ export default function AdminDashboard() {
         <Link to="/admin-panel/pedidos" className={styles.primaryButton}>
           Pedidos
         </Link>
+        <Link to="/admin-panel/usuarios" className={styles.primaryButton}>
+          Ver Usuarios
+        </Link>
+        <Link to="/admin-panel/calificaciones" className={styles.primaryButton}>
+          Calificaciones
+        </Link>
       </div>
     </div>
   );

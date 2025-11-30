@@ -27,6 +27,9 @@ import { useNotifications } from "./contexts/NotificationContext";
 import MisPedidosSinCalificar from "./pages/Client/MisPedidos/MisPedidosSinCalificar";
 import RecuperarContra from "./pages/RecuperarPass/RecuperarPass";
 import VendedorDashboard from "./pages/VendedorDashboard/VendedorDashboard";
+import VerCalificaciones from "./pages/Admin/VerCalificaciones/VerCalificaciones";
+import VerUsuarios from "./pages/Admin/VerUsuarios/VerUsarios";
+import CalificacionesRepartidor from "./pages/Admin/CalificacionesRepartidor/CalificacionesRepartidor";
 
 function App() {
   const { showNotification } = useNotifications();
@@ -95,6 +98,30 @@ function App() {
             element={
               <ProtectedRoute roles={["admin"]}>
                 <PedidoAdminDetalle />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin-panel/calificaciones"
+            element={
+              <ProtectedRoute roles={["admin"]}>
+                <VerCalificaciones />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin-panel/usuarios"
+            element={
+              <ProtectedRoute roles={["admin"]}>
+                <VerUsuarios />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/repartidor/:id/calificaciones"
+            element={
+              <ProtectedRoute roles={["admin"]}>
+                <CalificacionesRepartidor />
               </ProtectedRoute>
             }
           />

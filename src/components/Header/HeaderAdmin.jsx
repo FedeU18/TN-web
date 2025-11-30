@@ -54,6 +54,21 @@ export default function HeaderAdmin() {
         >
           Reportes
         </NavLink>
+
+        <NavLink
+          to="/admin-panel/usuarios"
+          className={({ isActive }) => (isActive ? "active-link" : "")}
+        >
+          Usuarios
+        </NavLink>
+
+        <NavLink
+          to="/admin-panel/calificaciones"
+          className={({ isActive }) => (isActive ? "active-link" : "")}
+        >
+          Calificaciones
+        </NavLink>
+        
         <button onClick={(e) => { e.currentTarget.closest('.header')?.classList.remove('menu-open'); handleLogout(); }}>Cerrar Sesión</button>
       </nav>
     </header>

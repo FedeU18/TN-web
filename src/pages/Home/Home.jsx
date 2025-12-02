@@ -189,7 +189,7 @@ export default function Home() {
       {/* CTA FINAL */}
       <section className={styles.ctaSection}>
         <h2>Empezá a optimizar tus entregas</h2>
-        <p>Registro gratuito y acceso inmediato al panel.</p>
+        <p>Registro gratuito y acceso inmediato al panel</p>
         <Link
           to="/register"
           className={styles.btnPrimaryLarge}

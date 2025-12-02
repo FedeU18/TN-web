@@ -88,44 +88,48 @@
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
+  font-weight: 600;
 }
 
 .btnPrimary {
-  background: var(--white);
-  border-color: var(--gray-600);
-  color: var(--primary-dark);
-  font-weight: bold;
+  background: var(--success-dark);
+  color: white;
 }
 
 .btnPrimary:hover {
-  background: var(--primary);
-  color: var(--white);
+  background: var(--success-light);
+  color: var(--black);
 }
 
 .btnSecondary {
-  background: gray;
-  color: white;
+  background: transparent;
+  color: var(--success-dark);
+  border: 2px solid var(--success-dark);
 }
 
 .btnSecondary:hover {
-  background: #555;
+  background: var(--success-dark);
+  color: white;
 }
 
 .linkBack {
-  background: black;
-  color: white;
+  background: transparent;
+  color: var(--success-dark);
   text-align: center;
-  padding: 12px 0;
+  padding: 10px 0;
   text-decoration: none;
   border-radius: 10px;
   width: 300px;
   font-size: 16px;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  border: 2px solid var(--success-dark);
 }
 
 .linkBack:hover {
-  background: #333;
+  background: var(--success-dark);
+  color: white;
 }
 
 .buttonGroup {
@@ -135,7 +139,6 @@
   margin-top: 1rem;
 }
 
-/* Password requirements */
 .passwordRequirements {
   width: 300px;
   background-color: rgba(255, 255, 255, 0.05);

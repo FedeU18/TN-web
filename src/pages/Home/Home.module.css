@@ -46,34 +46,39 @@
 
 /* Botones accesibles */
 .btnPrimary {
-  background: var(--success-dark);
-  padding: 14px 32px;
+  background: var(--primary);
+  padding: 16px 32px;
   color: white;
   border-radius: 12px;
   font-weight: 600;
   text-decoration: none;
   transition: 0.2s;
   font-size: 1.05rem;
+  border: 2px solid var(--primary);
+  box-sizing: border-box;
+  display: inline-block;
 }
 
 .btnPrimary:hover {
-  background: var(--success-light);
-  color: var(--black);
+  background: transparent;
+  color: var(--primary);
 }
 
 .btnSecondary {
-  padding: 14px 32px;
+  padding: 16px 32px;
   border-radius: 12px;
   text-decoration: none;
-  border: 2px solid var(--success-dark);
-  color: var(--success-dark);
+  border: 2px solid var(--primary);
+  color: var(--primary);
   font-weight: 600;
   transition: 0.2s;
   font-size: 1.05rem;
+  box-sizing: border-box;
+  display: inline-block;
 }
 
 .btnSecondary:hover {
-  background: var(--success-dark);
+  background: var(--primary);
   color: white;
 }
 

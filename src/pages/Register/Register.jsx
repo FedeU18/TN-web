@@ -156,7 +156,6 @@ export default function Register() {
               onChange={handleChange}
             />
             
-            {/* Password Requirements Display */}
             <div className={styles.passwordRequirements}>
               <p className={styles.requirementsTitle}>La contraseña debe contener:</p>
               <div className={styles.requirementItem}>

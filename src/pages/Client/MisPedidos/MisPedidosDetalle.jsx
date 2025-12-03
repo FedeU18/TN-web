@@ -58,10 +58,37 @@ export default function MisPedidosDetalle() {
     // Mostrar mensaje si vuelve desde pago
     const paymentStatus = searchParams.get("payment");
     if (paymentStatus === "success") {
-      setPaymentMessage("✅ Pago procesado. Recargando información...");
-      setTimeout(() => setPaymentMessage(""), 3000);
+      setPaymentMessage("Pago procesado. Recargando información...");
+      // Recargar datos después de 2 segundos para que el backend haya actualizado el estado
+      const timer = setTimeout(() => {
+        fetchPedido();
+        setPaymentMessage("");
+      }, 2000);
+      return () => clearTimeout(timer);
     } else if (paymentStatus === "failure") {
-      setPaymentMessage("❌ El pago fue rechazado. Intenta nuevamente.");
+      setPaymentMessage("El pago fue rechazado. Intenta nuevamente.");
+    } else if (paymentStatus === "pending") {
+      setPaymentMessage("Pago pendiente. Se notificará cuando sea confirmado.");
+      // Recargar datos después de 2 segundos
+      const timer = setTimeout(() => {
+        fetchPedido();
+        setPaymentMessage("");
+      }, 2000);
+      return () => clearTimeout(timer);
+    } else {
+      // Hacer polling cada 3 segundos para detectar cambios en el estado de pago
+      const pollInterval = setInterval(async () => {
+        try {
+          const data = await getDetallePedidoCliente(id);
+          // Si el estado de pago cambió a "pagado", actualizar la UI
+          if (data.estado_pago === "pagado" && pedido?.estado_pago !== "pagado") {
+            fetchPedido();
+          }
+        } catch (err) {
+          // Ignorar errores de polling
+        }
+      }, 3000);
+      return () => clearInterval(pollInterval);
     }
   }, [id, searchParams]);
 

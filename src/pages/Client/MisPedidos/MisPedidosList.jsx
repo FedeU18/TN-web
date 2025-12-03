@@ -79,11 +79,6 @@ export default function MisPedidosList() {
             </div>
 
             <div className={styles.secondColumn}>
-              {/* Badge de pago - solo si está pagado */}
-              {pedido.estado_pago === "pagado" && (
-                <span className={styles.badgePagado}>✅ Pagado</span>
-              )}
-
               <p
                 className={`${estadoClass[pedido.estado?.nombre_estado]} ${
                   styles.estado

@@ -28,6 +28,20 @@ export const crearPreferenciaPago = async (id_pedido) => {
 };
 
 /**
+ * Simular pago en Mercado Pago (para desarrollo/testing)
+ * Cambia el estado del pedido sin pasar por el checkout real
+ */
+export const simularPago = async (id_pedido) => {
+  try {
+    const response = await axios.post(`/pagos/simular-pago/${id_pedido}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error al simular pago:", error);
+    throw error;
+  }
+};
+
+/**
  * Obtener información de un pedido (para verificar estado)
  */
 export const obtenerDetallePedido = async (id_pedido) => {

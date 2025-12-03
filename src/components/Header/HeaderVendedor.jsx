@@ -38,7 +38,8 @@ export default function HeaderVendedor() {
         >
           Perfil
         </NavLink>
-              </nav>
+        <button onClick={(e) => { e.currentTarget.closest('.header')?.classList.remove('menu-open'); handleLogout(); }}>Cerrar Sesión</button>
+      </nav>
     </header>
   );
 }

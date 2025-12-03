@@ -109,7 +109,7 @@ export default function Login() {
         </Link>
         <br />
 
-        <button type="submit" className={`${styles.btn} ${styles.btnLogin}`}>
+        <button type="submit" className={`${styles.btn} ${styles.btnPrimary}`}>
           Iniciar sesión
         </button>
 

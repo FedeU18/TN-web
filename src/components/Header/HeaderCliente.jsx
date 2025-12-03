@@ -50,6 +50,7 @@ export default function HeaderCliente() {
         >
           Perfil
         </NavLink>
+        <button onClick={(e) => { e.currentTarget.closest('.header')?.classList.remove('menu-open'); handleLogout(); }}>Cerrar Sesión</button>
       </nav>
     </header>
   );

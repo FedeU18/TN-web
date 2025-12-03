@@ -58,6 +58,11 @@
   color: var(--primary-light);
 }
 
+.header-nav a:hover,
+.header-nav button:hover {
+  color: var(--primary-light);
+}
+
 /* HAMBURGER SHOWS ONLY ON MOBILE */
 .hamburger {
   display: none;

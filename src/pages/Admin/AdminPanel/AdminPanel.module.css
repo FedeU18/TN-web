@@ -2,6 +2,7 @@
   padding: 18px;
   background-color: #f3f4f6;
   color: #111827;
+  min-height: calc(100vh - var(--header-height) - var(--footer-height) - 8rem);
 }
 
 .title {

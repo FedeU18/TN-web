@@ -34,7 +34,7 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 3rem;
-  background-color: var(--primary);
+  background-color: var(--primary-dark);
   padding: 2rem;
   border-radius: 10px;
 }
@@ -80,6 +80,11 @@
   color: var(--white);
   text-decoration: underline;
   cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.linkForgot:hover {
+  color: #fbbf24;
 }
 
 .btn {
@@ -90,17 +95,36 @@
   font-size: 16px;
 }
 
-.btnLogin {
+.btnPrimary {
   width: 300px;
   background: var(--white);
   color: var(--primary);
-  border-color: var(--gray-300);
+  border: 1px solid var(--white);
+  border-radius: 10px;
   font-weight: bold;
   transition: background 0.3s ease;
+  box-sizing: border-box;
 }
 
-.btnLogin:hover {
+.btnPrimary:hover {
   background: #0056b3;
+  color: var(--white);
+}
+
+.btnSecondary {
+  width: 300px;
+  background: #5a7a8a;
+  color: white;
+  font-weight: bold;
+  border: 1px solid #5a7a8a;
+  border-radius: 10px;
+  transition: background 0.3s ease;
+  box-sizing: border-box;
+}
+
+.btnSecondary:hover {
+  background: #7a9aaa;
+  border-color: #7a9aaa;
 }
 
 .linkBack {
@@ -186,7 +210,7 @@
   }
 
   .inputField,
-  .btnLogin,
+  .btnPrimary,
   .linkBack {
     width: 100%;
     max-width: 350px;

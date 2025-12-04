@@ -16,6 +16,7 @@ export default function VendedorDashboard() {
     destino_latitud: "",
     destino_longitud: "",
     monto_pedido: "",
+    descripcion: "", // <-- NUEVO
   });
 
   const [clientes, setClientes] = useState([]);
@@ -62,27 +63,42 @@ export default function VendedorDashboard() {
       zoom: 11,
     });
 
+    // contador de toques en el mapa
+    let clickCount = 0;
+
     mapRef.current.on("click", async (e) => {
       const { lng, lat } = e.lngLat;
 
-      const isOrigen = !formData.origen_latitud && !formData.origen_longitud;
+      clickCount++;
 
-      // Limpiar marcadores si ya seleccionó dos
-      if (markersRef.current.length >= 2) {
+      // Reiniciar si toca por 3ra vez
+      if (clickCount > 2) {
+        clickCount = 1;
+
         markersRef.current.forEach((m) => m.remove());
         markersRef.current = [];
+
+        setFormData((prev) => ({
+          ...prev,
+          direccion_origen: "",
+          origen_latitud: "",
+          origen_longitud: "",
+          direccion_destino: "",
+          destino_latitud: "",
+          destino_longitud: "",
+        }));
       }
 
-      // Crear marcador
-      const marker = new mapboxgl.Marker({
-        color: isOrigen ? "green" : "red",
-      })
+      const isOrigen = clickCount === 1;
+      const markerColor = isOrigen ? "green" : "red";
+
+      const marker = new mapboxgl.Marker({ color: markerColor })
         .setLngLat([lng, lat])
         .addTo(mapRef.current);
 
       markersRef.current.push(marker);
 
-      // Reverse geocoding
+      // Geocoding para obtener la dirección
       const res = await fetch(
         `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${mapboxgl.accessToken}`
       );
@@ -105,7 +121,7 @@ export default function VendedorDashboard() {
         }));
       }
     });
-  }, [formData.origen_latitud, formData.destino_latitud]);
+  }, []);
 
   // ============================================================
   // AUTOCOMPLETAR DIRECCIONES
@@ -134,10 +150,8 @@ export default function VendedorDashboard() {
   const seleccionarDireccion = (feature, tipo) => {
     const [lng, lat] = feature.center;
 
-    // centrar
     mapRef.current.flyTo({ center: [lng, lat], zoom: 14 });
 
-    // marcador
     const marker = new mapboxgl.Marker({
       color: tipo === "origen" ? "green" : "red",
     })
@@ -182,6 +196,7 @@ export default function VendedorDashboard() {
         origen_longitud: Number(formData.origen_longitud),
         destino_latitud: Number(formData.destino_latitud),
         destino_longitud: Number(formData.destino_longitud),
+        descripcion: formData.descripcion || null, // <-- NUEVO
       };
 
       await crearPedidoVendedor(payload);
@@ -196,6 +211,8 @@ export default function VendedorDashboard() {
         origen_longitud: "",
         destino_latitud: "",
         destino_longitud: "",
+        monto_pedido: "",
+        descripcion: "", // <-- NUEVO
       });
 
       markersRef.current.forEach((m) => m.remove());
@@ -242,7 +259,6 @@ export default function VendedorDashboard() {
             </select>
           </label>
 
-          {/* ORIGEN */}
           <label>Dirección de origen:</label>
           <input
             type="text"
@@ -269,7 +285,6 @@ export default function VendedorDashboard() {
             </ul>
           )}
 
-          {/* DESTINO */}
           <label>Dirección de destino:</label>
           <input
             type="text"
@@ -296,7 +311,6 @@ export default function VendedorDashboard() {
             </ul>
           )}
 
-          {/* MONTO */}
           <label>Monto del pedido ($):</label>
           <input
             type="number"
@@ -313,6 +327,20 @@ export default function VendedorDashboard() {
             required
           />
 
+          {/* NUEVO CAMPO DESCRIPCIÓN */}
+          <label>Descripción (opcional):</label>
+          <textarea
+            className={styles.textarea}
+            value={formData.descripcion}
+            placeholder="Escribe detalles adicionales del pedido..."
+            onChange={(e) =>
+              setFormData((prev) => ({
+                ...prev,
+                descripcion: e.target.value,
+              }))
+            }
+          ></textarea>
+
           <button
             className={styles.submitButton}
             type="submit"
@@ -322,7 +350,6 @@ export default function VendedorDashboard() {
           </button>
         </form>
 
-        {/* DERECHA */}
         <div ref={mapContainerRef} className={styles.map}></div>
       </div>
     </div>

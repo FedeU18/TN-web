@@ -75,7 +75,7 @@ export default function Register() {
   };
 
   return (
-    <div className={styles.conteiner}>
+    <div className={styles.container}>
       <div className={styles.logoContainer}>
         <img src="/2630732.png" alt="logo" />
         <h2>Track Now</h2>

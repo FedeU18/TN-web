@@ -32,10 +32,6 @@ export default function CalificacionesRepartidor() {
 
   return (
     <div className={styles.container}>
-      <button className={styles.backButton} onClick={() => navigate(-1)}>
-        ⟵ Volver
-      </button>
-
       <h1 className={styles.title}>Calificaciones de {repartidorNombre}</h1>
 
       {calificaciones.length === 0 ? (
@@ -61,6 +57,10 @@ export default function CalificacionesRepartidor() {
           ))}
         </div>
       )}
+
+      <button className={styles.backButton} onClick={() => navigate(-1)}>
+        ← Volver
+      </button>
     </div>
   );
 }

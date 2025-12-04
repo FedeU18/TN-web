@@ -41,7 +41,10 @@ export default function VerCalificaciones() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Calificaciones de Repartidores</h1>
+      <div className={styles.titleContainer}>
+        <h1 className={styles.title}>Calificaciones de Repartidores</h1>
+        <p className={styles.subtitle}>(Hacé click en el nombre del repartidor para ver el detalle de sus calificaciones)</p>
+      </div>
 
       <div className={styles.filterContainer}>
         <label>Ordenar por:</label>

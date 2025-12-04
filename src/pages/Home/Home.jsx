@@ -60,7 +60,7 @@ export default function Home() {
               loading="lazy"
             />
             <h3>Creación del pedido</h3>
-            <p>El vendedor registra un nuevo pedido desde su panel.</p>
+            <p>El vendedor registra un nuevo pedido desde su panel</p>
           </article>
 
           <article className={styles.stepCard}>
@@ -71,7 +71,7 @@ export default function Home() {
             />
             <h3>Pedidos disponibles</h3>
             <p>
-              Los repartidores ven el listado y toman los pedidos disponibles.
+              Los repartidores ven el listado y toman los pedidos disponibles
             </p>
           </article>
 
@@ -82,7 +82,7 @@ export default function Home() {
               loading="lazy"
             />
             <h3>Seguimiento en tiempo real</h3>
-            <p>El cliente ve la ubicación del repartidor en vivo.</p>
+            <p>El cliente ve la ubicación del repartidor en vivo</p>
           </article>
 
           <article className={styles.stepCard}>
@@ -92,7 +92,7 @@ export default function Home() {
               loading="lazy"
             />
             <h3>Validación con QR</h3>
-            <p>La entrega se confirma escaneando un código QR del cliente.</p>
+            <p>La entrega se confirma escaneando un código QR del cliente</p>
           </article>
         </div>
       </section>
@@ -160,23 +160,23 @@ export default function Home() {
           <article className={styles.benefitCard}>
             <h3>📡 Seguimiento preciso</h3>
             <p>
-              Actualizaciones en tiempo real gracias a geolocalización continua.
+              Actualizaciones en tiempo real gracias a geolocalización continua
             </p>
           </article>
 
           <article className={styles.benefitCard}>
             <h3>🔐 Sistema seguro</h3>
-            <p>Validación con QR y registros de auditoría.</p>
+            <p>Validación con QR y registros de auditoría</p>
           </article>
 
           <article className={styles.benefitCard}>
             <h3>⚡ Alta eficiencia</h3>
-            <p>Optimización del proceso de entrega para reducir tiempos.</p>
+            <p>Optimización del proceso de entrega para reducir tiempos</p>
           </article>
 
           <article className={styles.benefitCard}>
             <h3>📊 Métricas y reportes</h3>
-            <p>Panel avanzado para analizar tiempos y desempeño.</p>
+            <p>Panel avanzado para analizar tiempos y desempeño</p>
           </article>
         </div>
       </section>
@@ -190,7 +190,7 @@ export default function Home() {
           className={styles.btnPrimaryLarge}
           aria-label="Crear una cuenta en Track Now"
         >
-          Crear cuenta ahora
+          ¡Creá tu cuenta ahora!
         </Link>
       </section>
     </main>

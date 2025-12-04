@@ -136,7 +136,7 @@ export default function ReportsPanel() {
 
   return (
     <div className={styles.reportContainer}>
-      <h1 className={styles.title}>Reporte de Desempeño</h1>
+      <h1 className={styles.title}>Reportes de Desempeño</h1>
 
       {/* Tarjeta de Filtros y KPIs */}
       <div className={styles.summaryCard}>
@@ -179,7 +179,7 @@ export default function ReportsPanel() {
           onClick={handleApply}
           disabled={loading}
         >
-          {loading ? "Cargando..." : "Aplicar"}
+          {loading ? "Cargando..." : "Aplicar filtros"}
         </button>
         {/*limpiar filtros*/}
         <button
@@ -187,7 +187,7 @@ export default function ReportsPanel() {
           onClick={handleClearFilters}
           disabled={loading}
         >
-          Limpiar
+          Limpiar filtros
         </button>
         <button
           className={styles.excelButton}

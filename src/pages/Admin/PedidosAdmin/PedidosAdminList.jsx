@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getAllPedidosAdmin } from "../../../services/pedidosAdmin";
+import { ButtonPrimary } from "../../../components/Button/Button";
 import styles from "./PedidosAdminList.module.css";
 
 export default function PedidosAdminList() {
@@ -33,7 +34,7 @@ export default function PedidosAdminList() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Pedidos del sistema</h1>
+      <h1 className={styles.title}>Pedidos del Sistema</h1>
       <div className={styles.tableWrapper}>
         <table className={styles.table}>
         <thead>
@@ -57,8 +58,8 @@ export default function PedidosAdminList() {
               <td>{p.direccion_origen}</td>
               <td>{p.direccion_destino}</td>
               <td>
-                <Link to={`/admin-panel/pedido/${p.id_pedido}`} className={styles.link}>
-                  Ver detalle
+                <Link to={`/admin-panel/pedido/${p.id_pedido}`} style={{ textDecoration: 'none' }}>
+                  <ButtonPrimary size="small" style={{ padding: '6px 12px', fontSize: '1rem', whiteSpace: 'nowrap' }}>Ver detalle</ButtonPrimary>
                 </Link>
               </td>
             </tr>

@@ -5,25 +5,84 @@
   margin-left: -50vw;
   margin-right: -50vw;
   width: 100vw;
-  height: var(--footer-height);
-  line-height: var(--footer-height);
-  background-color: var(--primary-dark);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
   color: white;
-  text-align: center;
-  padding: 0;
+  padding: 20px 0;
   font-size: 0.9rem;
 }
-.footer p {
-  margin: 0;
+
+.footerContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 10%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.footerTeam {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.teamMember {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 0.9rem;
-  font-weight: bold;
+}
+
+.teamMember span {
+  font-weight: 600;
+}
+
+.teamMember a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: opacity 0.2s;
+}
+
+.teamMember a:hover {
+  opacity: 0.8;
+}
+
+.githubIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.footerContent p {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
 }
 
 @media (max-width: 768px) {
   .footer {
-    font-size: 0.8rem;
-    padding: 0.4rem;
+    padding: 15px 0;
+  }
+
+  .footerContent {
+    gap: 10px;
+  }
+
+  .footerTeam {
+    gap: 15px;
+    flex-direction: column;
+  }
+
+  .teamMember {
+    font-size: 0.85rem;
+  }
+
+  .githubIcon {
+    width: 18px;
+    height: 18px;
   }
 }
-
-/* footer spacing handled via #root padding (App.css) */

@@ -17,6 +17,10 @@
 }
 
 /* Colores por estado */
+.noPagado {
+  background: #f97316;
+}
+
 .pendiente {
   background: var(--status-pending);
 }

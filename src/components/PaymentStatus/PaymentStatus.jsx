@@ -32,6 +32,20 @@ export default function PaymentStatus({ estado_pago, monto_pedido, fecha_pago })
 
   const estado = estadoMap[estado_pago] || estadoMap.pendiente;
 
+  // Solo mostrar si el estado de pago es pendiente, fallido o reembolsado
+  if (!["pendiente", "pendiente_pago", "fallido", "reembolsado"].includes(estado_pago)) {
+    return null;
+  }
+
+  // Para pendiente, mostrar solo el título (versión compacta)
+  if (estado_pago === "pendiente") {
+    return (
+      <div className={`${styles.container} ${styles[estado.color]}`}>
+        <h3 className={styles.title}>{estado.label}</h3>
+      </div>
+    );
+  }
+
   return (
     <div className={`${styles.container} ${styles[estado.color]}`}>
       <div className={styles.header}>

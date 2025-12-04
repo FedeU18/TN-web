@@ -47,13 +47,7 @@ export default function HeaderCliente() {
         >
           Mis pedidos
         </NavLink>
-        <NavLink
-          to="/profile"
-          className={({ isActive }) => (isActive ? "active-link" : "")}
-        >
-          Perfil
-        </NavLink>
-
+        
         <div className="profile-menu">
           <div 
             className="profile-avatar" 

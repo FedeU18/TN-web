@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./VerUsuarios.module.css";
 import { getAllUsuarios, updateUserRol} from "../../../services/adminService";
+import { ButtonPrimary } from "../../../components/Button/Button";
 
 export default function VerUsuarios() {
   const [usuarios, setUsuarios] = useState([]);
@@ -8,6 +9,12 @@ export default function VerUsuarios() {
   const [editingId, setEditingId] = useState(null);
   const [newRol, setNewRol] = useState("");
   const [message, setMessage] = useState("");
+
+  // Función para capitalizar la primera letra
+  const capitalize = (str) => {
+    if (!str) return "";
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
 
   useEffect(() => {
     fetchUsuarios();
@@ -94,7 +101,7 @@ export default function VerUsuarios() {
                       <option value="admin">Admin</option>
                     </select>
                   ) : (
-                    u.rol
+                    capitalize(u.rol)
                   )}
                 </td>
 
@@ -120,15 +127,16 @@ export default function VerUsuarios() {
                     </>
                   ) : (
                     <>
-                      <button
+                      <ButtonPrimary 
+                        size="small" 
+                        style={{ padding: '6px 12px', fontSize: '1rem', whiteSpace: 'nowrap' }}
                         onClick={() => {
                           setEditingId(u.id_usuario);
-                          setNewRol(u.rol);  // ← el select empieza con el rol actual
+                          setNewRol(u.rol);
                         }}
-                        className={`${styles.btn} ${styles.btnEdit}`}
                       >
                         Editar
-                      </button>
+                      </ButtonPrimary>
                     </>
                   )}
                 </td>

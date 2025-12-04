@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../../../store/auth";
-import { ButtonPrimary, ButtonSecondary } from "../../../components/Button/Button";
+import { ButtonPrimary } from "../../../components/Button/Button";
 import styles from "./ClienteDashboard.module.css";
 
 export default function ClienteDashboard() {
@@ -19,24 +19,18 @@ export default function ClienteDashboard() {
         <h1 className={styles.title}>
           ¡{getGreeting()} {user?.nombre || "Usuario"}!
         </h1>
-        <div className={styles.optionsContainer}>
-          <div>
-            <h2 className={styles.subtitle}>
-              Desde aquí podrás gestionar y seguir las entregas de tus pedidos
-            </h2>
-            <Link to="/mis-pedidos">
-              <ButtonPrimary>Mis Pedidos</ButtonPrimary>
-            </Link>
-          </div>
-          <div>
-            <h2 className={styles.subtitle}>
-              Desde aquí podrás ver y editar la información de tu perfil
-            </h2>
-            <Link to="/profile">
-              <ButtonSecondary>Mi Perfil</ButtonSecondary>
-            </Link>
-          </div>
-        </div>
+        <p className={styles.subtitle}>
+          Desde acá podés gestionar y seguir tus entregas
+        </p>
+      </div>
+
+      <div className={styles.buttonContainer}>
+        <Link to="/mis-pedidos">
+          <ButtonPrimary className={styles.dashboardButton}>Mis Pedidos</ButtonPrimary>
+        </Link>
+        <Link to="/profile">
+          <ButtonPrimary className={styles.dashboardButton}>Mi Perfil</ButtonPrimary>
+        </Link>
       </div>
     </div>
   );

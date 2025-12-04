@@ -27,7 +27,7 @@ export default function AdminDashboard() {
           ¡{getGreeting()} {user?.nombre || "Usuario"}!
         </h1>
         <p className={styles.subtitle}>
-          Desde aquí podrás administrar todo el sistema.
+          Desde acá podés administrar todo el sistema
         </p>
       </div>
 

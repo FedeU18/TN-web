@@ -33,13 +33,15 @@ export default function HeaderVendedor() {
           className={({ isActive }) => (isActive ? "active-link" : "")}
           onClick={(e) => e.currentTarget.closest('.header')?.classList.remove('menu-open')}
         >
-          Crear Pedido
+          Inicio
         </NavLink>
+
         <NavLink
-          to="/profile"
+          to="/crear-pedido"
           className={({ isActive }) => (isActive ? "active-link" : "")}
+          onClick={(e) => e.currentTarget.closest('.header')?.classList.remove('menu-open')}
         >
-          Perfil
+          Crear Pedido
         </NavLink>
 
         <div className="profile-menu">

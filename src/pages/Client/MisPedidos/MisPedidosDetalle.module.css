@@ -1,12 +1,34 @@
 .detalleContainer {
+  width: 90%;
+  margin: 10px auto;
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.detalleHeader {
   background-color: #ffffff;
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  width: 90%;
-  margin: 10px auto;
-  padding: 20px;
-  text-align: center;
-  display: block;
+  padding: 24px;
+  margin-bottom: 0;
+  text-align: left;
+  flex: 0 0 auto;
+  min-width: 350px;
+}
+
+.mapaWrapper {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  margin: 0;
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  padding: 12px;
+  box-sizing: border-box;
 }
 
 .detalleContainer h1 {
@@ -16,33 +38,17 @@
   margin-bottom: 20px;
 }
 
-.paymentMessage {
-  padding: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 6px;
-  font-size: 1rem;
-  font-weight: 600;
-  animation: slideDown 0.3s ease-out;
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 .detalleContainer p {
-  font-size: 18px;
+  font-size: 1rem;
   margin-bottom: 24px;
 }
 
 .repartidor {
   color: var(--success-dark);
+}
+
+.grayText {
+  color: #4b5563;
 }
 
 .estado {
@@ -62,6 +68,16 @@
   animation: blink 1.5s infinite;
 }
 
+.estadoNoPagado {
+  background-color: #fed7aa;
+  color: #b45309;
+}
+
+.estadoAsignado {
+  background-color: #bfdbfe;
+  color: #1e40af;
+}
+
 .estadoEnCamino {
   background-color: #bfdbfe;
   color: #1e40af;
@@ -70,6 +86,11 @@
 .estadoEntregado {
   background-color: #bbf7d0;
   color: #166534;
+}
+
+.estadoCancelado {
+  background-color: #fecaca;
+  color: #991b1b;
 }
 
 .backLink {
@@ -99,37 +120,43 @@
   }
 }
 
-.mapaWrapper {
-  width: 100%;
-  height: 420px; 
-  margin: 20px 0;
-  margin-bottom: 200px;
-  position: relative;
-}
-
-.mapaWrapper > * {
-  position: static !important;
-}
-
-.detalleHeader {
-  margin-bottom: 30px;
-  text-align: left;
+@keyframes blink {
+  50% {
+    opacity: 0.5;
+  }
 }
 
 /* -------- RESPONSIVE -------- */
 
 @media (max-width: 1100px) {
   .detalleContainer {
-    padding: 16px;
+    gap: 20px;
   }
 
   .detalleHeader {
-    width: 100%;
-    text-align: center;
+    min-width: 300px;
   }
 
   .mapaWrapper {
     height: 320px;
+  }
+}
+
+@media (max-width: 768px) {
+  .detalleContainer {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .detalleHeader {
+    width: 100%;
+    text-align: left;
+    min-width: auto;
+  }
+
+  .mapaWrapper {
+    width: 100%;
+    height: 280px;
   }
 }
 

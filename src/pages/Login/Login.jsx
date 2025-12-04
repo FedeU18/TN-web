@@ -4,7 +4,7 @@ import { loginRequest } from "../../api/auth";
 import { useAuthStore } from "../../store/auth";
 import { useState } from "react";
 import PasswordInput from "../../components/PasswordInput/PasswordInput";
-import { ButtonPrimary } from "../../components/Button/Button";
+import { ButtonPrimary, ButtonSecondary } from "../../components/Button/Button";
 import styles from "./Login.module.css";
 
 export default function Login() {
@@ -74,7 +74,7 @@ export default function Login() {
   };
 
   return (
-    <div className={styles.conteiner}>
+    <div className={styles.container}>
       <div className={styles.logoContainer}>
         <img src="/2630732.png" alt="logo" />
         <h2>Track Now</h2>
@@ -86,7 +86,7 @@ export default function Login() {
         <input
           type="email"
           name="email"
-          placeholder="Email"
+          placeholder="Correo electrónico"
           className={styles.inputField}
           value={form.email}
           onChange={handleChange}
@@ -110,9 +110,9 @@ export default function Login() {
         </Link>
         <br />
 
-        <ButtonPrimary type="submit" style={{ width: '100%', marginTop: '1rem' }}>
+        <ButtonSecondary type="submit" style={{ width: '100%', marginTop: '1rem' }}>
           Iniciar sesión
-        </ButtonPrimary>
+        </ButtonSecondary>
 
         <div>
           <Link to="../" className={styles.linkBack}>

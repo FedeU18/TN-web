@@ -1,14 +1,55 @@
 .container {
-  padding: 24px;
-  max-width: 1200px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: calc(100vh - var(--header-height) - var(--footer-height) - 5rem);
+  padding: 20px;
 }
 
 .title {
   font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 20px;
+  font-weight: bold;
   color: var(--primary-dark);
+  margin-bottom: 30px;
+}
+
+.tableWrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 30px;
+  margin-bottom: 10px;
+}
+
+.table {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  overflow: hidden;
+  min-width: 900px;
+}
+
+.table th,
+.table td {
+  padding: 16px;
+  text-align: center;
+  font-size: 15px;
+  color: #4b5563;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.table th {
+  background-color: var(--primary);
+  font-weight: 600;
+  color: white;
+}
+
+.table tr:hover {
+  background-color: #f9fafb;
 }
 
 .message {
@@ -18,39 +59,6 @@
   border-radius: 8px;
   margin-bottom: 16px;
   border-left: 4px solid #28a745;
-}
-
-.tableWrapper {
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.table {
-  width: 100%;
-  min-width: 700px;
-  border-collapse: collapse;
-  background: white;
-}
-
-.table th {
-  background: var(--primary);
-  color: white;
-  padding: 12px;
-  text-align: center;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-.table td {
-  padding: 12px;
-  border-bottom: 1px solid #eee;
-}
-
-.table tbody tr:hover {
-  background-color: #f9fafb;
 }
 
 .roleSelect {
@@ -65,6 +73,7 @@
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .btn {
@@ -88,16 +97,6 @@
   transform: translateY(-1px);
 }
 
-.btnDelete {
-  background-color: #dc2626;
-  color: white;
-}
-
-.btnDelete:hover {
-  background-color: #b91c1c;
-  transform: translateY(-1px);
-}
-
 .btnSave {
   background-color: #16a34a;
   color: white;
@@ -118,11 +117,23 @@
   transform: translateY(-1px);
 }
 
+.btnSave, .btnCancel {
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+}
+
 .loading {
   text-align: center;
   margin-top: 40px;
   font-size: 18px;
   color: var(--gray-600);
+}
+
+@media (max-width: 1024px) {
+  .table {
+    min-width: 800px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -131,18 +142,18 @@
   }
 
   .title {
-    font-size: 20px;
-    margin-bottom: 16px;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
   }
 
   .table {
-    min-width: 600px;
+    min-width: 700px;
   }
 
   .table th,
   .table td {
-    padding: 8px;
-    font-size: 13px;
+    padding: 10px 8px;
+    font-size: 14px;
   }
 
   .btn {
@@ -152,5 +163,25 @@
 
   .actions {
     gap: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 10px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .table {
+    min-width: 640px;
+  }
+
+  .table th,
+  .table td {
+    padding: 8px 6px;
+    font-size: 13px;
   }
 }

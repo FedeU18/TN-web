@@ -5,8 +5,12 @@ import styles from "./OrderHistory.module.css";
 
 const getStatusColor = (status) => {
   const statusLower = status?.toLowerCase() || "";
-  if (statusLower.includes("entregado")) return "#10b981"; 
-  if (statusLower.includes("cancelado")) return "#ef4444"; 
+  if (statusLower.includes("entregado")) return "#10b981";
+  if (statusLower.includes("cancelado")) return "#ef4444";
+  if (statusLower.includes("en camino")) return "#f97316";
+  if (statusLower.includes("pendiente")) return "#fbbf24";
+  if (statusLower.includes("asignado")) return "#3b82f6";
+  if (statusLower.includes("no pagado")) return "#f97316";
   return "#6b7280"; 
 };
 
@@ -142,7 +146,7 @@ export default function OrderHistory() {
           <thead>
             <tr>
               <th>ID</th>
-              <th>Fecha</th>
+              <th>Fecha y hora</th>
               <th>Dirección</th>
               <th>Estado</th>
             </tr>
@@ -156,9 +160,14 @@ export default function OrderHistory() {
                 <td title={o.direccion}>{o.direccion?.substring(0, 30)}...</td>
                 <td>
                   <span style={{ 
-                    color: getStatusColor(o.estado),
+                    backgroundColor: getStatusColor(o.estado),
+                    color: "white",
                     fontWeight: "700",
-                    fontSize: "13px"
+                    fontSize: "12px",
+                    padding: "6px 12px",
+                    borderRadius: "8px",
+                    display: "inline-block",
+                    whiteSpace: "nowrap"
                   }}>
                     ● {o.estado}
                   </span>

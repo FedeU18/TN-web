@@ -1,9 +1,9 @@
-.conteiner {
+.container {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
-  margin-top: 5rem;
+  margin-top: 2.5rem;
   padding: 0 1rem;
   gap: 2rem;
 }
@@ -14,6 +14,18 @@
   align-items: center;
   justify-content: center;
 }
+
+.centeredContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 3rem;
+  background-color: var(--primary-dark);
+  padding: 2rem;
+  border-radius: 10px;
+}
+
 .logoContainer img {
   width: 200px;
   height: auto;
@@ -26,17 +38,6 @@
 .logoContainer h3 {
   color: var(--gray-600);
   margin: 0;
-}
-
-.centeredContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 3rem;
-  background-color: var(--primary-dark);
-  padding: 2rem;
-  border-radius: 10px;
 }
 
 .title {
@@ -62,6 +63,11 @@
   outline: none;
   border-color: var(--primary);
   box-shadow: 0 0 5px rgba(9, 80, 195, 0.3);
+}
+
+.inputField:hover {
+  border-color: var(--gray-800);
+  box-shadow: 0 0 8px rgba(9, 80, 195, 0.4), inset 0 0 0 1px var(--gray-800);
 }
 
 .errorMessage {
@@ -183,7 +189,7 @@
 
 /* Tablets */
 @media (max-width: 900px) {
-  .conteiner {
+  .container {
     flex-direction: column;
     margin-top: 2rem;
     gap: 1rem;
@@ -200,7 +206,7 @@
 }
 
 @media (max-width: 480px) {
-  .conteiner {
+  .container {
     margin-top: 1rem;
     padding: 0 0.5rem;
   }

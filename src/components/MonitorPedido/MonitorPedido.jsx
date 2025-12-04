@@ -58,6 +58,7 @@ export default function MonitorPedido({ pedidoId }) {
 
   // Mapear estado → clase
   const estadoToClass = {
+    "No pagado": styles.noPagado,
     Pendiente: styles.pendiente,
     Asignado: styles.asignado,
     "En camino": styles.enCamino,

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { SiMercadopago } from "react-icons/si";
 import { crearPreferenciaPago } from "../../services/pagosService";
 import styles from "./PaymentButton.module.css";
 
@@ -42,6 +43,7 @@ export default function PaymentButton({ id_pedido, estado_pago, estado_pedido, m
         disabled={loading}
         className={styles.button}
       >
+        <SiMercadopago size={20} />
         {loading ? "Procesando..." : "Pagar con Mercado Pago"}
       </button>
 

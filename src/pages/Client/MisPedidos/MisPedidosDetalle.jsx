@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { useParams, Link, useSearchParams } from "react-router-dom";
+import { useParams, Link, useSearchParams, useNavigate } from "react-router-dom";
 import { getDetallePedidoCliente } from "../../../services/pedidosCliente";
 import MonitorPedido from "../../../components/MonitorPedido/MonitorPedido";
 import MapaRepartidor from "../../../components/MapaRepartidor/MapaRepartidor";
 import PaymentStatus from "../../../components/PaymentStatus/PaymentStatus";
 import PaymentButton from "../../../components/PaymentButton/PaymentButton";
+import PaymentModal from "../../../components/PaymentModal/PaymentModal";
 import io from "socket.io-client";
 import styles from "./MisPedidosDetalle.module.css";
 
@@ -13,9 +14,10 @@ const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN;
 export default function MisPedidosDetalle() {
   const { id } = useParams();
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const [pedido, setPedido] = useState(null);
   const [error, setError] = useState("");
-  const [paymentMessage, setPaymentMessage] = useState("");
+  const [paymentStatus, setPaymentStatus] = useState(null);
 
   const geocodeDireccion = async (direccion) => {
     try {
@@ -31,6 +33,12 @@ export default function MisPedidosDetalle() {
       console.error("Error al geocodificar dirección:", err);
       return { lat: null, lng: null };
     }
+  };
+
+  const handleCloseModal = () => {
+    setPaymentStatus(null);
+    // Limpiar los parámetros de búsqueda de la URL
+    navigate(location.pathname, { replace: true });
   };
 
   const fetchPedido = async () => {
@@ -55,24 +63,22 @@ export default function MisPedidosDetalle() {
   useEffect(() => {
     fetchPedido();
     
-    // Mostrar mensaje si vuelve desde pago
-    const paymentStatus = searchParams.get("payment");
-    if (paymentStatus === "success") {
-      setPaymentMessage("Pago procesado. Recargando información...");
+    // Mostrar modal si vuelve desde pago
+    const paymentStatusParam = searchParams.get("payment");
+    if (paymentStatusParam === "success") {
+      setPaymentStatus("success");
       // Recargar datos después de 2 segundos para que el backend haya actualizado el estado
       const timer = setTimeout(() => {
         fetchPedido();
-        setPaymentMessage("");
       }, 2000);
       return () => clearTimeout(timer);
-    } else if (paymentStatus === "failure") {
-      setPaymentMessage("El pago fue rechazado. Intenta nuevamente.");
-    } else if (paymentStatus === "pending") {
-      setPaymentMessage("Pago pendiente. Se notificará cuando sea confirmado.");
+    } else if (paymentStatusParam === "failure") {
+      setPaymentStatus("failure");
+    } else if (paymentStatusParam === "pending") {
+      setPaymentStatus("pending");
       // Recargar datos después de 2 segundos
       const timer = setTimeout(() => {
         fetchPedido();
-        setPaymentMessage("");
       }, 2000);
       return () => clearTimeout(timer);
     } else {
@@ -129,45 +135,54 @@ export default function MisPedidosDetalle() {
     return `${dia}/${mes}/${año}, ${horas}:${minutos}`;
   };
   return (
-    <div className={styles.detalleContainer}>
-      <div className={styles.detalleHeader}>
-        <h1>Pedido #{pedido.id_pedido}</h1>
+    <>
+      <PaymentModal 
+        status={paymentStatus} 
+        onClose={handleCloseModal} 
+      />
+      <div className={styles.detalleContainer}>
+        <div className={styles.detalleHeader}>
+          <h1>Pedido #{pedido.id_pedido}</h1>
 
-        {paymentMessage && (
-          <p className={styles.paymentMessage}>{paymentMessage}</p>
-        )}
+          {/* Estado de Pago */}
+          <PaymentStatus
+            estado_pago={pedido.estado_pago}
+            monto_pedido={pedido.monto_pedido}
+            fecha_pago={pedido.fecha_pago}
+          />
 
-        {/* Estado de Pago */}
-        <PaymentStatus
-          estado_pago={pedido.estado_pago}
-          monto_pedido={pedido.monto_pedido}
-          fecha_pago={pedido.fecha_pago}
-        />
+          {/* Botón de Pago */}
+          <PaymentButton
+            id_pedido={pedido.id_pedido}
+            estado_pago={pedido.estado_pago}
+            estado_pedido={pedido.estado?.nombre_estado}
+            monto={pedido.monto_pedido}
+          />
 
-        {/* Botón de Pago */}
-        <PaymentButton
-          id_pedido={pedido.id_pedido}
-          estado_pago={pedido.estado_pago}
-          estado_pedido={pedido.estado?.nombre_estado}
-          monto={pedido.monto_pedido}
-        />
-
-        {!pedido.repartidor ? (
+        {pedido.estado?.nombre_estado === "Pendiente" && !pedido.repartidor ? (
           <div>
             <p className={styles.info}>
               Este pedido aún no fue asignado a un repartidor.
             </p>
-            <p>Dirección de entrega: {pedido.direccion_destino} </p>
-            <p>Fecha creación: {formatearFecha(pedido.fecha_creacion)}</p>
+            <p className={styles.grayText}>Dirección de entrega: {pedido.direccion_destino} </p>
+            <p className={styles.grayText}>Fecha de creación: {formatearFecha(pedido.fecha_creacion)}</p>
+            {pedido.descripcion && <p className={styles.grayText}>Descripción del pedido: {pedido.descripcion}</p>}
           </div>
-        ) : (
+        ) : pedido.repartidor ? (
           <div>
             <p className={styles.repartidor}>
               <strong>Repartidor:</strong> {pedido.repartidor.nombre}{" "}
               {pedido.repartidor.apellido}
             </p>
-            <p>Dirección de entrega: {pedido.direccion_destino} </p>
-            <p>Fecha creación: {formatearFecha(pedido.fecha_creacion)}</p>
+            <p className={styles.grayText}>Dirección de entrega: {pedido.direccion_destino} </p>
+            <p className={styles.grayText}>Fecha de creación: {formatearFecha(pedido.fecha_creacion)}</p>
+            {pedido.descripcion && <p className={styles.grayText}>Descripción del pedido: {pedido.descripcion}</p>}
+          </div>
+        ) : (
+          <div>
+            <p className={styles.grayText}>Dirección de entrega: {pedido.direccion_destino} </p>
+            <p className={styles.grayText}>Fecha de creación: {formatearFecha(pedido.fecha_creacion)}</p>
+            {pedido.descripcion && <p className={styles.grayText}>Descripción del pedido: {pedido.descripcion}</p>}
           </div>
         )}
 
@@ -198,5 +213,6 @@ export default function MisPedidosDetalle() {
         </p>
       )}
     </div>
+    </>
   );
 }

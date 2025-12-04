@@ -27,6 +27,7 @@ import { useNotifications } from "./contexts/NotificationContext";
 import MisPedidosSinCalificar from "./pages/Client/MisPedidos/MisPedidosSinCalificar";
 import RecuperarContra from "./pages/RecuperarPass/RecuperarPass";
 import VendedorDashboard from "./pages/VendedorDashboard/VendedorDashboard";
+import CrearPedidoVendedor from "./pages/Vendedor/CrearPedidoVendedor/CrearPedidoVendedor";
 import VerCalificaciones from "./pages/Admin/VerCalificaciones/VerCalificaciones";
 import VerUsuarios from "./pages/Admin/VerUsuarios/VerUsarios";
 import CalificacionesRepartidor from "./pages/Admin/CalificacionesRepartidor/CalificacionesRepartidor";
@@ -203,6 +204,14 @@ function App() {
             element={
               <ProtectedRoute roles={["vendedor"]}>
                 <VendedorDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/crear-pedido"
+            element={
+              <ProtectedRoute roles={["vendedor"]}>
+                <CrearPedidoVendedor />
               </ProtectedRoute>
             }
           />

@@ -52,13 +52,14 @@ function App() {
     <BrowserRouter>
       <div className="app-container">
         <Header /> {/* <---- ahora es el dinámico */}
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/recuperarContra" element={<RecuperarContra />} />
-          <Route path="/verify-code" element={<VerificarToken />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
+        <main style={{ flex: 1 }}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/recuperarContra" element={<RecuperarContra />} />
+            <Route path="/verify-code" element={<VerificarToken />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
 
           {/*Dashboards protegidos*/}
           <Route
@@ -206,6 +207,7 @@ function App() {
             }
           />
         </Routes>
+        </main>
         <Footer />
       </div>
     </BrowserRouter>

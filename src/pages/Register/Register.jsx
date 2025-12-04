@@ -6,6 +6,7 @@ import {
   validateRegistrationStep2,
 } from "../../utils/validations";
 import PasswordInput from "../../components/PasswordInput/PasswordInput";
+import { ButtonPrimary, ButtonSecondary } from "../../components/Button/Button";
 
 import styles from "./Register.module.css";
 
@@ -122,13 +123,13 @@ export default function Register() {
             {error && <p className={styles.errorMessage}>{error}</p>}
 
             <div className={styles.buttonGroup}>
-              <button
+              <ButtonPrimary
                 type="button"
-                className={`${styles.btn} ${styles.btnPrimary}`}
                 onClick={nextStep}
+                style={{ width: '100%' }}
               >
                 Siguiente
-              </button>
+              </ButtonPrimary>
 
               <Link to="/" className={styles.linkBack}>
                 Volver al menú principal
@@ -193,20 +194,20 @@ export default function Register() {
             {error && <p className={styles.errorMessage}>{error}</p>}
 
             <div className={styles.buttonGroup}>
-              <button
+              <ButtonPrimary
                 type="submit"
-                className={`${styles.btn} ${styles.btnPrimary}`}
+                style={{ width: '100%' }}
               >
                 Registrarse
-              </button>
+              </ButtonPrimary>
 
-              <button
+              <ButtonSecondary
                 type="button"
-                className={`${styles.btn} ${styles.btnSecondary}`}
                 onClick={prevStep}
+                style={{ width: '100%' }}
               >
                 Volver
-              </button>
+              </ButtonSecondary>
 
               <Link to="/" className={styles.linkBack}>
                 Volver al menú principal

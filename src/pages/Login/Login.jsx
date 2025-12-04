@@ -4,6 +4,7 @@ import { loginRequest } from "../../api/auth";
 import { useAuthStore } from "../../store/auth";
 import { useState } from "react";
 import PasswordInput from "../../components/PasswordInput/PasswordInput";
+import { ButtonPrimary } from "../../components/Button/Button";
 import styles from "./Login.module.css";
 
 export default function Login() {
@@ -109,9 +110,9 @@ export default function Login() {
         </Link>
         <br />
 
-        <button type="submit" className={`${styles.btn} ${styles.btnPrimary}`}>
+        <ButtonPrimary type="submit" style={{ width: '100%', marginTop: '1rem' }}>
           Iniciar sesión
-        </button>
+        </ButtonPrimary>
 
         <div>
           <Link to="../" className={styles.linkBack}>

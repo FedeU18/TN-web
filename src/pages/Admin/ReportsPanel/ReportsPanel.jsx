@@ -138,8 +138,10 @@ export default function ReportsPanel() {
     <div className={styles.reportContainer}>
       <h1 className={styles.title}>Reporte de Desempeño</h1>
 
-      {/* Filtros */}
-      <div className={styles.filters}>
+      {/* Tarjeta de Filtros y KPIs */}
+      <div className={styles.summaryCard}>
+        {/* Filtros */}
+        <div className={styles.filters}>
         <div className={styles.filterGroup}>
           <label>Desde</label>
           <input
@@ -208,6 +210,7 @@ export default function ReportsPanel() {
           title="Promedio calificación general"
           value={kpis.promedio_calificacion_general ?? 0}
         />
+      </div>
       </div>
 
       <div className={styles.chartGrid}>

@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuthStore } from "../../../store/auth";
+import { ButtonPrimary } from "../../../components/Button/Button";
 import styles from "./AdminDashboard.module.css";
 
 export default function AdminDashboard() {
@@ -31,20 +32,17 @@ export default function AdminDashboard() {
       </div>
 
       <div className={styles.buttonContainer}>
-        <Link to="/reports-panel" className={styles.primaryButton}>
-          Reportes
+        <Link to="/admin-panel/pedidos">
+          <ButtonPrimary className={styles.dashboardButton}>Pedidos</ButtonPrimary>
         </Link>
-        <Link to="/admin-panel" className={styles.primaryButton}>
-          Panel
+        <Link to="/reports-panel">
+          <ButtonPrimary className={styles.dashboardButton}>Reportes</ButtonPrimary>
         </Link>
-        <Link to="/admin-panel/pedidos" className={styles.primaryButton}>
-          Pedidos
+        <Link to="/admin-panel/usuarios">
+          <ButtonPrimary className={styles.dashboardButton}>Usuarios</ButtonPrimary>
         </Link>
-        <Link to="/admin-panel/usuarios" className={styles.primaryButton}>
-          Ver Usuarios
-        </Link>
-        <Link to="/admin-panel/calificaciones" className={styles.primaryButton}>
-          Calificaciones
+        <Link to="/admin-panel/calificaciones">
+          <ButtonPrimary className={styles.dashboardButton}>Calificaciones</ButtonPrimary>
         </Link>
       </div>
     </div>

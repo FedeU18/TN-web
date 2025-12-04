@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #f9fafb;
   min-height: calc(100vh - var(--header-height) - var(--footer-height) - 5rem);
   padding: 20px;
 }

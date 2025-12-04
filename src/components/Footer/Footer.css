@@ -1,15 +1,16 @@
 .footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100vw;
   height: var(--footer-height);
   line-height: var(--footer-height);
   background-color: var(--primary-dark);
   color: white;
   text-align: center;
-  z-index: 1000;
-  padding: 0 1rem;
+  padding: 0;
   font-size: 0.9rem;
 }
 .footer p {

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { ButtonPrimary, ButtonSecondary } from "../../components/Button/Button";
 import styles from "./Home.module.css";
 
 export default function Home() {
@@ -20,29 +21,23 @@ export default function Home() {
           </h1>
 
           <p id="hero-desc" className={styles.subtitle}>
-            Plataforma inteligente para gestionar entregas en tiempo real.
+            Plataforma inteligente para gestionar entregas en tiempo real
           </p>
 
           <div className={styles.buttons}>
-            <Link
-              to="/register"
-              className={styles.btnPrimary}
-              aria-label="Crear una cuenta nueva"
-            >
-              Crear cuenta
+            <Link to="/register" style={{ textDecoration: 'none' }}>
+              <ButtonPrimary size="large" aria-label="Crear una cuenta nueva">
+                Crear cuenta
+              </ButtonPrimary>
             </Link>
 
-            <Link
-              to="/login"
-              className={styles.btnSecondary}
-              aria-label="Iniciar sesión en Track Now"
-            >
-              Iniciar sesión
+            <Link to="/login" style={{ textDecoration: 'none' }}>
+              <ButtonSecondary size="large" aria-label="Iniciar sesión en Track Now">
+                Iniciar sesión
+              </ButtonSecondary>
             </Link>
           </div>
-        </div>
-
-        <div className={styles.heroImage}>
+        </div>        <div className={styles.heroImage}>
           <img
             src="/pexels-norma-mortenson-4392030.jpg"
             alt="Persona realizando una entrega en bicicleta"

@@ -1,10 +1,13 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import "./Header.css";
 import { useAuthStore } from "../../store/auth";
+import { useState } from "react";
 
 export default function HeaderVendedor() {
-  const { logout } = useAuthStore();
+  const { logout, user } = useAuthStore();
   const navigate = useNavigate();
+  const [showDropdown, setShowDropdown] = useState(false);
+  
   const handleLogout = () => {
     logout(); //limpia el token
     navigate("/"); //redirige al home
@@ -38,7 +41,41 @@ export default function HeaderVendedor() {
         >
           Perfil
         </NavLink>
-        <button onClick={(e) => { e.currentTarget.closest('.header')?.classList.remove('menu-open'); handleLogout(); }}>Cerrar Sesión</button>
+
+        <div className="profile-menu">
+          <div 
+            className="profile-avatar" 
+            onClick={() => setShowDropdown(!showDropdown)}
+            title={user?.nombre || "Perfil"}
+          >
+            {user?.nombre?.charAt(0).toUpperCase() || "V"}
+          </div>
+          {showDropdown && (
+            <div className="dropdown-menu">
+              <div className="dropdown-header">{user?.nombre || "Vendedor"}</div>
+              <button 
+                className="dropdown-item"
+                onClick={(e) => { 
+                  e.preventDefault();
+                  setShowDropdown(false);
+                  navigate("/profile");
+                }}
+              >
+                👤 Mi Perfil
+              </button>
+              <button 
+                className="dropdown-item dropdown-logout"
+                onClick={(e) => { 
+                  e.preventDefault();
+                  setShowDropdown(false);
+                  handleLogout(); 
+                }}
+              >
+                ✕ Cerrar Sesión
+              </button>
+            </div>
+          )}
+        </div>
       </nav>
     </header>
   );

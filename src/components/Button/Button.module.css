@@ -1,0 +1,89 @@
+/* Botón primario azul */
+.btnPrimary {
+  background: var(--primary);
+  padding: 10px 20px;
+  color: white;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.2s;
+  font-size: 0.95rem;
+  border: 2px solid var(--primary);
+  box-sizing: border-box;
+  display: inline-block;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.btnPrimary:hover {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: white;
+}
+
+/* Botón primario grande para hero/landing */
+.btnPrimaryLarge {
+  background: var(--primary);
+  padding: 16px 32px;
+  color: white;
+  border-radius: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.2s;
+  font-size: 1.05rem;
+  border: 2px solid var(--primary);
+  box-sizing: border-box;
+  display: inline-block;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.btnPrimaryLarge:hover {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: white;
+}
+
+/* Botón secundario outline */
+.btnSecondary {
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  font-weight: 600;
+  transition: 0.2s;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  display: inline-block;
+  cursor: pointer;
+  font-family: inherit;
+  background: #ffffff;
+}
+
+.btnSecondary:hover {
+  background: #f0f9ff;
+  color: var(--primary);
+}
+
+/* Botón secundario grande para hero/landing */
+.btnSecondaryLarge {
+  padding: 16px 32px;
+  border-radius: 12px;
+  text-decoration: none;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  font-weight: 600;
+  transition: 0.2s;
+  font-size: 1.05rem;
+  box-sizing: border-box;
+  display: inline-block;
+  cursor: pointer;
+  font-family: inherit;
+  background: transparent;
+}
+
+.btnSecondaryLarge:hover {
+  background: rgba(59, 130, 246, 0.08);
+  color: var(--primary);
+}

@@ -95,8 +95,6 @@ export default function OrderHistory() {
 
   return (
     <div className={styles.ordersContainer}>
-      <h2>Historial de pedidos</h2>
-
       {/* -------------------------
           FILTROS
       --------------------------- */}

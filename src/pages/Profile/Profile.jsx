@@ -4,6 +4,7 @@ import axios from "../../libs/axios";
 import UserProfile from "../../components/UserProfile/UserProfile";
 import OrderHistory from "../../components/OrderHistory/OrderHistory";
 import ChangePassword from "../../components/ChangePassword/ChangePassword";
+import { ButtonPrimary, ButtonSecondary } from "../../components/Button/Button";
 import styles from "./Profile.module.css";
 import { useAuthStore } from "../../store/auth";
 
@@ -137,45 +138,48 @@ export default function Profile() {
         </div>
       )}
       <div className={styles.actionsSection}>
-        <div className={styles.actionsContainer}>
-          <button
-            className={`${styles.historyBtn} ${
-              showHistory ? styles.activeSection : ""
-            }`}
+        <div className={styles.actionsCard}>
+          <ButtonPrimary
+            className={showHistory ? styles.activeSection : ""}
             onClick={openHistory}
           >
             Historial de pedidos
-          </button>
+          </ButtonPrimary>
 
-          <button
-            className={`${styles.historyBtn} ${
-              showEdit ? styles.activeSection : ""
-            }`}
+          <ButtonPrimary
+            className={showEdit ? styles.activeSection : ""}
             onClick={openEdit}
           >
             Editar perfil
-          </button>
+          </ButtonPrimary>
 
-          <button
-            className={`${styles.historyBtn} ${
-              showForm ? styles.activeSection : ""
-            }`}
+          <ButtonPrimary
+            className={showForm ? styles.activeSection : ""}
             onClick={openForm}
           >
             Cambiar contraseña
-          </button>
+          </ButtonPrimary>
         </div>
-        <div>
-          {showHistory && (
+        {showHistory && (
+          <div className={styles.contentCard}>
+            <h2 className={styles.sectionTitle}>Historial de pedidos</h2>
             <div className={styles.historyWrapper}>
               <div className={styles.tableResponsive}>
                 <OrderHistory />
               </div>
             </div>
-          )}
-          {showEdit && <UserProfile />}
-          {showForm && <ChangePassword />}
-        </div>
+          </div>
+        )}
+        {showEdit && (
+          <div className={styles.contentCard}>
+            <UserProfile />
+          </div>
+        )}
+        {showForm && (
+          <div className={styles.contentCard}>
+            <ChangePassword />
+          </div>
+        )}
       </div>
     </div>
   );

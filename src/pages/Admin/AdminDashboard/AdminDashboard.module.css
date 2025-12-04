@@ -2,26 +2,26 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   min-height: calc(100vh - var(--header-height) - var(--footer-height) - 5rem);
-  background-color: #f9fafb;
   padding: 20px;
 }
 
 .welcomeContainer {
   text-align: center;
-  margin: 32px auto;
+  margin: 24px auto 32px;
   max-width: 800px;
 }
 
 .title {
-  font-size: 28px;
+  font-size: 2.5rem;
   font-weight: bold;
-  color: #1f2937;
+  color: var(--primary-dark);
   margin-bottom: 16px;
 }
 
 .subtitle {
-  font-size: 14px;
+  font-size: 1.1rem;
   color: #4b5563;
 }
 
@@ -38,7 +38,12 @@
   max-width: 210px;
   gap: 14px;
   margin-top: 32px;
-  margin-right: 32px
+}
+
+.dashboardButton {
+  padding: 14px 24px !important;
+  font-size: 1rem !important;
+  width: 100%;
 }
 
 .primaryButton {

@@ -1,12 +1,27 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import "./Header.css";
 import { useAuthStore } from "../../store/auth";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function HeaderVendedor() {
   const { logout, user } = useAuthStore();
   const navigate = useNavigate();
   const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef(null);
+  
+  // Cerrar dropdown al hacer click fuera
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    };
+
+    if (showDropdown) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [showDropdown]);
   
   const handleLogout = () => {
     logout(); //limpia el token
@@ -44,7 +59,7 @@ export default function HeaderVendedor() {
           Crear Pedido
         </NavLink>
 
-        <div className="profile-menu">
+        <div className="profile-menu" ref={dropdownRef}>
           <div 
             className="profile-avatar" 
             onClick={() => setShowDropdown(!showDropdown)}

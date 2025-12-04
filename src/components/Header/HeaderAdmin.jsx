@@ -1,12 +1,26 @@
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import "./Header.css";
 import { useAuthStore } from "../../store/auth";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function HeaderAdmin() {
   const { logout, user } = useAuthStore();
   const navigate = useNavigate();
   const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef(null);
+  
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    };
+
+    if (showDropdown) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [showDropdown]);
   
   const handleLogout = () => {
     logout(); //limpia el token
@@ -64,7 +78,7 @@ export default function HeaderAdmin() {
           Calificaciones
         </NavLink>
 
-        <div className="profile-menu">
+        <div className="profile-menu" ref={dropdownRef}>
           <div 
             className="profile-avatar" 
             onClick={() => setShowDropdown(!showDropdown)}

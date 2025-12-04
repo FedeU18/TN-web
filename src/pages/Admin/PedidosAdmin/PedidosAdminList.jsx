@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getAllPedidosAdmin } from "../../../services/pedidosAdmin";
 import { ButtonPrimary } from "../../../components/Button/Button";
+import Loading from "../../../components/Loading/Loading";
 import styles from "./PedidosAdminList.module.css";
 
 export default function PedidosAdminList() {
@@ -30,6 +31,7 @@ export default function PedidosAdminList() {
   const pedidosPaginados = pedidos.slice(startIndex, startIndex + PEDIDOS_POR_PAGINA);
 
   if (error) return <p className={styles.error}>{error}</p>;
+  if (pedidos.length === 0 && !error) return <Loading message="Cargando pedidos..." />;
   if (pedidos.length === 0) return <p className={styles.empty}>No hay pedidos registrados.</p>;
 
   return (

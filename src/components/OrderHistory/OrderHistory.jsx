@@ -71,7 +71,7 @@ export default function OrderHistory() {
     fetchOrders();
   }, [user?.rol]);
 
-  if (loading) return <div className={styles.loading}>⏳ Cargando pedidos...</div>;
+  if (loading) return <div className={styles.loading}>Cargando pedidos...</div>;
   if (error) return <div className={styles.error}>⚠️ {error}</div>;
   if (orders.length === 0) return <div className={styles.noPedidos}>No hay pedidos registrados</div>;
 

@@ -260,56 +260,60 @@ export default function CrearPedidoVendedor() {
           </label>
 
           <label>Dirección de origen:</label>
-          <input
-            type="text"
-            value={formData.direccion_origen}
-            onChange={(e) => {
-              setFormData((prev) => ({
-                ...prev,
-                direccion_origen: e.target.value,
-              }));
-              buscarDireccion(e.target.value, "origen");
-            }}
-          />
+          <div style={{ position: 'relative' }}>
+            <input
+              type="text"
+              value={formData.direccion_origen}
+              onChange={(e) => {
+                setFormData((prev) => ({
+                  ...prev,
+                  direccion_origen: e.target.value,
+                }));
+                buscarDireccion(e.target.value, "origen");
+              }}
+            />
 
-          {autocompleteOrigen.length > 0 && (
-            <ul className={styles.suggestions}>
-              {autocompleteOrigen.map((f) => (
-                <li
-                  key={f.id}
-                  onClick={() => seleccionarDireccion(f, "origen")}
-                >
-                  {f.place_name}
-                </li>
-              ))}
-            </ul>
-          )}
+            {autocompleteOrigen.length > 0 && (
+              <ul className={styles.suggestions}>
+                {autocompleteOrigen.map((f) => (
+                  <li
+                    key={f.id}
+                    onClick={() => seleccionarDireccion(f, "origen")}
+                  >
+                    {f.place_name}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
 
           <label>Dirección de destino:</label>
-          <input
-            type="text"
-            value={formData.direccion_destino}
-            onChange={(e) => {
-              setFormData((prev) => ({
-                ...prev,
-                direccion_destino: e.target.value,
-              }));
-              buscarDireccion(e.target.value, "destino");
-            }}
-          />
+          <div style={{ position: 'relative' }}>
+            <input
+              type="text"
+              value={formData.direccion_destino}
+              onChange={(e) => {
+                setFormData((prev) => ({
+                  ...prev,
+                  direccion_destino: e.target.value,
+                }));
+                buscarDireccion(e.target.value, "destino");
+              }}
+            />
 
-          {autocompleteDestino.length > 0 && (
-            <ul className={styles.suggestions}>
-              {autocompleteDestino.map((f) => (
-                <li
-                  key={f.id}
-                  onClick={() => seleccionarDireccion(f, "destino")}
-                >
-                  {f.place_name}
-                </li>
-              ))}
-            </ul>
-          )}
+            {autocompleteDestino.length > 0 && (
+              <ul className={styles.suggestions}>
+                {autocompleteDestino.map((f) => (
+                  <li
+                    key={f.id}
+                    onClick={() => seleccionarDireccion(f, "destino")}
+                  >
+                    {f.place_name}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
 
           <label>Monto del pedido ($):</label>
           <input

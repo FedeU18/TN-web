@@ -133,6 +133,13 @@ export default function ReportsPanel() {
     // Exportar archivo
     XLSX.writeFile(workbook, `reporte_desempeño_${Date.now()}.xlsx`);
   };
+  const formatearFecha = (iso) => {
+    const d = new Date(iso);
+    const dia = String(d.getDate()).padStart(2, "0");
+    const mes = String(d.getMonth() + 1).padStart(2, "0");
+    const anio = d.getFullYear();
+    return `${dia}/${mes}/${anio}`;
+  };
 
   return (
     <div className={styles.reportContainer}>
@@ -142,75 +149,75 @@ export default function ReportsPanel() {
       <div className={styles.summaryCard}>
         {/* Filtros */}
         <div className={styles.filters}>
-        <div className={styles.filterGroup}>
-          <label>Desde</label>
-          <input
-            type="date"
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
-            max={hoy}
-          />
-        </div>
-        <div className={styles.filterGroup}>
-          <label>Hasta</label>
-          <input
-            type="date"
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
-            max={hoy}
-          />
-        </div>
-        <div className={styles.filterGroup}>
-          <label>Repartidor</label>
-          <select
-            value={repartidorId}
-            onChange={(e) => setRepartidorId(e.target.value)}
+          <div className={styles.filterGroup}>
+            <label>Desde</label>
+            <input
+              type="date"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+              max={hoy}
+            />
+          </div>
+          <div className={styles.filterGroup}>
+            <label>Hasta</label>
+            <input
+              type="date"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+              max={hoy}
+            />
+          </div>
+          <div className={styles.filterGroup}>
+            <label>Repartidor</label>
+            <select
+              value={repartidorId}
+              onChange={(e) => setRepartidorId(e.target.value)}
+            >
+              <option value="">Todos</option>
+              {repartidores.map((r) => (
+                <option key={r.id} value={r.id}>
+                  {r.nombre}
+                </option>
+              ))}
+            </select>
+          </div>
+          <button
+            className={styles.applyButton}
+            onClick={handleApply}
+            disabled={loading}
           >
-            <option value="">Todos</option>
-            {repartidores.map((r) => (
-              <option key={r.id} value={r.id}>
-                {r.nombre}
-              </option>
-            ))}
-          </select>
+            {loading ? "Cargando..." : "Aplicar filtros"}
+          </button>
+          {/*limpiar filtros*/}
+          <button
+            className={styles.clearButton}
+            onClick={handleClearFilters}
+            disabled={loading}
+          >
+            Limpiar filtros
+          </button>
+          <button
+            className={styles.excelButton}
+            onClick={exportToExcel}
+            disabled={loading || series.length === 0}
+          >
+            Exportar a Excel
+          </button>
         </div>
-        <button
-          className={styles.applyButton}
-          onClick={handleApply}
-          disabled={loading}
-        >
-          {loading ? "Cargando..." : "Aplicar filtros"}
-        </button>
-        {/*limpiar filtros*/}
-        <button
-          className={styles.clearButton}
-          onClick={handleClearFilters}
-          disabled={loading}
-        >
-          Limpiar filtros
-        </button>
-        <button
-          className={styles.excelButton}
-          onClick={exportToExcel}
-          disabled={loading || series.length === 0}
-        >
-          Exportar a Excel
-        </button>
-      </div>
 
-      {/*KPI Cards*/}
-      <div className={styles.kpiContainer}>
-        <KpiCard title="Pedidos entregados" value={kpis.entregados ?? 0} />
-        <KpiCard title="Pedidos cancelados" value={kpis.cancelados ?? 0} />
-        <KpiCard
-          title="Tiempo promedio (min)"
-          value={kpis.promedio_entrega_minutos ?? 0}
-        />
-        <KpiCard
-          title="Promedio calificación general"
-          value={kpis.promedio_calificacion_general ?? 0}
-        />
-      </div>
+        {/*KPI Cards*/}
+        <div className={styles.kpiContainer}>
+          <KpiCard title="Pedidos entregados" value={kpis.entregados ?? 0} />
+          <KpiCard title="Pedidos cancelados" value={kpis.cancelados ?? 0} />
+          <KpiCard
+            title="Tiempo promedio (min)"
+            value={kpis.promedio_entrega_minutos ?? 0}
+          />
+          <KpiCard
+            title="Promedio calificación general"
+            value={kpis.promedio_calificacion_general ?? 0}
+          />
+        </div>
       </div>
 
       <div className={styles.chartGrid}>
@@ -221,7 +228,7 @@ export default function ReportsPanel() {
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={series}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="fecha" />
+              <XAxis dataKey="fecha" tickFormatter={formatearFecha} />
               <YAxis domain={[0, 5]} />
               <Tooltip />
               <Legend />
@@ -240,7 +247,7 @@ export default function ReportsPanel() {
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={series}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="fecha" />
+              <XAxis dataKey="fecha" tickFormatter={formatearFecha} />
               <YAxis />
               <Tooltip />
               <Legend />
@@ -261,7 +268,7 @@ export default function ReportsPanel() {
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={series}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="fecha" />
+              <XAxis dataKey="fecha" tickFormatter={formatearFecha} />
               <YAxis />
               <Tooltip />
               <Legend />
